@@ -1,0 +1,47 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_cms_plugin_admin_section:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_cms_plugin.model.section.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                code: asc
+            limits: [10, 25, 50]
+            fields:
+                code:
+                    type: string
+                    label: bitbag_sylius_cms_plugin.ui.code
+                    sortable: ~
+                type:
+                    type: twig
+                    label: bitbag_sylius_cms_plugin.ui.type
+                    options:
+                        template: "@SyliusUi/Grid/Field/section.html.twig"
+                name:
+                    type: string
+                    label: bitbag_sylius_cms_plugin.ui.name
+                    sortable: translation.name
+                description:
+                    type: twig
+                    label: bitbag_sylius_cms_plugin.ui.description
+                    options:
+                        template: "@SyliusUi/Grid/Field/shortDescription.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, type]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -1,0 +1,19 @@
+AppBundle\Entity\HeurekaTaxonomy:
+    type: entity
+    table: sylius_heureka_taxonomy
+    repositoryClass: AppBundle\Repository\HeurekaTaxonomyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: integer
+        name:
+            type: string
+            length: 255
+        dateImported:
+            type: datetime
+            column: date_imported

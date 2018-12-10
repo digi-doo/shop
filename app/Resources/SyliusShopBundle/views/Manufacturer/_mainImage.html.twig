@@ -1,0 +1,9 @@
+{% set class = '' %}
+{% if manufacturer.image and manufacturer.image.path is not empty %}
+    {% set path = manufacturer.image.path|imagine_filter(filter|default('sylius_shop_product_box_main')) %}
+{% else %}
+    {% set path = asset('assets/shop/img/logo.png') %}
+    {% set class = 'no-image no-image-manufacturer' %}
+{% endif %}
+
+<img src="{{ path }}" alt="{{ manufacturer.name }}" class="{{class}}" />

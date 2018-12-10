@@ -1,0 +1,41 @@
+h1 {
+    font-size: $fs-40;
+
+    &.heading-border {
+        border-bottom: 1px solid #31562f;
+        padding-bottom: 12px;
+        margin-bottom: 10px;
+    }
+}
+
+h2 {
+    font-size: $fs-36;
+
+    &.heading-border {
+        border-bottom: 1px solid #31562f;
+        padding-bottom: 12px;
+        margin-bottom: 10px;
+    }
+}
+
+h3 {
+    font-size: $fs-24;
+}
+
+.link {
+    &--green {
+        color: $green;
+        font-weight: $fw-m;
+    }
+    &--text {
+        text-decoration: underline;
+        font-weight: $fw-m;
+        color: inherit;
+    }
+
+    &--normal {
+        text-decoration: none;
+        font-weight: $fw-m;
+        color: inherit;
+    }
+}

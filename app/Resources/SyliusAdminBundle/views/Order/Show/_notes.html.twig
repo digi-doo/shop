@@ -1,0 +1,10 @@
+{% if order.notes is not null %}
+    <div class="ui attached message styled red">
+        <div class="header">
+            {{ 'sylius.ui.notes'|trans }}
+        </div>
+        <div class="ui segment" id="sylius-order-notes">
+            {{ order.notes }}
+        </div>
+    </div>
+{% endif %}

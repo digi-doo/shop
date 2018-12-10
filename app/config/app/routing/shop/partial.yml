@@ -1,0 +1,15 @@
+app_shop_partial_taxon:
+    resource: "partial/taxon.yml"
+    prefix: /taxons
+
+app_shop_partial_product:
+    resource: "partial/product.yml"
+
+app_shop_partial_manufacturer:
+    resource: "partial/manufacturer.yml"
+
+app_shop_partial_tag:
+    resource: "partial/tag.yml"
+
+app_shop_partial_page:
+    resource: "partial/page.yml"

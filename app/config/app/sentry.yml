@@ -1,0 +1,9 @@
+sentry:
+    dsn: "https://035a6d31183a4d138fecea1293a7f1cc:99c6637542a941cbb3c19c0160bb6b5a@sentry.io/293641"
+    options:
+        environment: "%kernel.environment%"
+        release: "%sshop_release%"
+    listener_priorities:
+        request: 0
+        kernel_exception: -1
+        console_exception: 0

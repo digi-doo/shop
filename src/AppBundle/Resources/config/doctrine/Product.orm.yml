@@ -1,0 +1,54 @@
+AppBundle\Entity\Product:
+    type: entity
+    table: sylius_product
+    indexes:
+        fulltext_product_code_index:
+            columns: ["code"]
+            flags: fulltext
+    oneToMany:
+        productDefaults:
+            targetEntity: AppBundle\Entity\ProductDefault
+            mappedBy: product
+            cascade:
+                - all
+            fetch: LAZY
+            orphanRemoval: true
+            indexBy: channelCode
+    manyToOne:
+        manufacturer:
+            targetEntity: AppBundle\Entity\Manufacturer
+            joinColumn:
+                name: manufacturer_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL
+        heurekaTaxonomy:
+            targetEntity: AppBundle\Entity\HeurekaTaxonomy
+            joinColumn:
+                name: heureka_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL
+        googleTaxonomy:
+            targetEntity: AppBundle\Entity\GoogleTaxonomy
+            joinColumn:
+                name: google_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL
+    manyToMany:
+        tags:
+            targetEntity: AppBundle\Entity\Tag
+            joinTable:
+                name: sylius_product_tag
+                joinColumns:
+                    product_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    tag_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE

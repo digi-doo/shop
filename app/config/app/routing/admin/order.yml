@@ -1,0 +1,84 @@
+################
+# Order states #
+################
+app_admin_order_process:
+    path: /orders/{id}/process
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            event: process
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: process
+            redirect: referer
+            flash: sylius.order.processed
+
+app_admin_order_expedite:
+    path: /orders/{id}/expedite
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            event: expedite
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: expedite
+            redirect: referer
+            flash: sylius.order.expedited
+
+app_admin_order_issue:
+    path: /orders/{id}/issue
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            event: issue
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: issue
+            redirect: referer
+            flash: sylius.order.issued
+
+app_admin_order_storno:
+    path: /orders/{id}/storno
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            event: storno
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: cancel
+            redirect: referer
+            flash: sylius.order.storned
+
+app_admin_order_bank_transfer_notification:
+    path: /orders/{orderId}/bank-transfer-notification
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order:bankTransferNotificationAction
+        _sylius:
+            permission: true
+            repository:
+                method: findOneById
+                arguments:
+                    id: $orderId
+            redirect: referer
+
+########################
+# Order internal notes #
+########################
+app_admin_order_internal_notes:
+    path: /orders/{id}/internal-notes
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: '@SyliusAdmin/Order/Show/InternalNote/index.html.twig'

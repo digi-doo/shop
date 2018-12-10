@@ -1,0 +1,31 @@
+app_admin_ajax_tag_by_name_phrase:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: app.controller.tag:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByNamePart
+                arguments:
+                    phrase: $phrase
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+
+app_admin_ajax_tag_by_id:
+    path: /id
+    methods: [GET]
+    defaults:
+        _controller: app.controller.tag:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findBy
+                arguments: [id: $id]
+
+app_admin_generate_tag_slug:
+    path: /tag-generate-slug
+    methods: [GET]
+    defaults:
+        _controller: "AppBundle:TagSlug:generate"

@@ -1,0 +1,174 @@
+.form {
+	*:focus {
+		outline: 0;
+		border-bottom: 1px solid $green;
+	}
+
+	&__input {
+		width: 100%;
+		padding: 18px 0;
+		background: transparent;
+		border: 0;
+		border-bottom: 1px solid #818181;
+		font-size: $fs-24;
+
+		&::-webkit-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&::-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-ms-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+
+		@media (max-width: 575px) {
+			font-size: $fs-18;
+		}
+	}
+
+	&__textarea {
+		width: 100%;
+		background: transparent;
+		padding: 18px 20px;
+		border: 1px solid #818181;
+		min-height: 117px;
+		resize: none;
+
+		&::-webkit-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&::-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-ms-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+
+		&:focus {
+			border: 1px solid $green;
+		}
+
+		@media (max-width: 575px) {
+			font-size: $fs-18;
+		}
+	}
+	
+	button {
+		background: $green;
+		font-size: $fs-18;
+		border: 0;
+		color: white;
+		transition: all 0.3s;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		@media (max-width: 575px) {
+			margin-top: 10px;
+		}
+	}
+
+	&--footer {
+		&__top {
+			margin: {
+				top: 40px;
+				bottom: 80px;
+			}
+
+			@media (max-width: 1200px) {
+				margin: {
+					top: 40px;
+					bottom: 40px;
+				}
+			}
+		}
+
+		button {
+			width: 100%;
+		    padding: 14px 15px;
+		    position: relative;
+		    top: -5px;
+		}
+	}
+
+}
+
+.form-banner {
+	font-size: 0;
+
+	input,
+	button {
+		display: inline-block;
+		vertical-align: top;
+		padding: 19px 20px;
+		font-size: $fs-24;
+		border: 0;
+		height: 64px;
+
+		&:focus {
+			outline: 0;
+			box-shadow: 0 0 5px $green;
+			border: 1px solid $green;
+		}
+
+		@media (max-width: 450px) {
+			padding: {
+				left: 10px;
+				right: 10px;
+			}
+		}
+	}
+
+	input {
+		width: 70%;
+
+		&::-webkit-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&::-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-ms-input-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+		&:-moz-placeholder {
+		  color: black;
+		  font-weight: $fw-l;
+		}
+
+		@media (max-width: 575px) {
+			width: 100%;
+		}
+	}
+
+	button {
+		width: 30%;
+		background: $green;
+		color: white;
+
+		@media (max-width: 575px) {
+			margin-top: 10px;
+			width: 100%;
+		}
+	}
+}

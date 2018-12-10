@@ -1,0 +1,8 @@
+{% set type = data.type %}
+
+{% if 'text' == type or 'html' == type or 'collection' == type or 'products' == type %}
+    {# {{ data.content|length > 30 ? data.content|slice(0, 30)|striptags|raw ~ '...' : data.content|striptags|raw  }} #}
+    {{ data.content|striptags|truncate(90, true, '...')|raw|nl2br }}
+{% elseif 'image' == type %}
+    <img src="{{ data.image.path|imagine_filter(filter|default('sylius_admin_product_thumbnail_heighten_grid')) }}" class="ui bordered image"/>
+{% endif %}

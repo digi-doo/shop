@@ -1,0 +1,30 @@
+{% if blocks|length > 0 %}
+    {% set mainBlock = blocks|first %}
+    {% set section = mainBlock.sections|first %}
+    
+    {% if mainBlock.products|length > 0 %}
+        <div class="product-holder">
+            <div class="row">
+                <div class="col">
+                    <h2 class="heading-border">{{ section.name }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="carousel">
+                {% for product in mainBlock.products %}
+                    <div class="slick-item">
+                        {% include '@SyliusShop/Product/_box.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="slider">
+            <div id="custom-handle" class="ui-slider-handle">
+                <span class="ui-slider-handle__sum">
+                    <strong></strong><span></span>
+                </span>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

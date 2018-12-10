@@ -1,0 +1,25 @@
+AppBundle\Entity\TagTranslation:
+    type: entity
+    table: sylius_tag_translation
+    repositoryClass: AppBundle\Repository\TagTranslationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+            unique: true
+        description:
+            type: text
+            nullable: true
+    indexes:
+        fulltext_tag_translation_index:
+            columns: ["name"]
+            flags: fulltext

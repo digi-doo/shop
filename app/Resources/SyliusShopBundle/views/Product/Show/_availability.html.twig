@@ -1,0 +1,8 @@
+{% import "@SyliusShop/Common/Macro/variantAvailability.html.twig" as availability %}
+
+<div class="product-detail__info-producer mt-2">
+    <div>
+        <p>{{ 'app.ui.availability'|trans }}: <strong id="variant-stock-info" class="{{ availability.resolveClass(product.variants.first)|trim }}">{{ availability.resolve(product.variants.first)|trim }}</strong></p>
+    </div>
+</div>
+<div class="alert alert-danger d-none mt-3 sylius-validation-error" id="sylius-cart-validation-error"></div>

@@ -1,0 +1,7 @@
+{% if product.shortDescription %}
+    <div class="product-detail__info-producer mt-4">
+        <div>
+            <p>{{ product.shortDescription }} | <a href="#main-description">{{ 'sylius.ui.more_information'|trans }}</a></p>
+        </div>
+    </div>
+{% endif %}

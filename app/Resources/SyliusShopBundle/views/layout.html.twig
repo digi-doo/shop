@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+<head>
+    <title>{% block title %}{% if sylius.channel.metaTitle %}{{ sylius.channel.metaTitle }}{% else %}{{ tenant_name }}{% endif %}{% endblock %}</title>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="{% if sylius.channel.metaRobots %}index, follow{% else %}noindex, nofollow{% endif %}" />
+    <meta name="author" content="{{ sylius.channel.metaAuthor }}" />
+    {% if google_site_verification and app.environment == 'prod' %}
+        <meta name="google-site-verification" content="{{ google_site_verification }}" />
+    {% endif %}
+
+    {% block metatags %}
+        <meta name="keywords" content="{{ sylius.channel.metaKeywords }}" />        
+        <meta name="description" content="{{ sylius.channel.metaDescription }}" />        
+    {% endblock %}
+
+    {% block stylesheets %}
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&amp;subset=latin-ext'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://fonts.googleapis.com/css?family=Poppins:400,700'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://use.fontawesome.com/releases/v5.0.6/css/all.css'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css'} %}
+        {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'assets/shop/css/app.css?v=' ~ sshop_assets_release } %}
+
+        {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
+    {% endblock %}
+
+    {% block favicon %}
+        {% include '@SyliusShop/Ui/_favicon.html.twig' with {'path': 'assets/shop/img/favicon'} %}
+    {% endblock %}
+
+    {% block header_javascripts %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://code.jquery.com/jquery-3.3.1.min.js'} %}
+    {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.head') }}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <div class="wrapper">
+        {{ sonata_block_render_event('sylius.shop.layout.before_body') }}
+        {% block header %}
+            {% include '@SyliusShop/_header.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
+        {% endblock %}
+
+        <main id="app">
+            <div class="container">
+                {% include '@SyliusShop/Ui/_flashes.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+
+                {% block content %}
+                {% endblock %}
+
+                {{ sonata_block_render_event('sylius.shop.layout.after_content') }}
+            </div>
+        </main>
+{% block footer %}
+    {% include '@SyliusShop/_footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {# Third party cdn's #}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://code.jquery.com/ui/1.12.0/jquery-ui.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://use.fontawesome.com/releases/v5.0.6/js/all.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js'} %}
+
+    {# APP js's #}
+    {% if app.environment == 'prod' %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/sylius-scripts-min.js'} %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/sylius-app-min.js'} %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/app-min.js'} %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&thirdparty=1&hideDetailsBtn=1&privacyPage=https%3A%2F%2Fprocamping.cz%2Fshop%2Fstranka%2Fpovinneinformace'} %}
+    {% else %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/sylius-scripts.js'} %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/sylius-app.js'} %}
+        {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
+    {% endif %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.javascripts') }}
+{% endblock %}
+
+{% include '@SyliusUi/Modal/_confirmation.html.twig' %}
+
+{# Log in modal if there is no user #}
+{% if not is_granted('ROLE_USER') %}
+    {{ render(controller('Sylius\\Bundle\\UserBundle\\Controller\\SecurityController::loginAction', {'_sylius': {'template': '@SyliusShop/Modal/_login.html.twig', 'redirect': {'route': app.request.attributes.get('_route')}}})) }}
+{% endif %}
+
+{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+</div>
+</body>
+</html>

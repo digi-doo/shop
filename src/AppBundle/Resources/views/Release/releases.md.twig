@@ -1,0 +1,562 @@
+<div class="ui segment">
+    {% markdown %}
+    # v0.1.4
+    ## SHOP
+    ### Hledání
+    * fulltext @TODO
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.1.3
+    ## ADMIN
+    ### Blok
+    * opravena chybná informace u sloupce "Povoleno" ve výpisu bloků    
+    * opraveno zobrazení sloupce "Obsah" bez HTML značek a ve správném kódování
+    ### Výrobci
+    * přidána možnost nahrát k výrobci logo
+    * ve výpisu výrobců se zobrazuje logo nahrané k výrobci
+    * do nastavení kanálu byl přidán přepínač "Zobrazovat seznam produktů dle skladové dostupnosti". Toto nastavení je použito pro výpis produktů daného výrobce.
+    ### Kanál
+    * pro lepší oriantaci bylo přepracováno menu v editaci kanálu
+    * do nastavení kanálu byla přidána možnost zadat "cenu od" pro zobrazení štítku produktu "Dopravu zdarma"
+    * do nastavení kanálu byl přidán přepínač "Zobrazovat seznam produktů dle skladové dostupnosti". Toto nastavení je použito pro vyhledané produkty.
+    ### Kategorie
+    * do nastavení kategorie byl přidán přepínač "Zobrazovat seznam produktů dle skladové dostupnosti". 
+        * pokud je tato volba zapnuta, je výpis produktů seřazen do dvou skupin - skladem a není skladem
+        * v každé skupině lze poté řadit dle pozice v kategorii
+        * toto řazení není aplikováno v případě, že je zapnuto některé z ostatních řazení (dle ceny, názvu atd.)
+        * pokud je tato volba vypnuta, řadí se pouze dle pozice v kategorii
+    ### Štítek
+    * do nastavení štítku byl přidán přepínač "Zobrazovat seznam produktů dle skladové dostupnosti". Tato volba je použita pro výpis produktů daného štítku.
+
+    ## SHOP
+    ### Kategorie
+    * přidáno tlačítko "Zobrazit další"
+        * zobrazuje se pouze tehdy, pokud má kategorie více než jednu stránku k zobrazení
+        * zobrazuje se pouze tehdy, pokud má kategorie dostupné produkty na další stránce
+        * aktuální posun v kategorii je zaznamenán v url adrese a odráží aktuální stránku (simuluje další stránku v pořadí ve stránkovači)
+        * funguje stejně i v případě aktivní filtrace produktů
+        * funkčnost stránkovače ve spodní části kategorie byla zachována (v případě použití tlačítka "Zobrazit další" se stránkovač dynamicky mění tak, aby zachytil aktuální posun)
+    * přejmenováno výchozí řazení "Podle pořadí" na "Doporučujeme"
+    ### Výrobci
+    * do hlavního menu přidán odkaz na všechny dostupné výrobce
+    * výpis výrobců obsahuje boxy s logem a názvem
+    * celý box odkazuje na výpis produktů daného výrobce
+    * pokud je výrobce vypnutý, ve výpisu se nezobrazuje
+    * do výpisu přidáno tlačítko "Zobrazit další" se stejnou logikou jako je popsáno výše
+    ### Štítky
+    * do výpisu přidáno tlačítko "Zobrazit další" se stejnou logikou jako je popsáno výše
+    ### Vyhledávání
+    * do výpisu přidáno tlačítko "Zobrazit další" se stejnou logikou jako je popsáno výše
+    ### Hlavní stránka
+    * opravena chyba v kolekcích produktů podle štítku, která způsobovala, že se v některých případěch nezobrazil poslední náhodně vybraný produkt
+    ### Produkt
+    * pokud je v nastavení kanálu vyplněna částka pro dopravu zdarma a cena produktu je vetší nebo rovna dané častce:
+        * v detailu produktu a ve všech výpisech produktů (kategorie, štítky, vyhledávání, výrobci, kolekce na hlavní stránce, slevy na hlavní stránce, asociace produktů, poslední navštívené produkty) se zobrazuje informace o dopravě zdarma
+        * pokud má daný produkt zárověň slevu, informace o dopravě zdarma se zobrazuje pod informací o slevě a výše uvedený výpočet je aplikován na cenu již po slevě
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.1.2
+    ## ADMIN
+    ### Produkt
+    * opravena chyba v přiřazování produktu do kategorií, která v případě, že nebyl rozbalen celý strom zvolené kategorie, způsobovala smazání relace produktu na zvolenou podkategorii
+    ### Kategorie
+    * ke všem kategoriím přidán přepínač "Zobrazovat filtr" 
+        * v případě zapnutého přepínače se pouze pro danou kategorii v postranním panelu na shopu zobrazuje/nezobrazuje filtr
+        * pro každou kategorii je volba unikátní - tzn neberou se v potaz rodičovské kategorie ani podkategorie
+    ### Možnosti
+    * ke všem možnostem variant přidán přepínač "Filtrovatelné" 
+        * ve výpisu možností se v tabulce pro každý řádek zobrazuje informace, jestli je daná možnost filtrovatelná
+        * pokud je v dané kategorii zapnutý filtr, zobrazuje se na základě této volby filtr hodnot dané možnosti varianty, ale pouze těch hodnot, které jsou v dané kategorii opravdu použity
+        * pokud je možnost obecně vypnuta, filtr se nezobrazuje, a to i přes to, že je možnost filtrace zapnuta
+        * pokud je přepínač zapnutý a pro danou kategorii systém najde pouze jednu použitou hodnotu této možnosti, filtr dané možnosti varianty se nezobrazuje (v kategorii je pouze jeden produkt, který má možnost např. Barva)
+    ### Atributy
+    * ke všem atributům produktů přidán přepínač "Filtrovatelné" 
+        * ve výpisu atributů se v tabulce pro každý řádek zobrazuje informace, jestli je daný atribut filtrovatelný
+        * pokud je v dané kategorii zapnutý filtr, zobrazuje se na základě této volby filtr hodnot daného atribut, ale pouze těch hodnot, které jsou v dané kategorii opravdu použity
+        * pokud je přepínač zapnutý a pro danou kategorii systém najde pouze jednu použitou hodnotu tohoto atributu, filtr daného atributu se nezobrazuje (v kategorii je pouze jeden produkt, který má atribut např. Barva a hodnotu např. Zelená)
+        * v zobrazeném filtru se atributy řadí dle své pozice
+    * do výpisu atributů přidána informace o pozici každého atributu
+    ### Výrobci
+    * ke všem výrobcům produktů přidán přepínač "Filtrovatelné" 
+        * ve výpisu výrobců se v tabulce pro každý řádek zobrazuje informace, jestli je daný výrobce filtrovatelný
+        * pokud je v dané kategorii zapnutý filtr, zobrazuje se na základě této volby filtr výrobců, ale pouze těch výrobců, kteří jsou v dané kategorii opravdu použity
+        * pokud je výrobce obecně vypnut, filtr se nezobrazuje, a to i přes to, že je možnost filtrace zapnuta
+    
+    ## SHOP
+    ### Kategorie
+    * na základě výše zmíněného nastavení se v kategorii nad stromem podkategorií zobrazuje filtr produktů
+    * pokud kategorie obsahuje produkty, které mají alespoň jednoho výrobce, zobrazí se filtr výrobců
+    * pokud kategorie obsahuje konfigurovatelné produkty, zobrazuje se filtr možností variant, kde každá možnost obsahuje pouze pro danou kategorii použité hodnoty možností
+    * pokud kategorie obsahuje produkty, které obsahují nějaké atributy, zobrazuje se filtr atributů proudktů, kde každý atribut obsahuje pouze pro danou kategorii použité hodnoty
+    * v rámci jednoho bloku (výrobci, varianty, atributy) se systém řídí logikou **NEBO**
+    * mezi všemi bloky (výrobci, varianty, atributy) se systém řídí logikou **A ZÁROVEŇ**
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.1.1
+    ___
+    ## ADMIN
+    ### Objednávka
+    * bylo přidáno propisování stavů (štítků) objednávky do aplikace Autodevelo
+        * objednávka:
+            * Nová 
+            * Zpracovaná 
+            * Expedovaná
+            * Vyskladněná 
+            * Vyřízená 
+            * Stornovaná 
+        * platba
+            * Čeká se na platbu 
+            * Platba stornována 
+            * Zaplaceno 
+        * doprava
+            * Nová přeprava
+            * Přeprava zrušena 
+            * Předáno dopravci  
+            * Doručeno
+    * byla opravena chyba při stornaci objednávky s online platbou
+
+    ## Obecné
+    * opraven Google Tag Manager plugin v detailu produktu
+    * aktualizovány některé pluginy třetích stran
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.1.0
+    ___
+    ## ADMIN
+    ### Objednávka
+    * byla přidána nová funkčnost komunikace ze strany aplikace Autodevelo do shopu
+        * propisování všech výdejek
+        * propisování všech nových faktur
+        * v případě kompletního vydání se objednávka automaticky označuje jako "Vydáno" a stahují se všechny nové výdejky. Pouze pro tento případ <strong style="color:red;">neplatí</strong>, že objednávka musí být ve stavu "K expedici".
+        * v případě vyfakturování objednávky se stav platby objednávky automaticky označuje jako "Zaplaceno" a stahují se všechny nové faktury
+        * v případě stornace objednávky se objednávka na straně shopu automaticky označuje jako "Stornováno" a pokud existuje vydaná faktura, stahuje se dobropis
+        * přidáno automatické stahování příjmových pokladních dokladů k objednávce
+    * v případě potvrzení zaplacení objednávky na dobírku se nově stahuje/odesílá vydaná faktura z aplikace Autodevelo
+    * pouze pro platbu převodním příkazem bylo přidáno tlačítko, které zákazníkovi odesílá opětovnou výzvu k platbě a to pouze tehdy, pokud existuje alespoň jedna zálohová faktura
+    * ve výpisu objednávek byl přidán sloupec "Poznámky", které administrátora informuje o existenci poznámky od klienta a interních poznámek
+    * v detailu objednávky byla přesunuta poznámka od zákazníka nad tabulku objednáných produktů a byla podbarvena červenou barvou
+    * byla upravena logika stornace objednávky, kde se nově nejprve kontroluje splnění podmínek na straně aplikace Autodevelo (nastavení odesílání emailů účetní).
+    * do detailu objednávky byla přidána informace o existujicích interních poznámkách
+    
+    ## SHOP
+    ### Kategorie
+    * v detailu kategorie byla opravena chyba, která způsobovala, že se v postranním panelu zobrazovaly neaktivní kategorie
+
+    ### Produkt
+    * do detailu produktu byl přidán stručný popis, včetně odkazu na celý popis produktu na dané stránce
+    * odkaz do administrace na editaci produktu pro přihlášené administrátory se otevírá v novém okně
+    * opraveny volby variant, kdy se pri zmene varianty v detailu produktu zobrazovala nezaokrouhlena cena
+
+    ### Objednávka
+    * bylo odstraněno pole "titul" z formuláře pro zadání adresy
+    * přidána validace telefonního čísla zákaznika pro formáty +420 123 456 789 nebo +420123456789
+    
+    ## Obecné
+    * vyměněn banner v hlavičce
+    * přidán štítek "Výprodej" do hlavního menu
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.9
+    ___
+    ## ADMIN
+    ### Objednávka
+    * upraveno vydávání objednávky ze skladu
+        * pokud se vydává z administrace shopu, objednávka nemá žádné synchronizované produkty a má zvolenou platbu dobírkou - přechází se do stavu vydáno a zaplaceno a stahuje se vydaná faktura
+        * pokud se vydává z administrace shopu a objednávka má minimálně jeden synchronizovaný produkty, tak nelze objednávku vydat. V tomto případě se musí objednávka vydat v externím systému.
+        * pokud se vydává v externím systému, objednávka má minimálně jeden synchronizovaný produkt a má zvolenou platbu dobírkou, automaticky se do administrace shopu propisuje stav vydáno a zaplaceno, stahují se výdejky a faktura
+        * pokud se vydává v externím systému, objednávka má minimálně jeden synchronizovaný produkt a nemá zvolenou platbu dobírkou, automaticky se do administrace shopu propisuje stav vydáno a stahují se výdejky
+        * <strong style="color:red;">aby se objednávka automaticky vydala z externího systému, musí být v administraci shopu objednávka ve stavu "K expedici" !</strong>
+    * ve výpisu objednávek je ve výchozím stavu filtr otevřený
+
+    ### Produkt
+    * ve výpisu produktů je ve výchozím stavu filtr otevřený
+
+    ## Obecné
+    * byla upravena některá pole Facebook a Google feedů pro efektivnější 
+        * upraveno pole google_product_category, do kterého se již nevypisuje kód Google kategorie, ale celý název Google kategorie
+        * přidáno pole product_type, do kterého se pro identifikaci propisuje první nalezený slug kategorie druhé úrovně, do které produk patří
+        * v poli availability byl upraven výpis "stock" a "out of stock" tak, aby se nebrala v potaz možnost zapnutého záporného skladu. Tzn pokud není produk reálně skladem, tak je vždy "out of stock" i přes zapnutou možnost záporného skladu (stále lze produkt objednat)
+        * přidáno pole custom_label_0, do kterého se v případě existující slevy propisuje "akce"
+        * přidáno pole custom_label_1, do kterého se v závislosti dostupnosti na skladě propisuje "skladem", nebo fráze dodavatele, nebo "na dotaz"
+    * optimalizován příkaz pro hromadnou synchronizaci skladových zásob a rezervací s externím systémem
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.8
+    ___
+    ## ADMIN
+    ### Produkt
+    * při obnovení stránky (např. uložení) se nově ukládá poslední otevřená záložka
+    * informace o cenách, výrobci a dodavateli byly přesunuty do samostnatné záložky
+    * přidána možnost omezit platnost slevy produktu do vyprodání zásob (sklad - rezervace), nebo omezit slevu časově - od do, pouze od, pouze do. Slevy a omezení slev se přesunuly do samostatné záložky "Ceník" v jednoduchém produktu a ve variantě konfigurovatelného produktu.
+    * v editaci produktu se nově ukládá poslední otevřená záložka. Tzn při obnovení/uložení formuláře je aktivní poslední zvolená záložka.
+    * bylo opraveno automatické zvolení nadřazených kategorií. Pokud tak administrátor pro produkt zvolí přiřazení do některé z podřazených kategorií, automaticky se zakřížkují i její nadřazené kategorie.
+    * k výpisu produktů byla přidána nová funkčnost hromadné úpravy slev vybraných produktů. Volby se dají různě kombinovat.
+        * lze upravit pouze procentuální slevu a ponechat stávající typy omezení slev u vybraných produktů
+        * pokud není vyplněna procentuální sleva, lze upravit pouze typy omezení slev u vybraných produktů
+        * pokud je zvoleno omezení slevy typu "Časové omezení" lze zadat datum od a datum do, nebo pouze datum od, nebo pouze datum do
+        * o výsledku hromadné úpravy v závislosti na kombinaci zvolených polí je administrátor obeznámen informační zprávou
+    * opravena chyba způsobující neuložení, nebo špatné uložení varianty konfigurovatelného produktu
+    * k produktové variantě byla přidána možnost variantu vypnout/zapnout
+    * do hromadných akcí nad produkty a variantami byla přidána nová funkčnost zapnutí nebo vypnutí vybraných položek
+    * tlačítko "Zobrazit v obchodě" nebo "Zobrazit v obchodě (koncept)" u konfigurovatelného produktu bylo upraveno tak, aby se zobrazovalo pouze v případě, že má produkt minimálně jednu povolenou variantu.
+    * opravena chyba, která způsobovala padání systému v případě zadání neexistujícího kódu k synchronizaci produktu
+
+    ## SHOP
+    ### Menu
+    * úprava vzhledu a zpřehlednění horního menu v desktopovém rozlišení
+    * opraven výpis kategorií v hlavním menu, kde se již nevypisují i neaktivní kategorie
+    
+    ### Kategorie
+    * úprava vzhledu detailu kategorie, doplnění popisu pro kategorií, úprava levého menu podkategorií
+    * opraven výpis kategorií v levém menu, kde se již nevypisují i neaktivní kategorie
+
+    ### Košík
+    * opravena šířka pole pro vložení slevového kupónu
+    * obsah košíku se uchovává v paměti po dobu 3 měsíců
+
+    ### Produkt
+    * pokud je produktová varianta vypnuta, v detailu produktu konfigurovatelného se nezobrazuje
+    * pokud má konfigurovatelný produkt všechny varianty vypnuty, chová se stejně, jako by byl sám vypnutý. Tzn nezobrazuje se v kategoriích, vyhledávání a nelze zobrazit ani detail produktu a to jak v konceptu, tak v normálním režimu.
+    * vypnuté produktové varianty se neexportují do žádných feedů
+    * 3 poslední navštívené produkty se uchovávají v paměti po dobu 3 měsíců
+
+    ## Obecné
+    * v adminu se při skrytí postranního panelu ukládá poslední zvolený stav. Tzn při další návštěvě, nebo při obnovení stránky, je panel skrytý nebo odkrytý.
+    * byly přidány CLI příkazy pro přesun nebo kopii kategorie a všech jejich přiřazených produktů, které lze na vyžádání spustit
+    * v shopu byl přidán nový banner do hlavičky
+    * byla opravena velikost obrázků v kolekcích na hlavní stránce
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.7
+    ___
+    ## ADMIN
+    ### Zákazník
+    * ve výpisu zákazníků byly upraveny tlačítka akcí tak, aby se správně zpbrazovaly i na menších monitorech
+    * byla pročištěna databáze od všech spam uživatelů, které se dotáhly ze starého e-shopového jádra (zákazníci, adresy atd...)
+
+    ### Produkt
+    * produkt lze nyní zobrazit v obchodě i pokud není povolen
+        * produkt se zobrazuje v tzv. "konceptu" a pouze na dané speciální adrese
+        * ve vyhledávání a v kategoriích se nezobrazuje dokud není povolen
+        * pro jakékoliv zobrazení musí mít produkt minimálně jednu naplněnou variantu
+        * pro zobrazení konceptu v obchodě musí být administrátor přihlášen. V opačném případě není adresa dostupná.
+    * byly přidány některé výchozí hodnoty formuláře při vytváření nového produktu, aby se předešlo případným překlepům
+        * sledovaný sklad = ano
+        * záporný sklad = ne
+        * výchozí kusy na skladě = 0
+    * opravena synchronizace skladových dostupností a rezervací posílaných z devela
+    * opraven textový editor pro popis produktu, kdy při přidání delšího textu docházelo ke ztrátě lišty s nástroji a přepnutí do html
+    * k variantě přidána možnost zadat neunikátní EAN kód
+    * do výpisu produktů byl přidán odkaz do detailu i na obrázek a název
+
+    ### Objednávka
+    * upravena logika rezervací a skladových dostupností
+        * pokud je produkt synchronizován s develem, je jeho skladová dostupnost a rezervace plně ovládána develem
+        * pokud se provede objednávka samostatně v develu, je do shopu posílána stejná informace o skladové dostupnosti a rezervaci jako při vytvoření objednávky v shopu 
+
+    ## SHOP
+    ### Zákazník
+    * k registraci zákazníka byla přidána reCAPTCHA pro odstranění škodlivých botů (ruské adresy atd...) + viz admin/zákazník výše
+    * změněn popisek při přihlašování z "Vaše uživatelské jméno" na "Váš e-mail"
+    
+    ### Objednávka
+    * do posledního kroku přidán checkbox "Souhlasím s obchodními podmínkami" s proklikem na stránku obchodních podmínek, bez kterého nelze objednávku odeslat
+
+    ### Produkt
+    * pokud je administrátor přihlášen, zobrazuje se mu v detailu produktu odkaz na editaci produktu do administrace
+    * ve výpisu produktů se pro tlačátko Skladem/Není skladem již nebere v potaz záporný sklad
+    * opravena chyba, která se týkala uložení naposledy navštívených produktů
+        * pokud byl produkt po navštívení a uložení v administraci vypnut, stálé se produkt na shopu zobrazoval v sekci naposledy navštívených, přičemž link na vypnutý produkt vedl na chybu
+    * v produktovém boxu odstraněna ikona vedoucí na detail
+    
+    ### Obecné
+    * byly přidány zálohy celé databáze, které se co 4 hodiny odesílají na privátní cloud pro případ, že dojde k výpadku serveru, nebo jakékoliv závažné chybě
+    * všechny kontaktní formuláře byly opatřeny reCAPTCHA ochranou proti rozesílání spamu
+    * ke všem kontaktním formulářům byla přidána informace o stránce, ze které je daný formulář odesílán (produkt, kategorie atd...)
+    * byla přidána možnost zálohy všech obrázků na e-shopu, která lze na vyžádání spustit, zazipovat a odeslat např do dropboxu
+    * bylo kompletně předěláno hlavní menu a to jak v mobilní, tak v desktopové verzi
+    * v souladu s GDPR byly upraveny nebo přidány odpovídající informace
+    * bylo provedeno několik grafických úprav v detailu produktu
+    * na shopu byla zakotvena horní lišta i pro desktop
+    * v horní liště změněno "Vítejte v Procamping" na "Kontaktujte naši zákaznickou podporu"
+    * v souladu s nařízením EU přidána lišta pro povolení COOKIES
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.6
+    ___
+    ## ADMIN
+    ### Objednávka
+    * pokud se objednávka nespáruje s develem:
+        * v detailu se zobrazuje varování, že objednávka není spárována/exportována
+        * všechny změny stavů, při kterých se volá develo (zaplacení, vydání, storno) lze provádět bez padání systému, administrátor je pouze informován, že se daný stav nepodařilo aplikovat na straně devela
+            * v případě změny stavu s oznámením, se odesílají výchozí informační e-maily (bez faktur atd)
+        * objednávku se administrátor může pokusit exportovat znovu tlačítkem "Exportovat"
+            * pokud se export z nějakého důvodu nepovede, zobrazuje se chybová hláška s detailem problému
+            * pokud se objednávka exportuje správně a u objednávky byla zvolena metoda platby převodem, automaticky se zákazníkovi odesíla e-mail se zálohovou fakturou a číslem účtu k zaplacení objednávky
+            * pokud se objednávka exportuje správně, stáhnou se z devela všechny dokumenty stejně jako při správném exportu při dokončení objednávky z shopu a zobrazí se tlačítko s odkazem na detail objednávky do devela
+    * byl přidán nový stav přepravy "Předáno dopravci". Nová objednávka musí být nejprve vydána, poté lze stav dopravy aktualizovat na "Předáno dopravci", kde se v případě zvoleného oznámení odesílá e-mail "Vaši objednávku jsme předali dopravci XYZ..." a až poté lze přejít do stavu "Dodáno". Pro stav "Dodáno" se v případě oznámení odesílá e-mail "...děkujeme za Váš nákup, Vaše objednávka č. 000000246 byla úspěšně dodána".
+    ### Produkt
+    * o jakémkoliv výsledku synchronizace s develem je nyní administrátor informován zprávou
+    * při úspěšné synchronizaci produktu/varianty se nově do devela odesílá informace o párování + odkaz na produkt do shopu (v develu pak dostupné ve skladové kartě v záložce "Synchronizace se systémy")
+    * pro zrušení párování přibylo tlačítko "Zrušit" v záložce "Synchronizace" - záložka v develu zmizí
+
+    ## SHOP
+    ### Objednávka
+    * po dokončení posledního kroku objednávky se nově nejpomalejší události zpracovávají asynchronně - pro zákazníka se dokončení objednávky rapidně zrychlilo
+    * pokud po dokončení nedojde k žádné chybě:
+        * zákazníkovi se odesílá e-mail potvrzující objednávku
+        * pokud je zvolena platba převodem, posílá se zálohová faktura z devela
+        * administrátorům uvedeným v nastavení kanálu se odesílá informace o nové objednávce
+    * pokud po dokončení dojde k jakékoliv chybě (především synchronizace s develem, poslání zálohové faktury atd.):
+        * zákazník dokončí objednávku stejně jakoby se nic nestalo - už se mu nezobrazuje chybová hláška
+        * vždy a za jakýchkoliv okolností se zákazníkovi odesílá e-mail potvrzující objednávku
+        * pokud je zvolena platba převodem, odesílá se jenom obecný potvrzující e-mail <strong style="color:red;">bez</strong> zálohové faktury
+        * vždy pokud po dokončení dojde k jakékoliv chybě, odesílá se administrátorům uvedeným v nastavení kanálu e-mail s chybovou zprávou a odkazem na objednávku do administrace
+    * byly opraveny některé výjimečné stavy související s přechodem a návratem z platební brány GoPay
+    
+    ### Produkt
+    * ve výpisu produktu se změnilo tlačítko košíku v informaci o skladové dostupnosti
+        * pokud je produkt skladem (nebo má povolen záporný sklad), zobrazuje se zelené tlačítko s textem "Skladem" 
+        * pokud není skladem, zobrazuje se oranžové tlačítko s textem "Není skladem" 
+
+    ### Obecné
+    * bylo opraveno několik chybových stavů tak, aby se pokud možno zákazníkovi na straně shopu vůbec nezobrazoval FATAL ERROR, ale aby o této skutečnosti byli informováni administrátoři e-mailem
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.5
+    ___
+    ## ADMIN
+    ### Objednávka
+    * do přehledu objednávek byla přidána informace o zvolené platbě a dopravě
+    * do detailu objednávky byl přidán modul interních poznámek
+        * pokud administrátor vytvoří interní poznámku, zobrazí se v poznámkách pod formulářem
+        * dokud poznámku nepotvrdí jakýkoliv administrátor, při přechodu do jakéhokoliv stavu objednávky se zobrazí upozornění, že k objednávce existují nějaké nepotvrzené interní poznámky
+        * pokud má objednávka všechny interní poznámky potvrzeny, upozorněni při přechodech stavů se nezobrazuje (kromě stornace objednávky)
+        * k interní poznámce se ukládá záznam o tom, kdo a kdy ji vytvořil a případně kdo a kdy ji potvrdil
+    * pro přechod do stavu "Vydáno" byla přidána kontrola existující číselné řady pro požadovaný sklad v externím systému
+    * byly přepracovány všechny změny stavů objednávky
+        * každá změna stavu, která odesílala jakýkoliv email, má nyní možnost přechodu do zvoleného stavu s nebo bez odeslání oznámení zákazníkovi
+        * všechny již implementované funkčnosti při změnách stavů zůstaly zachovány
+
+    ## Produkt
+    * ke skladové dostupnosti v detailu produktu byla přidána informace o rezervovaných kusech
+    * opravena validace ceny varianty ve formuláři - nesmí být prázdná hodnota
+    * ve výpisu produktů lze nově zobrazit 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 produktů na stránku
+    * byla přidána synchronizace rezervovaných kusů z devela -> skladová dostupnost již není ponížena o rezervované kusy, místo toho se synchronizuje i počet rezervovaných kusů
+    * do informačního boxu "Varianta k synchronizaci" byly přidány další informace o externím produktu
+
+    ## SHOP
+    ### Produkt
+    * v detailu produktu opraveno zobrazení dostupnosti tak, aby se počítalo už i s rezervovanými kusy
+    * pokud má produkt nějaké vyplněné asociace, tak se v detailu zobrazuje jako nová záložka s počtem asociovaných produktů v závorce
+
+    ### Košík
+    * opravena validace a vypsání kusů na skladě mínus rezervovaných kusů, pokud si zákazník v košíku navýší požadovaný počet kusů produktu
+
+    ### Hlavní stránka
+    * v kolekcích se nyní produkty zobrazují v náhodném pořadí
+
+    ### Objednávka
+    * do devela se nově posílá k synchronizaci i poznámka k objednávce, vložená zákazníkem v rekapitulaci
+
+    ## OBECNÉ
+    ### Feedy
+    * opravena měna u doprav v Google feedu
+
+    ### E-maily
+    * v potvrzujícím e-mailu o odeslané objednávce bylo přepsáno "Informace o vyřízení objednávky" na "Informace o odeslání objednávky"
+
+    ### Přihlášení
+    * opravena funkčnost zapamatování přihlášení do administrace i do uživatelského účtu
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.4
+    ___
+    ## ADMIN
+    ### Kanál
+    * bylo přepracováno přidávání a editace kanálu
+    * v detailu kanálu se nyní nachazí podmenu, kde je každá položka vztažená ke specifickým vlastnostem
+    * bylo přidáno globální SEO nastavení
+        * indexování obsahu - povolit/zakázat robotům indexování obsahu nebo sledování odkazů, nebo generování souboru robots.txt
+        * titulek - výchozí titulek vypisovaný v hlavičce na každé stránce e-shopu
+        * meta autor - výchozí meta autor vypisovaný v hlavičce na každé stránce e-shopu
+        * meta klíčová slova - slouží jako "záložní" pro případ, že daná stránka nemá vyplněna meta klíčová slova
+        * meta popis - slouží jako "záložní" pro případ, že daná stránka nemá vyplněn meta popisek
+
+    ### Kategorie
+    * přidána pole meta popis a meta klíčová slova
+    * popis kategorie je nově formou WYSIWYG editoru, který podporuje například pokročilé formátováni textu nebo vkládání obrázků
+    
+    ## Shop
+    ### Hlavní menu
+    * opraven nadpis h3 v podmenu
+
+    ### Hlavní stránka
+    * přidán skrytý nadpis h1, který se plní titulkem ze SEO nastavení kanálu
+    * upraveno pořadí h1, h2, h3 nadpisů pro SEO
+
+    ### Kategorie
+    * upraveno pořadí h1, h2, h3 nadpisů pro SEO
+    * v případě, že má kategorie vyplněn meta popis, vypisuje se v hlavičce. Pokud meta popis vyplněn nemá, zobrazuje se výchozí z nastavení kanálu.
+    * v případě, že má kategorie vyplněny meta klíčová slova, vypisují se v hlavičce. Pokud meta klíčová slova vyplněna nemá, zobrazují se výchozí z nastavení kanálu.
+
+    ### Produkt
+    * upraveno pořadí h1, h2, h3 nadpisů pro SEO
+    * opraven titulek stránky v html kódu na "Produkt XYZ | Titulek z nastavení"
+    * v případě, že má produkt vyplněn meta popis, vypisuje se v hlavičce. Pokud meta popis vyplněn nemá, zobrazuje se výchozí z nastavení kanálu.
+    * v případě, že má produkt vyplněny meta klíčová slova, vypisují se v hlavičce. Pokud meta klíčová slova vyplněna nemá, zobrazují se výchozí z nastavení kanálu.
+    * do detailu produktu byla přidána nová informace o dostupnosti varianty na skladě, která se vypisuje dle následujících pravidel:
+        * pokud má produkt skladovou dostupnost > 0, vypisuje se dostupnost <strong style="color:green;">ihned</strong> a produkt <strong style="color:green;">lze</strong> objednat
+        * pokud má produkt skladovou dostupnost <= 0, má povolen odběr do záporu a má zvoleného dodavatele, vypisuje se dostupnost uvedená u daného dodavatele např. <strong style="color:orange;">do 14 dní</strong> a produkt <strong style="color:green;">lze</strong> objednat
+        * pokud má produkt skladovou dostupnost <= 0, má povolen odběr do záporu a nemá zvoleného dodavatele, vypisuje se dostupnost <strong style="color:red;">na dotaz</strong> a produkt <strong style="color:green;">lze</strong> objednat
+        * pokud má produkt skladovou dostupnost <= 0, nemá povolen odběr do záporu a má zvoleného dodavatele, vypisuje se dostupnost <strong style="color:red;">na dotaz</strong> a produkt <strong style="color:red;">nelze</strong> objednat
+        * pokud má produkt skladovou dostupnost <= 0, nemá povolen odběr do záporu a nemá zvoleného dodavatele, vypisuje se dostupnost <strong style="color:red;">na dotaz</strong> a produkt <strong style="color:red;">nelze</strong> objednat
+    * v případě konfigurovatelného produktu se informace o dostupnosti automaticky mění na základě zvolené kombinace varianty
+
+    ### Objednávka
+    * upraveno pořadí h1, h2, h3 nadpisů pro SEO
+    * opraven titulek stránky v html kódu na "Krok procesu objednávky | Titulek z nastavení"
+
+    ## OBECNÉ
+    ### E-maily
+    * opraveno zobrazování tabulky objednaných produktů
+    ### Feedy
+    * opraveno automatické generování všech feedů každou noc ve 3:15
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.3
+    ___
+    ## ADMIN
+    ### Objednávky
+    * v detailu objednávky přejmenován stav "Zrušit" na "Stornovat" a "Stornováno"
+
+    ### Štítky
+    * u štítku byla přidána možnost označit štítek jako "Hlavní". Další informace viz níže v sekci SHOP/Produkt.
+
+    ### Zákazníci
+    * byly opraveny špatně se zobrazující tlačítka v hlavičce detailu zákazníka
+
+    ## SHOP
+    ### Zákazník
+    * zákazník si nyní může ve svých adresách volit státy, které jsou v administraci povoleny
+
+    ### Objednávky
+    * v kroku volby adresy si zákazník může zvolit jiný (v administraci povolený) stát
+    * v kroku dopravy se vypisují pouze ty dopravní metody, které jsou v administraci pro daný stát přiřazeny
+        * pokud je v kroku adresy zvolen stát, který nemá žádné dopravní metody, zobrazí se zákazníkovi informační zpráva a v objednávce nelze pokračovat
+    
+    ### Košík
+    * z výpisu objednaných produktů se nyní lze prokliknout do detailu produktu
+
+    ### Produkt
+    * v detailu produktu byla opravena volba variant (select boxy), kde se již nezobrazují kompletně všechny volby možností variant, ale pouze ty, které jsou u daného konfigurovatelného produktu opravdu použity
+    * ve výpisu produktů (produktový boxík) a v detailu produktu se nyní vypisují všechny ceny zaokrouhleně
+    * v detailu produktu se hlavní štítky zobrazují nad základními informacemi. Ostatní (vedlejší) štítky se pak zobrazují pod záložkami produktu (popis, parametry...)
+
+    ## OBECNÉ
+    ### E-maily
+    * z tabulky objednaných produktů byl odstraněn sloupec s informací o slevě
+    * v případě stornace již zaplacené objednávky byla přidána zpráva "Částka Vám bude vrácena na účet do 14 dní."
+    ### Import
+    * vylepšen import konfigurovatelných produktů z excelu
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+    # v0.0.2
+    ___
+    ## ADMIN
+    ### Objednávky
+    * vylepšen filtr objednávek - nyní se ve výchozím stavu zobrazují pouze nové objednávky a pomocí filtrů lze zobrazit různé kombinace stavů objednávky, platby a dodávky
+    * přidány nové stavy objednávky v pořadí Zpracovává se -> K expedici -> Vydat. Tyto stavy jdou po sobě a nelze mezi nimi jinak přecházet.
+        * u stavu Zpracovává se se zákazníkovi odesíla e-mail, že se objednávka začala zpracovávat
+        * u stavu K expedici se nic nědějě
+        * u stavu Vydat se kontroluje externí skladová dostupnost. Pokud je objednávka vykrytá, lze objednávku "vydat" a automaticky se stáhnout skladové výdejky
+        * pouze ze stavu "Vydáno" lze uzavřít a odeslat objednávku
+        * pokud má objednávka platební metodu "Dobírka" a objednávka se vydá, automaticky se stahuje vydaná faktura a stav platby se mění na "Zaplaceno"
+        * zrušit objednávku lze nyní z jakéhokoliv stavu
+    {% endmarkdown %}
+</div>
+
+<div class="ui segment">
+    {% markdown %}
+        # v0.0.1
+        ___
+        ## ADMIN
+        ### Objednávky
+        * do dokumentů k objednávce přidáno PDF samotné objednávky
+        * přidán odkaz do detailu objednávky pro proklik na zákazníka
+        * potrvzení zrušení objednávky
+        * odesílá se odkaz na objednávku do shopu 
+        * odesílá se odkaz na objednané produkty do shopu 
+        * v detailu objednávky je dostupný odkaz na objednávku do devela
+        * filtr objednávek nově podporuje hledání i v dodacích a fakturačních adresách zákazníka
+        * změněna barva kódů objednaných produktů z bílé na tmavou
+        * opraveno dvojité zpracování stornace objednávky
+
+        ### Zákazník
+        * v detailu zákazníka přidány jeho adresy
+
+        ### Akce
+        * přidána akce na platbu zdarma
+
+        ### Platební metody
+        * přidána metoda GoPay
+        * ošetřeny různé návratové stavy z platební brány + následná interakce s develem
+
+        ## SHOP
+        ### Produkt
+        * v detailu produktu přidána informace o slevě
+        * upraveny velikosti obrázků v kolekci produktů na hlavní stránce
+        * ve výpisu produktů je neslevněná cena černou barvou
+        * v detailu produktu přejmenovány záložky Pobrobnosti => Popis a Atributy => Technické parametry
+
+        ### Kategorie
+        * opraveno chování stránkovače v případě vetšího počtu produktů na stránku
+
+        ### Objednávka
+        * telefonní číslo je nyní povinné
+        * odstraněny problémy s dokončením objednávky - červená hláška
+        * upraveno vypočítávání všech cen v rámci objednávkového procesu
+
+        ### Obecné
+        * obálka webu má maximální šířku 1600px
+
+    {% endmarkdown %}
+</div>
+
+

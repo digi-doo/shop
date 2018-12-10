@@ -1,0 +1,15 @@
+app_admin_tag:
+    resource: |
+        alias: app.tag
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        redirect: index
+        grid: app_admin_tag
+        vars:
+            all:
+                subheader: app.ui.manage_tags
+                templates:
+                  form: AppBundle:Tag:_form.html.twig
+            index:
+                icon: 'tags image outline'
+    type: sylius.resource

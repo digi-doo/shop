@@ -1,0 +1,15 @@
+app_admin_ajax_tag:
+    resource: "ajax/tag.yml"
+    prefix: /tags
+
+app_admin_ajax_manufacturer:
+    resource: "ajax/manufacturer.yml"
+    prefix: /manufacturer
+
+app_admin_ajax_heureka:
+    resource: "ajax/heureka.yml"
+    prefix: /heureka
+
+app_admin_ajax_google:
+    resource: "ajax/google.yml"
+    prefix: /google

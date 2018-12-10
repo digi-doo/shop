@@ -1,0 +1,18 @@
+{% block subject %}
+    {{ 'mailing.subject.new_release_info'|trans }} {{ sshop_release }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.new_release_info'|trans ~ ' ' ~ sshop_release } %}
+    	{% include '@SyliusUi/Email/body-raw.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.new_release_info_text'|trans({
+                '%release%': sshop_release, 
+                '%releases_url%': releases_url,
+                '%shop_name%': shop_name
+            })
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

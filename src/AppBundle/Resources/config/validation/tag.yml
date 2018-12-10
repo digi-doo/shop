@@ -1,0 +1,28 @@
+AppBundle\Entity\Tag:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: ["code"]
+            groups: ["sylius"]
+            message: "app.tag.code.unique"
+    properties:
+        translations:
+            - Valid:
+        code:
+            - NotBlank:
+                groups: ["sylius"]
+AppBundle\Entity\TagTranslation:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [locale, slug]
+            errorPath: slug
+            message: app.tag.slug.unique
+            groups: ["sylius"]
+    properties:
+        name:
+            - NotBlank:
+                message: app.tag.name.not_blank
+                groups: ["sylius"]
+        slug:
+            - NotBlank:
+                message: app.tag.slug.not_blank
+                groups: ["sylius"]

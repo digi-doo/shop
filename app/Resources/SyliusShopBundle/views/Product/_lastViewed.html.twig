@@ -1,0 +1,16 @@
+{% if products|length > 0 %}    
+    <div class="product-holder pt-4">
+        <div class="row">
+            <div class="col">
+                <h2 class="heading-border">{{ 'procamping.ui.last_viewed'|trans }}</h2>
+            </div>
+        </div>
+        <div class="row product">
+            {% for product in products if product.enabled %}
+                <div class="col-lg-4 col-12">
+                    {% include '@SyliusShop/Product/_box.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

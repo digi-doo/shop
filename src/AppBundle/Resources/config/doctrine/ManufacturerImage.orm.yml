@@ -1,0 +1,11 @@
+AppBundle\Entity\ManufacturerImage:
+    type: entity
+    table: sylius_manufacturer_image
+    oneToOne:
+        owner:
+            targetEntity: AppBundle\Entity\Manufacturer
+            inversedBy: image
+            cascade: [ALL]
+            joinColumn:
+                name: owner_id
+                referencedColumnName: id

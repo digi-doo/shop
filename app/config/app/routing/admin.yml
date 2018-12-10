@@ -1,0 +1,32 @@
+app_admin_manufacturer:
+    resource: 'admin/manufacturer.yml'
+
+app_admin_supplier:
+    resource: 'admin/supplier.yml'
+
+app_admin_tag:
+    resource: 'admin/tag.yml'
+
+app_admin_release:
+    resource: 'admin/release.yml'
+    
+app_admin_security:
+    resource: 'admin/security.yml'
+
+app_admin_order:
+    resource: 'admin/order.yml'
+
+app_admin_shipment:
+    resource: 'admin/shipment.yml'
+
+app_admin_product:
+    resource: 'admin/product.yml'
+
+app_admin_order_internal_note:
+    resource: 'admin/order_note.yml'
+
+app_admin_ajax:
+    resource: "admin/ajax.yml"
+    prefix: /ajax
+    defaults:
+        _format: json

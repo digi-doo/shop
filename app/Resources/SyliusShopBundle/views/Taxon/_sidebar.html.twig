@@ -1,0 +1,37 @@
+{{ sonata_block_render_event('sylius.shop.product.index.before_sidebar', {'taxon': taxon}) }}
+
+{% set activeSlug = app.request.attributes.get('slug') %}
+
+<div class="filtr-side__item filtr-side__item-category">
+  <h2>
+    {% if taxon.parent is not empty %}
+        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.parent.slug, '_locale': taxon.parent.translation.locale}) }}">{{ taxon.parent.name }}</a>
+    {% endif %}
+  </h2>
+
+  <ul>
+    {% if taxon.parent %}
+      {% set items = taxon.parent.children %}
+    {% else %}
+      {% set items = taxon.children %}
+    {% endif %}
+
+    {% for child in items if child.isEnabled %}
+        <li{% if activeSlug is defined and activeSlug == child.slug %} class="active"{% endif %}>
+          <a href="{{ path('sylius_shop_product_index', {'slug': child.slug, '_locale': child.translation.locale}) }}">{{ child.name }}</a>
+          {% if child.children|length > 0 %}
+            <ul>
+            {% for subchild in child.children if subchild.isEnabled %}
+                <li>
+                    <a href="{{ path('sylius_shop_product_index', {'slug': subchild.slug, '_locale': subchild.translation.locale}) }}">{{ subchild.name }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{{ sonata_block_render_event('sylius.shop.product.index.after_sidebar', {'taxon': taxon}) }}
+

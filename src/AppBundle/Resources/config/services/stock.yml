@@ -1,0 +1,4 @@
+services:
+    # Allow order item to negative stock numbers in inventory
+    sylius.availability_checker.default:
+        class: AppBundle\Helpers\Stock\AvailabilityChecker

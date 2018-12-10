@@ -1,0 +1,10 @@
+<form method="get" action="{{ path('sylius_shop_product_search') }}">
+    <div>
+        <button type="submit" class="search-ico"></button>
+        <input name="criteria[search][value]" type="text" 
+            {% if app.request.query.get('criteria')['search']['value'] is defined %} value="{{ app.request.query.get('criteria')['search']['value'] }}" {% endif %} 
+            placeholder="{{'sylius.ui.search_for_products'|trans }}" 
+            required="required">
+        <span></span>
+    </div>
+</form>

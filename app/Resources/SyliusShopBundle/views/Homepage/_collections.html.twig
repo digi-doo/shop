@@ -1,0 +1,45 @@
+{% if blocks|length > 0 %}
+    {% set section = blocks|first.sections|first %}
+    <div class="mt-20">
+        <div class="row">
+            <div class="col">
+                <h2 class="heading-border">{{ section.name }}</h2>
+            </div>
+        </div>
+        <div class="row recommend">
+            {% for collection in blocks %}
+                <div class="col-lg-6 col-12">
+                    <div class="recommend__item">
+                        {% if collection.tabType == 'tag' and collection.tag is not null %}
+                            {{ render(url('sylius_shop_partial_random_product_index_by_tag_with_variant', {'count': 8, 'tagSlug': collection.tag.slug, 'template': '@SyliusShop/Product/Collection/_tagProductsList.html.twig'})) }}
+                        {% elseif collection.tabType == 'taxon' and collection.taxon is not null %}
+                            {{ render(url('sylius_shop_partial_random_product_index_by_taxon_with_variant', {'count': 4, 'taxonSlug': collection.taxon.slug, 'template': '@SyliusShop/Product/Collection/_taxonProductsList.html.twig'})) }}
+                        {% endif %}
+                    </div>
+                    <div class="recommend__text">
+                        <h3>{{ collection.name }}</h3>
+                        <div>
+                            <span>
+                                {% if collection.tabType == 'tag' and collection.tag is not null %}
+                                    {% set count = collection.tag|products_by_tag_counter %}
+                                    {% transchoice count with {'%count%': count} %}procamping.ui.products_in_collection{% endtranschoice %}
+                                {% elseif collection.tabType == 'taxon' and collection.taxon is not null %}
+                                    {% set count = collection.taxon|products_by_taxon_counter %}
+                                    {% transchoice count with {'%count%': count} %}procamping.ui.products_in_collection{% endtranschoice %}
+                                {% endif %}
+                            </span>
+                            <span>{{ collection.updatedAt|date("d.m.Y") }}</span>
+                            <span>
+                                {% if collection.tabType == 'tag' and collection.tag is not null %}
+                                    <a href="{{ path('app_shop_tag_index', {'slug': collection.tag.slug }) }}" class="link--green">{{ 'procamping.homepage.shop_now'|trans }}</a>
+                                {% elseif collection.tabType == 'taxon' and collection.taxon is not null %}
+                                    <a href="{{ path('sylius_shop_product_index', {'slug': collection.taxon.slug }) }}" class="link--green">{{ 'procamping.homepage.shop_now'|trans }}</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

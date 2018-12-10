@@ -1,0 +1,70 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+
+{#{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
+    </div>
+{% endblock %}#}
+
+{% block subcontent %}
+    <header class="tmpHeader">
+        <h1>{{ 'sylius.ui.my_account'|trans }} <small>{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</small></h1>
+        <hr>
+    </header>
+
+    {#<h1 class="ui dividing header">
+        {{ 'sylius.ui.my_account'|trans }}
+        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
+    </h1>
+     <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        </li>
+        <li class="breadcrumb-item">{{ 'sylius.ui.my_account'|trans }}</li>
+    </ol>#}
+
+    
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+
+            {{ sonata_block_render_event('sylius.shop.account.dashboard.after_content_header', {'customer': customer}) }}
+
+            <div class="ui large list tmpUserDetail" id="customer-information">
+                <div class="item">
+                    {{ customer.fullName }}
+                </div>
+                <div class="item">
+                    <strong>
+                        {{ customer.email }}
+                    </strong>
+                </div>
+                <div class="item">
+                    {% if customer.user.verified %}
+                        <span class="ui icon green basic label"><i class="checkmark icon fa fa-fw fa-check"></i> {{ 'sylius.ui.verified'|trans }}</span>
+                    {% else %}
+                        <span class="ui icon red basic label"><i class="remove icon fa fa-fw fa-times"></i> {{ 'sylius.ui.not_verified'|trans }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {{ sonata_block_render_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
+        </div>
+        <div class="col-md-4">
+            <div class="tmpTextMenu">
+                <a href="{{ path('sylius_shop_account_profile_update') }}" class="item"><i class="fa fa-pencil-alt fa-fw"></i> {{ 'sylius.ui.edit'|trans }}</a>
+                <a href="{{ path('sylius_shop_account_change_password') }}" class="item"><i class="fa fa-lock fa-fw"></i> {{ 'sylius.ui.change_password'|trans }}</a>
+                <a href="{{ path('sylius_shop_logout') }}" class="item"><i class="fa fa-sign-out fa-fw"></i> {{ 'sylius.ui.logout'|trans }}</a>
+                {% if not customer.user.verified %}
+                    <form class="item" id="verification-form" action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
+                        <button type="submit" class="ui basic icon mini button">
+                            <i class="checkmark icon"></i> {{ 'sylius.ui.verify'|trans }}
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

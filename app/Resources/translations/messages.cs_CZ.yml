@@ -1,0 +1,659 @@
+##########
+# Sylius #
+########## 
+sylius:
+    payum_action:
+        payment.description: '{0} Platba obsahuje %items% položek celkové hodnoty %total%|{1} Platba obsahuje %items% položku celkové hodnoty %total%|]1,4] Platba obsahuje %items% položky celkové hodnoty %total%|[5,Inf[ Platba obsahuje %items% položek celkové hodnoty %total%'
+    payum_gateway_factory:
+        paypal_express_checkout: 'Paypal express checkout'
+        stripe_checkout: 'Stripe'
+    locales:
+        cs_CZ: 'Český jazyk'
+    media:
+        main: 'Hlavní obrázek'
+        thumbnail: 'Náhled'
+        sidebar_icon: 'Ikonka v sidebaru'
+        megamenu_icon: 'Obrázek v megamenu'
+        megabanner: 'Banner v megamenu'
+        color: 'Barevný vzorek'
+    cart:
+        add_item: 'Položka byla přidána do košíku'
+    ui:
+        rangeable: Zobrazovat posuvník hodnot
+        filter_enabled: Zobrazovat filtr
+        filter_it: Filtrovat
+        filterable: Filtrovatelné
+        send_bank_transfer_notification: Připomenout platbu
+        send_transfer_notification_with_proforma: Zákazníkovi bude odeslána opětovná výzva k platbě včetně všech zálohových faktur.
+        has_order_notes: Objednávka obsahuje poznámku od zákazníka!
+        no_order_notes: Objednávka neobsahuje poznámku od zákazníka.
+        no_order_internal_notes: Objednávka neobsahuje žádné interní poznámky.
+        has_order_internal_notes: '{0} Objednávka obsahuje %count% interních poznámek.|{1} Objednávka obsahuje %count% interní poznámku!|]1,4] Objednávka obsahuje %count% interní poznámky!|[5,Inf[ Objednávka obsahuje %count% interních poznámek!'
+        notes_plural: Poznámky
+        bulk_update_item_visible_confirmation: Všechny vybrané položky budou povoleny.
+        bulk_update_item_invisible_confirmation: Všechny vybrané položky budou zakázany.
+        bulk_update_product_visible: Povolit
+        bulk_update_product_invisible: Vypnout
+        bulk_product_visibility: Povolit / Vypnout
+        discounts: Slevy
+        bulk_update_product_discount: Aktualizovat slevy
+        bulk_update_product_discount_confirmation: Všechny slevy všech variant jednoduchých i konfigurovatelných produktů budou aktualizovány.
+        discount_limit_no_change: Neměnit stávající omezení
+        discount_limit_no_change_message: Stávající omezení slev vybraných produktů nebudou změněny.
+        discount_limit_none_message: U vybraných produktů se změní omezení slevy na "Bez omezení".
+        discount_limit_type_info: Podrobnosti omezení slevy
+        bulk_update_product_discount: Úprava slev
+        discount_stock_bulk_message: Sleva u vybraných produktů bude platná pouze do vyprodání skladových zásob. Tzn aktuální počet ks na skladě mínus počet rezervovaných ks.
+        discount_stock_message: Sleva bude platná pouze do vyprodání skladových zásob. Tzn aktuální počet ks na skladě mínus počet rezervovaných ks.
+        discount_from_to_message: Sleva bude platná od a do zvoleného data. Pokud si přejete cenu časově omezit pouze z jedné strany, ponechte druhé pole prázdné.
+        discount_from_to__bulk_message: Sleva u vybraných produktů bude platná od a do zvoleného data. Pokud si přejete cenu časově omezit pouze z jedné strany, ponechte druhé pole prázdné.
+        discount_limit_datetime: Omezení slevy časově
+        discount_limit_stock: Omezení slevy do vyprodávní zásob
+        discount_limit_none: Bez omezení slevy
+        discount_limit_type: Typ omezení slevy
+        mansup: Výrobce a dodavatel
+        ean: EAN
+        show_concept_in_store: Zobrazit v obchodě (koncept)
+        show_product_in_admin: Zobrazit produkt v administraci
+        ready_waiting_for_issue: Čeká se na vydání
+        issue_transport: Předat dopravci
+        issued_transport: Předáno dopravci
+        variants_reserved: '{0} Z toho rezervováno %count% kusů.|{1} Z toho rezervován %count% kus.|]1,4] Z toho rezervovány %count% kusy.|[5,Inf[ Z toho rezervováno %count% kusů.'
+        send_notification: Odeslat oznámení
+        dont_send_notification: Bez oznámení
+        order_storno_irreversible: POZOR! Stornace objednávky je nevratná!
+        there_is_unapproved_note: POZOR! K objednávce existují nepotvrzené interní poznámky!
+        approve: Potvrdit
+        unapproved_order_note: Dosud nepotvrzeno
+        created_order_note: Přidáno dne %date% v %time%
+        unapproved_order_note: Nepotvrzeno
+        approved_order_note: Potvrzena administrátorem %name% dne %date% v %time%
+        order_notes: Interní poznámky
+        order_internal_notes: Interní poznámky
+        channel_seo_settings: SEO nastavení
+        channel_settings: Nastavení kanálu
+        is_main_tag: Jedná se o hlavní štítek?
+        main_tag: Hlavní štítek
+        cancel: Stornovat
+        cancelled: Stornováno
+        all_orders: Všechny
+        process: Zpracovává se
+        processed: Zpracovává se
+        expedite: K expedici
+        expedited: K expedici
+        issue: Vydat
+        issued: Vydáno
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Úprava položek, použití kupónu nebo pokračovat k pokladně
+        addresses: Adresy
+        cusomer_has_no_addresses: Uživatel nemá definovány žádné adresy
+        total_no_vat: Celkem bez DPH
+        total_vat: Celkem s DPH
+        more_children: další... 
+        bulk_actions: Hromadné akce
+        taxon: Kategorie
+        percental_discount: Procentuální sleva
+        cannot_update_external_inventory: Varianta je spárována s externím systémem a proto nelze aktualizovat skladovou dostupnost.
+        cannot_update_external_pricing: Varianta je spárována s externím systémem a proto nelze aktualizovat cenu a daňovou sazbu.
+        our_offer: Z naší nabídky
+        google_tag_manager_settings: Nastavení Google Tag Manager
+        contact_info: Kontaktní údaje
+        payment_total: Platba celkem
+        no_payment_charges: Nejsou aplikovány žádné platby za platby
+        you_are_not_allowed_to_view_this_page: Pro zobrazení této stránky nemáte potřebná oprávnění
+        you_can_no_longer_change_payment_method_of_this_order: Změna platební metody již není možná
+        select_products: 'Vyberte produkty...(pro vyhledávání začněte psát název nebo kód produktu)'
+        enabled-disabled: Povoleno / zakázáno
+        text_color: Barva textu
+        slug: 'Slug'
+        others: Ostatní
+        error: Chyba
+        release: 'Historie verzí jádra'
+        verify: 'Ověřit'
+        facebook_login: 'Přihlášení přes Facebook'
+        this_customer_has_not_completed_any_orders_yet: 'Uživatel nemá žádné objednávky'
+        this_customer_does_not_have_a_default_address: 'Uživatel nemá definovanou výchozí adresu'
+        channels_assign: 'Dostupné v kanálech'
+        payments: 'Platby'
+        possible_payments: 'Možné platby za dopravu'
+        fulfilled: 'Vyřízená'
+        tracking_code: 'Sledovací kód'
+        channel_informations: 'Informace o kanále'
+        channel_configuration: 'Nastavení kanálu'
+        manage_taxation_of_your_products: 'Správa daňových sazeb'
+        manage_shipping_methods_for_your_store: 'Správa dopravních metod'
+        manage_shipping_categories_for_your_store: 'Správa přepravních kategorií'
+        channel_contacts: 'Kontakty'
+        awaiting_payment: 'Čeká se na platbu'
+        use_the_contact_form_below_to_send_us_a_message: 'Použijte kontaktní formulář níže a pošlete nám zprávu.'
+        manage_payment_methods_available_to_your_customers: 'Správa plateb'
+        send: 'Odeslat'
+        to_order: 'Záporné nebo nulové zásoby'
+        qty: 'Množství'
+        quantity: 'Množství'
+        supplier_delivery: 'Doba dodání' 
+        manage_association_types_of_your_products: 'Správa produktových asociací'
+        product_association_types: 'Asociace produktů'
+        server_has_encountered_some_errors: 'Server nemohl zpracovat Váš požadavek.'
+        unexpected_error_occurred: 'Nastala neočekávaná chyba.'
+        please_contact_administrator: 'Prosím kontaktujte administrátora: jan.czernin@autodevelo.cz'
+        we_know_it: 'Chybu jsme automaticky zaznamenali a opravíme ji v nejbližším možném termínu.'
+        sorry_for_complications: 'Za způsobené komplikace se omlouváme.'
+        product_taxon: 'Volba kategorie'
+        edit_your_items_or_proceed_to_the_checkout: 'Úprava položek v košíku, nebo pokračovat k pokladně'
+        checkout: 'K objednávce'
+        list_variants: 'Seznam'
+        reserved: 'Rezervováno'
+        latest_products: 'Poslední produkty'
+        edit_variant: 'Upravit variantu'
+        not_equal: 'Není rovno'
+        in: 'V'
+        value: 'Hodnota'
+        values: 'Hodnoty'
+        variant_choice: 'Výběr varianty'
+        options_matching: 'Kombinace možností'
+        basic_informations: 'Základní informace'
+        Male: 'Muž'
+        product: Produkt
+        search_for_products: 'Vyhledat produkty...'
+        my_account: 'Můj účet'
+        no_taxons: 'Žádné kategorie!'
+        home_favourite_cats: 'Oblíbené kategorie'
+        best_sellers: 'Nejprodávanější'
+        action_products: 'Akční zboží'
+        out_of_stock: 'Není skladem'
+        stock: 'Skladem'
+        price_no_vat: 'Cena bez DPH'
+        price_vat: 'Cena s DPH'
+        more_information: 'Více informací'
+        your_orders: 'Vaše objednávky'
+        choice: 'Volba'
+        no_translation: 'Chybí překlad!'
+        update_cart: 'Aktualizovat košík'
+        yes_label: 'Ano'
+        coupons_vouchers: 'Slevový kupón / Dárkový poukaz'
+        apply_coupon: 'Aplikovat kupón'
+        note: 'Poznámka'
+        note_description: 'Do poznámky prosím uveďte doplňkové informace k objednávce.'
+        checkout_address: 'Dodací a fakturační údaje'
+        manage_variants: 'Varianty'
+        taxons: 'Kategorie'
+        new_taxon: 'Nová kategorie'
+        or: ''
+        manage_taxons: 'Kategorie'
+        save_positions: 'Uložit pozice'
+        manage_categorization_of_your_products: 'Správa kategorie produktů'
+        manage_your_product_catalog: 'Správa produktového katalogu'
+        process_your_orders: 'Správa objednávek'
+        manage_your_customers: 'Správa zákazníků'
+        manage_customer_groups: 'Správa skupin zákazníků'
+        search_products: 'Hledat produkty'
+        configurable_product: 'Konfigurovatelný výrobek'
+        taxonomy: 'Kategorie'
+        view_your_store: 'Do obchodu'
+        register_in_the_store: 'Registrace do obchodu'
+        registered_customers: 'Registrovaní zákazníci'
+        manage_your_personal_information_and_preferences: 'Nastavení Vašeho profilu'
+        manage_your_saved_addresses: 'Spravujte Vaše adresy'
+        address: 'Adresa'
+        select_address_from_book: 'Vybrat adresu z Vašeho adresáře'
+        address_to_ship: 'Dodací adresa'
+        manage_users_able_to_access_administration_panel: 'Správa uživatelů s přístupem do administrátorské sekce'
+        manage_configuration_options_of_your_products: 'Správa konfigurací produktů'
+        manage_attributes_of_your_products: 'Správa atributů produktů'
+        manage_inventory: 'Správa skladových zásob'
+        verified: 'Ověřen'
+        product_variants: 'Produktové varianty'
+        payment_state: 'Stav platby'
+        state: 'Stav'
+        new: 'Nová'
+        awaiting_payment: 'Čeká se na platbu'
+        ready: 'Připraveno'
+        edit_taxon: 'Upravit kategorii'
+        complete: 'Dokončit'
+        review_and_confirm_your_order: 'Souhrn a odeslání objednávky'
+        reset_password: 'Resetovat heslo'
+        register_your_new_account: 'Pokud u nás nemáte účet, registrujte se.'
+        you_are_not_allowed_to_view_this_page: 'Nemáte oprávnění zobrazit tuto stránku, prosím přihlaste se.'
+        show_in_store: 'Zobrazit v obchodě'
+        immediately: 'ihned'
+        manage_shipping_destinations: 'Správa zemí'
+        manage_geographical_zones: 'Správa oblastí'
+        main_taxon: 'Hlavní kategorie'
+        price: 'Cena bez DPH'
+        show_more: Zobrazit další
+        recommended: Doporučujeme
+        channel_pricing: Měny a ceny
+        channel_others: Ostatní
+        channel_various: Různé
+        channel_search: Vyhledávání
+        search_sorting: Dle relevance
+        stock_sorting: Dle skladové dostupnosti
+        channel_gift: Dárky k nákupu
+        channel_free_gifts: Nastavení dárku k nákupu
+        gift: Dárek
+    message:
+        please_login: Prosím, přihlašte se
+        categoryTree_information: 'Zvolte prosím požadované kategorie. Plná složka značí možné rozkrytí podkategorií, prázdná složka pak kategorii bez potomků.'
+        history_module_feature: 'Modul historie stavů objednávek je stále ve vývoji!'
+        no_tax_categories: 'Nejsou definovány žádné daňové kategorie. Bez daňové kategorie produkt nelze vytvořit!'
+        no_payment_methods: 'Nejsou definovány žádné platební metody!'
+        no_taxCat_or_taxRate: 'Není přiřazena daňová kategorie!'
+        product_has_no_variants: 'Produkt nemá žádné varianty!'
+        empty_associations: 'V současné chvíli neexistují žádné typy asociací'
+        empty_tags: 'V současné chvíli neexistují žádné štítky'
+        shipping_not_on_conf_prod: 'Volby přepravy u konfigurovatelných produktů se nacházejí v detailech jednotlivých variant.'
+    form:
+        user:
+            email: Váš e-mail
+        login:
+            remember_me: Zůstat přihlášený po dobu 14 dní
+        order:
+            add_internal_note: Přidat interní poznámku
+        filters: 'Filtry'
+        variant:
+            shipping_required: Požadována doprava?
+            negative_stock: Záporný sklad
+            external_code: Externí kód
+        customer:
+            subscribed_to_newsletter: 'Odebírat novinky'
+            birthday: 'Narození'
+            gender: 'Pohlaví'
+            first_name: 'Jméno'
+        address:
+            title: Titul
+            first_name: 'Jméno'
+            ic: IČ
+            dic: DIČ
+            street_number: Číslo popisné
+            phone_number: Telefonní číslo
+        checkout:
+            terms: Souhlasím s <a href="%link%" target="_blank">obchodními podmínkami</a>.
+        shipping_method:
+            position: 'Pozice'
+        channel:
+            contact_email: 'E-mail administrátora'
+            stock_emails: 'E-maily obsluhy skladu (oddělené čárkou)'
+            order_emails: 'E-maily oznamující nové objednávky (oddělené čárkou)'
+            bank_account: 'Číslo bankovního účtu'
+            support_number: 'Telefonní číslo podpory'
+            support_email: 'E-mail podpory'
+            address: 'Adresa obchodu'
+            opening: 'Otevírací doba obchodu'
+            hostname: URL adresa
+            meta_robots: Indexování obsahu
+            meta_title: Titulek
+            meta_keywords: Meta klíčová slova
+            meta_description: Meta popis
+            meta_author: Meta autor
+        rule:
+            unit_count_configuration:
+                count: Hodnota
+                equal: Rovna
+            type: Typ pravidla
+        shipment:
+            tracking_code: Sledovací kód
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Paušální sazba za zásilku
+                amount: Cena bez DPH
+            per_unit_rate_configuration:
+                label: Paušální sazba na jednotku
+                amount: Cena bez DPH
+        shipping_category:
+            description: Description
+            name: Name
+        shipping_method:
+            calculator: Calculator
+            category: Category
+            category_requirement: Category requirement
+            channels: Channels
+            configuration: Configuration
+            description: Description
+            enabled: Enabled
+            name: Name
+            tax_category: Tax category
+            translations: Translations
+            position: Position
+        product:
+            main_taxon: Hlavní kategorie
+        attribute_type:
+            float: 'Desetinné číslo'
+            percent: 'Procento'
+        promotion_action:
+          payment_percentage_discount: Procentuální sleva platby
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Typy asociace
+                    attributes: Atributy
+                    header: Katalog
+                    inventory: Sklad
+                    options: Možnosti
+                    products: Produkty
+                    taxons: Kategorie
+                configuration:
+                    admin_users: Administrátoři
+                    channels: Kanály
+                    countries: Země
+                    currencies: Měny
+                    exchange_rates: Směnný kurz
+                    header: Konfigurace
+                    locales: Lokalizace
+                    payment_methods: Způsoby plateb
+                    shipping_categories: Přepravní kategorie
+                    shipping_methods: Způsoby dopravy
+                    tax_categories: Daňové kategorie
+                    tax_rates: Daňové sazby
+                    zones: Oblasti
+                marketing:
+                    header: Marketing
+                    product_reviews: Hodnocení produktu
+                    promotions: Akce
+                customers:
+                    customers: Zákazníci
+                    groups: Skupiny
+                    header: Zákazník
+                sales:
+                    header: Prodeje
+                    orders: Objednávky
+        shop:
+            account:
+                address_book: 'Vaše adresy'
+
+###########
+# Mailing #
+###########
+mailing:
+    subject:
+        user_registration: 'Registrace zákazníka'
+        password_reset: 'Obnova Vašeho hesla'
+        order_information: 'Informace o objednávce č. %id_order%'
+        shipment_confirmation: 'Informace o odeslání objednávky'
+        low_stock_info: 'Upozornění na nedostatečné skladové zásoby'
+        new_release_info: 'Nová verze e-shopového jádra'
+        month_products_overview: 'Mesíční přehled přidaných produktů'
+        email_verification: 'Ověření účtu'
+        order_cancelation: 'Storno objednávky č. %id_order%'
+        admins_order: 'Nová objednávka č. %id_order%'
+        superadmin_new_admin: 'Nový administrátor %username%'
+        new_admin: 'Nový administrátor %username%'
+        your_new_admin_account: 'Váš administrátorský účet'
+        contact_request: 'Zpráva z kontaktního formuláře'
+        invalid_stock_synchronization: Nevalidní skladové dostupnosti
+        bank_trasfer_notification: 'Výzva k platbě objednávky č. %id_order%'
+    header:
+        mail_dear_customer: 'Vážený zákazníku,'
+        mail_dear_admin: 'Vážený administrátore,'
+        mail_dear_superadmin: 'Vážený superadministrátore,'
+    text:
+        bank_trasfer_notification: stále jsme nezaznamenali Vaši platbu objednávky č. %id_order%. Podrobnosti k platbě naleznete v příloze.
+        order_information_text: děkujeme za Váš nákup, objednávku %id_order% jsme v pořádku přijali. O jejím zpracování Vás budeme dále informovat e-mailem.
+        shipment_confirmation_text: 'Vaši objednávku %id_order% jsme právě předali dopravci %shipment_name%.'
+        shipment_tracking_code: 'Vaší objednávce bylo u dopravce přiděleno sledovací číslo %tracking_code%.'
+        password_reset_text: 'zažádali jste o obnovu hesla přiřazenému k účtu %username%. Pro obnovu Vašeho hesla prosím navštivte následující odkaz %url%'
+        low_stock_info_text: 've Vašem e-shopu %name% docházejí skladové zásoby následujících produktů:'
+        negative_stock_info_text: 'Ve vašem e-shopu %name% došly skladové zásoby následujících produktů:'
+        month_products_overview_text: 've Vašem e-shopu %name% bylo za měsíc %month% v roce %year% přidáno %simpleProducts% jednoduchých produktů a %confProducts% produktů konfigurovatelných, které obsahovaly %confVariants% variant.'
+        user_registration_text: 'Vaše registrace proběhla v pořádku %username%'
+        email_verification_text: 'pro ověření Vašeho účtu prosím navštivte následující odkaz %url%'
+        invalid_stock_synchronization_text: 've Vašem e-shopu se nachází %count% produktů, které mají špatně synchronizovanou skladovou dostupnost s externím systémem. Prosím překontrolujte si synchronizaci následujících produktů:'
+        new_release_info_text: |
+            právě byla vydána nová verze <strong>%release%</strong> e-shopu <strong>%shop_name%</strong>, kde jste registrován jako administrátor.
+            <br>
+            <br>
+            Novinky, opravy a změny pro tuto verzi se dozvíte po přihlášení do administrátorské sekce na <a href="%releases_url%">této adrese</a>.
+        order_cancelation_text: 'Vaše objednávka č. %id_order% byla stornována.'
+        admins_order: na Vašem e-shopu byla provedena nová objednávka č. %id_order%. Objednávku můžete po přihlášení editovat na adrese %url% .
+        superadmin_new_admin: na Vašem e-shopu %channel% byl vytvořen nový administrátor s uživatelským jménem %username% a e-mailem %email% .
+        new_admin: |
+            na e-shopu <a href="%shop_url%">%channel%</a> Vám byl vytvořen administrátorský účet. Níže naleznete Vaše přihlašovací údaje:
+            <br>
+            <br>
+            Uživatelské jméno: <strong>%username%</strong>
+            <br>
+            Heslo: <strong>%password%</strong>
+            <br>
+            <br>
+            Pro přihlášení do administrátorské sekce použijte <a href="%admin_login_url%">tento odkaz</a>. Pokud si přejete změnit Vaše kontaktní údaje a heslo, můžete tak učinit po přihlášení na <a href="%admin_users_url%">této adrese</a>.
+        contact_request: |
+            z e-shopu <a href="%shop_url%">%channel%</a> a adresy <a href="%request_url%">%request_url%</a> přišla zpráva z kontaktního formuláře:
+            <br>
+            <br>
+            <strong>Jméno:</strong> %fullName%
+            <br>
+            <strong>E-mail:</strong> %email%
+            <br>
+            <strong>Zpráva:</strong>
+            <br>
+            %message%
+            <br>
+        order_processed: Vaše objednávka č. %id_order% se začala zpracovávat. O jejím odeslání Vás budeme dále informovat e-mailem.
+        order_paid: Vaše objednávka č. %id_order% byla úspěšně zaplacena. O jejím zpracování Vás budeme dále informovat e-mailem.
+        order_shipped_text: děkujeme za Váš nákup, Vaše objednávka č. %id_order% byla úspěšně dodána.
+    footer:
+        mail_footer: 'S pozdravem tým'
+
+##############
+# Missing ID #
+############## 
+Value: 'Hodnota'
+Values: 'Hodnoty'
+Option values: 'Možnosti'
+Invalid credentials.: 'Neplatné přihlašovací údaje'
+None of the units have to match the method category: 'Žádná entita nemusí splňovat danou přepravní kategorii'
+At least 1 unit has to match the method category: 'Minimálně jedna entita musí splňovat danou kategorii'
+All units has to match the method category: 'Všechny entity musí splňovat danou kategorii'
+Order items based: 'Založeno na objednaných entitách'
+Order item units based: 'Založeno na kusech objednaných entity'
+Bad credentials.: 'Neplatné přihlašovací údaje'
+enabled: 'Povoleno'
+Select products: 'Vyberte produkty...(pro vyhledávání začněte psát název nebo kód produktu)'
+Question: Otázka
+Answer: Odpověď
+Code: Kód
+Position: Pozice
+Enabled: Povoleno
+
+##############
+# BitBag CMS #
+##############
+bitbag:
+    ui:
+        blocks: Bloky
+        pages: Stránky
+        sections: Sekce
+        content_management: Obsahový management
+        cms: Obsahový management
+        enabled: Povoleno
+        blocks: Bloky
+        pages: Stránky
+        blocks_header: Bloky
+        sections_header: Sekce
+        blocks_subheader: Správa bloků
+        sections_subheader: Správa sekcí
+        faq_subheader: Správa otázek a odpovědí
+        text_block: Textový blok
+        html_block: HTML blok
+        image_block: Obrázkový blok
+        pages_header: Stránka
+        pages_subheader: Správa stránek
+        products: Produkty
+        name: Název
+        slug: Slug
+        meta_keywords: Meta klíčová slova
+        meta_description: Meta popis
+        content: Obsah
+        code: Kód
+        enabled: Povoleno
+        name: Název
+        contents: Obsahy
+        content: Obsah
+        images: Obrázky
+        link: Odkaz
+        faq: FAQ
+        frequently_asked_questions: FAQ
+        question: Otázka
+        answer: Odpověď
+        basic_settings: Základní nastavení
+        product_relations: Vztah k produktům
+        products_select: Výběr produktů
+        tags_select: Výběr štítku
+        taxon_select: Výběr kategorie
+        collection_block: Blok kolekce
+        products_block: Blok produktů
+        
+#############
+# AppBundle #
+#############
+app:
+    form:
+        price_no_vat: 'Cena bez DPH'
+        product:
+            code1: 'Kód 2'
+            code2: 'Kód 3'
+    ui:
+        taxon: Kategorie
+        tel: Telefon
+        email: E-mail
+        payment: Platba
+        summary_payment_cancelled: Zrušeno
+        summary_payment_completed: Zaplaceno
+        summary_order_number_change_payment: Platba objednávky č.
+        summary_order_accepted_at: Objednávka přijata
+        summary_order_items_count: Počet objednaných položek
+        summary_order_total: Cena za objednávku celkem
+        summary_payment_processed: Zpracováno
+        items: '{0} Položek|{1} Položka|]1,4] Položky|[5,Inf[ Položek'
+        order_accepted_at: Přijata
+        suppliers: 'Dodavatelé'
+        supplier: 'Dodavatel'
+        not_available: 'Nedostupné'
+        on_request: 'na dotaz'
+        manufacturers: Výrobci
+        manufacturer_products: Produkty výrobce
+        manufacturer: Výrobce
+        manage_manufacturers: Správa výrobců
+        new_manufacturer: Nový výrobce
+        edit_manufacturer: Editace výrobce
+        suppliers: Dodavatelé
+        manage_suppliers: Správa dodavatelů
+        new_supplier: Nový dodavatel
+        edit_supplier: Editace dodavatelů
+        delivery_interval: Doba dodání
+        availability: 'Dostupnost'
+        tags: 'Štítky'
+        tag: 'Štítek'
+        manage_tags: Správa štítků
+        new_tag: Nový štítek
+        edit_tag: Upravit štítek
+        start_typing: Začněte psát
+        feeds: Vyhledávače
+        merchant_feeds: Kategorie vyhledávačů
+        heureka_feed: Kategorizace Heureka.cz
+        google_feed: Kategorizace Google Merchant
+        facebook_feed: Kategorizace Facebook Shop
+        mass_product_edit: Hromadné úpravy
+        enabled_mass_price: Tímto změnit všechny ceny variant
+        enabled_mass_discount: Tímto změnit všechny procentuální slevy variant
+        enabled_mass_original_price: Tímto změnit všechny originální ceny variant
+        enabled_mass_supplier: Tímto změnit všechny dodavatele variant
+        enabled_mass_tax_category: Tímto změnit všechny daňové kategorie variant
+        enabled_mass_tracked: Tímto změnit sledování skladových dostupností všech variant
+        enabled_mass_on_hand: Tímto změnit skladové dostupnosti všech variant
+        base_price: Základní cena
+        original_price: Původní cena bez DPH
+        choose_supplier: Vyberte dodavatele
+        stock: Sklad
+        login: Přihlášení
+        logo_image: Logo
+        free_shipping_from: Doprava zdarma od (bez DPH)
+        free_shipping: Doprava zdarma
+        display_information: Nastavení zobrazení
+        stock_sorting_enabled: Zobrazovat seznam produktů dle skladové dostupnosti
+        free_gift_from: Přidat dárek k objednávce od (bez DPH)
+        free_gift_variant_code: Kód produktu (jendoduchý produkt) nebo varianty (konfigurovatelný produkt) pro přidání k objednávce
+    menu:
+        admin:
+            suppliers: 'Dodavatelé'
+            manufacturers: 'Výrobci'
+    inventory:
+        edit_product: 'Produkt'
+        edit_variant: 'Varianta'
+    message:
+        facebook_feed_same_as_google_url: |
+            Kategorizace pro Facebook Shop je stejná jako pro Google Merchant.
+            <br>
+            Feed pro Facebook se generuje každou noc a je dostupný na adrese <a href="%url%">%url%</a>
+        google_export_url: |
+            Vyberte prosím příslušnou Google kategorii.
+            <br>
+            Feed pro Google se generuje každou noc a je dostupný na adrese <a href="%url%">%url%</a>
+        feed_disabled_buy_it: Váš balíček neobsahuje doplňek pro synchronizaci s vyhledávači. Kontaktujte svého poskytovatele pro více informací.
+        select_associations: |
+            Tato možnost slouží k vybrání asociovaných produktů.
+            <br>
+            K výběru jsou pouze produkty, které jsou povolené a které mají alespoň jednu variantu.
+        mass_product_default: |
+            Tato možnost slouži k předvyplnění, nebo ke změně všech dostupných možností variant produktu. 
+            <br>
+            Vyplněním následujících polí se budou u nově přidaných variant zobrazovat zde vyplněné hodnoty.
+        mass_product_edit: |
+            V případě, že chcete jednorázově změnit zvolená pole u všech již existujících variant produktu, zapněte tuto možnost a uložte formulář. 
+            <br>
+            Prosím mějte na paměti, že tato změna je nevratná!
+        block_image_upload: |
+            Nahrejte prosím obrázek pro daný obrázkový blok. Pro jednotlivé sekce na Vašem e-shopu doporučujeme nahrávat obrázky v následujicích rozlišeních:
+            <br>
+            - banner v hlavičce - 527x95
+            <br>
+            - slideshow na hlavní stránce - 1133x390
+            <br>
+            - oblíbené kategorie na hlavní stránce - 550x320
+            <br>
+            - bannery pod hlavním menu - rozlišení nemá omezení, je spravováno na straně kódu
+        manufacturer_logo_upload: |
+            Nahrejte prosím obrázek loga pro daného výrobce. Logo musí být formátu PNG, JPG nebo GIF a musí být následujících rozměrů:
+            <br>
+            - maximální šířka 1000px, minimální šířka 100px
+            <br>
+            - maximální výška 1000px, minimální výška 100px
+        heureka_export_url: |
+            Vyberte prosím příslušnou Heureka kategorii.
+            <br>
+            Feed pro Heureka.cz se generuje každou noc a je dostupný na adrese <a href="%url%">%url%</a>
+        channel_seo_settings: Toto nastavení bude použito v případě, že neexistuje jiné SEO nastavení (kategorie, produkty atd), nebo není-li vyplněno.
+        taxon_display_information: |
+            Pokud je zapnuto zobrazení produktů dle skladové dostupnosti, jsou ve výchozím stavu produkty vypsány ve dvou sloučených skupinách - první skladem a druhá není skladem. 
+            Pokud si přejete upřednostnit některý z produktů, v každé skupině lze poté řadit dle pozice v kategorii.
+        fulltext_future: |
+            V budoucnu zde bude možnost nastavit:<br>
+            - stopslova - slova, která nebudou ovlivňovat výsledek vyhledávání<br>
+            - preferovaná slova - slova, která budou ve výsledcích vyhledávání řazena výše<br>
+            - synonyma - podobná slova
+        channel_order_gift: Zvolený produkt (varianta) bude samostatně neprodejný!
+        buy_more_for_gift: Nakupte ještě za %amount% a získejte dárek ZDARMA!
+    order:
+        recapitulation_number: Rekapitulace objednávky č. %id_order%
+    section:
+        sidebarBanners: Bannery v sidebaru
+        bestCats: Oblíbené kategorie
+        footerMenu: Menu v patičce
+        slideshow: Slideshow
+        collection: Kolekce produktů
+        products: Výpis produktů
+        products_carousel: Produktový carousel
+    block:
+        type:
+            image: Obrázkový blok
+            text: Textový blok
+            html: HTML blok
+            collection: Kolekce produktů
+            products: Výpis produktů
+            products_carousel: Produktový carousel
+
+###############################
+# Tenant related translations #
+###############################
+imports:
+    - { resource: "procamping/messages.cs_CZ.yml" }

@@ -1,0 +1,48 @@
+app_admin_order_internal_note_create:
+    path: /orders/{orderId}/internal-notes/new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.order_internal_note:createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Order/Show/InternalNote/_form.html.twig"
+            form:
+                options:
+                    validation_groups: ['sylius']
+            factory:
+                method: createWithAdminAndOrder
+                arguments:
+                    - "expr:service('security.token_storage').getToken().getUser()"
+                    - "expr:service('sylius.repository.order').findOneById($orderId)"
+            redirect:
+                route: app_admin_order_internal_notes
+                parameters:
+                    id: $orderId
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+            flash: sylius.order_internal_note.create
+
+app_admin_order_internal_note_approve:
+    path: /orders/{orderId}/internal-notes/{id}/archive
+    methods: [GET, PATCH]
+    defaults:
+        _controller: app.controller.order_internal_note:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Order/Show/InternalNote/_approve.html.twig"
+            form:
+                type: AppBundle\Form\Type\OrderInternalNoteApproveType
+            redirect:
+                route: app_admin_order_internal_notes
+                parameters:
+                    id: $orderId
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id
+            flash: sylius.order_internal_note.approve

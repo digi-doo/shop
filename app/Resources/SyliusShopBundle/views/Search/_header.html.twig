@@ -1,0 +1,18 @@
+{# <header>
+    {% include '@SyliusShop/Search/_breadcrumb.html.twig' %}
+    <h1 class="mb-3">{{ 'sylius.ui.search'|trans }} {% if app.request.query.get('criteria')['search']['value'] is defined %} "{{ app.request.query.get('criteria')['search']['value'] }}" {% endif %}</h1>
+</header> #}
+
+<header class="tmpHeader">
+    <h1>{{ 'sylius.ui.search'|trans }} {% if app.request.query.get('criteria')['search']['value'] is defined %} "{{ app.request.query.get('criteria')['search']['value'] }}" {% endif %}</h1>
+    <hr>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+           <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+        </li>
+        <li class="breadcrumb-item">
+           <span>{{ 'sylius.ui.search'|trans|upper }}</span>
+        </li>
+    </ol>
+    <hr>
+</header>

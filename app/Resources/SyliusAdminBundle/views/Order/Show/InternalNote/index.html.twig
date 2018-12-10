@@ -1,0 +1,33 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% block title %}{{ 'sylius.ui.order'|trans }} {{ order.number }} - {{ 'sylius.ui.order_internal_notes'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sonata_block_render_event('sylius.admin.order.internal_notes.before_header', {'resource': resource}) }}
+
+    {% include '@SyliusAdmin/Order/Show/InternalNote/_header.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.admin.order.internal_notes.after_header', {'resource': resource}) }}
+
+    {% include '@SyliusAdmin/Order/Show/InternalNote/_breadcrumb.html.twig' %}
+
+    <div class="ui one column grid">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui dividing header black">{{ 'sylius.ui.order_internal_notes'|trans }}</h2>
+
+                {{ render(path('app_admin_order_internal_note_create', {'orderId': order.id})) }}
+
+                {% if order.hasInternalNotes %}                   
+                    {% include '@SyliusAdmin/Order/Show/InternalNote/_feed.html.twig' %} 
+                {% else %}
+                    {{ messages.info('sylius.ui.no_results_to_display') }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {{ sonata_block_render_event('sylius.admin.order.internal_notes.after_content', {'resource': resource}) }}
+{% endblock %}

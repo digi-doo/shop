@@ -1,0 +1,16 @@
+{# {% set definition = grid.definition %}
+{% set data = grid.data %} #}
+
+{# {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %} #}
+
+<div class="filtr-side">
+    <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="filter__form">
+        {% for productFilter in products.definition.enabledFilters %}
+            {{ sylius_grid_render_filter(products, productFilter) }}
+        {% endfor %}
+    </form>
+    {{ render(url('sylius_shop_partial_taxon_show_by_slug', {
+        'slug': app.request.attributes.get('slug'),
+        'template': '@SyliusShop/Taxon/_sidebar.html.twig'
+    })) }}
+</div>

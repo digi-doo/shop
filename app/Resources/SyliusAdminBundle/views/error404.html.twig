@@ -1,0 +1,14 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.error'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+	<div class="ui two column centered grid">
+		<div class="column">
+			<div class="ui blue inverted segment center aligned icon header">
+				<i class="circular help icon"></i>
+				<h1>{{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}</h1>
+	        </div>
+		</div>
+	</div>
+{% endblock %}

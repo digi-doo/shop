@@ -1,0 +1,15 @@
+###############
+# Controllers #
+###############
+services:
+    app.controller.footer_contact:
+        class: AppBundle\Controller\ContactController
+        arguments:
+            - "@form.factory"
+            - "@templating.engine.twig"
+            - "@sylius.context.channel.cached"
+            - "@sylius.email_manager.contact"
+
+    app.controller.robots_txt:
+        class: AppBundle\Controller\RobotsTxtController
+        arguments: ['@templating.engine.twig']

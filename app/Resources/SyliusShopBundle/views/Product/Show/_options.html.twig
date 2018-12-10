@@ -1,0 +1,27 @@
+{# Dirty way #}
+{% for option_form in form.cartItem.variant %}
+    {% set optionFormCode = option_form.vars.name %}
+    {% set optionFormLabel = option_form.vars.label %}
+
+    <div class="form-group">
+        <label class="form-control-label required" for="sylius_add_to_cart_cartItem_variant_{{optionFormCode}}">{{optionFormLabel}}</label>
+        <select id="sylius_add_to_cart_cartItem_variant_{{optionFormCode}}" name="sylius_add_to_cart[cartItem][variant][{{optionFormCode}}]" data-option="{{optionFormCode}}" class="form-control">
+            {% set usedValueCodes = [] %}
+            {% for variant in product.variants %}
+                {% for optionValue in variant.optionValues %}
+                    {% if optionFormCode == optionValue.option.code %}
+                        {% if optionValue.code not in usedValueCodes %}
+                            <option value="{{optionValue.code}}">{{optionValue.value}}</option>
+                            {% set usedValueCodes = usedValueCodes|merge({(optionValue.id):(optionValue.code)}) %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </select>
+    </div>
+{% endfor %}
+
+{# Old way
+{% for option_form in form.cartItem.variant %}
+    {{ form_row(option_form, { 'attr': { 'data-option': option_form.vars.name } }) }}
+{% endfor %} #}

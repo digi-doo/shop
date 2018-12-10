@@ -1,0 +1,14 @@
+{% block subject %}
+    {{ 'mailing.subject.bank_trasfer_notification'|trans({'%id_order%': order.number}) }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.bank_trasfer_notification'|trans({'%id_order%': order.number}) } %}
+        {% include '@SyliusUi/Email/body.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_customer'|trans,
+            'content': 'mailing.text.bank_trasfer_notification'|trans({'%id_order%': order.number})
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

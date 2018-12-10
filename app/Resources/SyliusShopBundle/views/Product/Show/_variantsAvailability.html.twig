@@ -1,0 +1,7 @@
+{% import "@SyliusShop/Common/Macro/variantAvailability.html.twig" as availability %}
+
+<div id="sylius-variants-availability">
+    {% for variant in product.variants %}
+        <div {% for value in variant.optionValues %}data-{{ value.option.code }}="{{ value.code|replace({'\"': '\''}) }}"{% endfor %} data-availability-class="{{ availability.resolveClass(variant)|trim }}" data-availability="{{ availability.resolve(variant)|trim }}"></div>
+    {% endfor %}
+</div>

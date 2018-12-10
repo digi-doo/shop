@@ -1,0 +1,50 @@
+# Mailer credentials
+swiftmailer:
+    transport: "%mailer_transport%"
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    port: "%mailer_port%"
+
+# Mailer config & templates
+sylius_mailer:
+    sender:
+        name: "%mailer_team_name%"
+        address: "%mailer_sender_email%"
+    emails:
+        low_stock_info:
+            subject: app.emails.low_stock_info.subject
+            template: "SyliusAdminBundle:Email:lowStockInfo.html.twig"
+        invalid_stock_synchronization:
+            subject: app.emails.invalid_stock_synchronization.subject
+            template: "SyliusAdminBundle:Email:invalidaStockSynchronization.html.twig"
+        new_release_info:
+            subject: app.emails.new_release_info.subject
+            template: "SyliusAdminBundle:Email:newReleaseInfo.html.twig"
+        month_products_overview:
+            subject: app.emails.month_products_overview.subject
+            template: "SyliusAdminBundle:Email:monthProductsOverview.html.twig"
+        processed_order:
+            subject: app.emails.processed_order.subject
+            template: "SyliusShopBundle:Email:orderProcessed.html.twig"
+        paid_order:
+            subject: app.emails.paid_order.subject
+            template: "SyliusShopBundle:Email:orderPaid.html.twig"
+        cancelled_order:
+            subject: app.emails.cancelled_order.subject
+            template: "SyliusShopBundle:Email:orderCancelation.html.twig"
+        shipped_order:
+            subject: app.emails.shipped_order.subject
+            template: "SyliusShopBundle:Email:orderShipped.html.twig"
+        admins_order_info:
+            subject: app.emails.admins_order.subject
+            template: "SyliusAdminBundle:Email:adminsOrder.html.twig"
+        superadmin_new_admin:
+            subject: app.emails.superadmin.subject
+            template: "SyliusAdminBundle:Email:superAdminNewAdmin.html.twig"
+        new_admin:
+            subject: app.emails.admin.subject
+            template: "SyliusAdminBundle:Email:newAdmin.html.twig"
+        order_bank_transfer_notification:
+            subject: app.emails.bank_trasfer_notification.subject
+            template: "SyliusAdminBundle:Email:orderBankTransferNotification.html.twig"

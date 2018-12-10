@@ -1,0 +1,20 @@
+<div class="pl-0 border-0 form-control {% if not form.rating.vars.valid %} is-invalid{% endif %}">
+    {# {{ form_label(form.rating) }} #}
+    <p><label for="">{{ form.rating.vars.label|trans }}</label></p>
+    <fieldset class="rating">
+        <input required="required" type="radio" id="sylius_product_review_rating_0" name="sylius_product_review[rating]" value="5" /><label class="full" for="sylius_product_review_rating_0"></label>
+        <input required="required" type="radio" id="sylius_product_review_rating_1" name="sylius_product_review[rating]" value="4" /><label class="full" for="sylius_product_review_rating_1"></label>
+        <input required="required" type="radio" id="sylius_product_review_rating_2" name="sylius_product_review[rating]" value="3" /><label class="full" for="sylius_product_review_rating_2"></label>
+        <input required="required" type="radio" id="sylius_product_review_rating_3" name="sylius_product_review[rating]" value="2" /><label class="full" for="sylius_product_review_rating_3"></label>
+        <input required="required" type="radio" id="sylius_product_review_rating_4" name="sylius_product_review[rating]" value="1" /><label class="full" for="sylius_product_review_rating_4"></label>
+    </fieldset>
+    <div class="clearfix"></div>
+</div>
+{{ form_errors(form.rating) }}
+<hr>
+
+{{ form_row(form.title) }}
+{{ form_row(form.comment) }}
+{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+    {{ form_row(form.author.email) }}
+{% endif %}

@@ -1,0 +1,5 @@
+app_admin_generate_manufacturer_slug:
+    path: /manufacturer-generate-slug
+    methods: [GET]
+    defaults:
+        _controller: "AppBundle:ManufacturerSlug:generate"

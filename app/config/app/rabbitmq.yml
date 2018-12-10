@@ -1,0 +1,47 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host: '%rabbit_mq_host%'
+            port: '%rabbit_mq_port%'
+            user: '%rabbit_mq_user%'
+            password: '%rabbit_mq_pswd%'
+            vhost: '%rabbit_mq_vhost%'
+            lazy: false
+            connection_timeout: 3
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+    producers:
+        email_sender:
+            connection:       default
+            exchange_options: {name: 'email-sender', type: direct}
+            service_alias:    app.rabbit.producer.email_sender
+        heureka_overeno:
+            connection:       default
+            exchange_options: {name: 'heureka-overeno', type: direct}
+            service_alias:    app.rabbit.producer.heureka_overeno
+    consumers:
+        email_sender:
+            connection:       default
+            exchange_options: {name: 'email-sender', type: direct}
+            queue_options:    {name: 'email-sender'}
+            callback:         app.rabbit.consumer.email_sender
+        heureka_overeno:
+            connection:       default
+            exchange_options: {name: 'heureka-overeno', type: direct}
+            queue_options:    {name: 'heureka-overeno'}
+            callback:         app.rabbit.consumer.heureka_overeno
+
+rabbit_mq_supervisor:
+    paths:
+        workspace_directory:            '%kernel.project_dir%/etc/supervisor/%kernel.environment%/'
+        configuration_file:             '%kernel.project_dir%/etc/supervisor/%kernel.environment%/supervisord.conf'
+        pid_file:                       '%kernel.project_dir%/etc/supervisor/%kernel.environment%/supervisord.pid'
+        sock_file:                      '%kernel.project_dir%/etc/supervisor/%kernel.environment%/supervisord.sock'
+        log_file:                       '%kernel.project_dir%/etc/supervisor/%kernel.environment%/supervisord.log'
+        worker_configuration_directory: '%kernel.project_dir%/etc/supervisor/%kernel.environment%/worker/'
+        worker_output_log_file:         '%kernel.project_dir%/etc/supervisor/%kernel.environment%/logs/stdout.log'
+        worker_error_log_file:          '%kernel.project_dir%/etc/supervisor/%kernel.environment%/logs/stderr.log'
+    consumer:
+        general:
+            messages: 1

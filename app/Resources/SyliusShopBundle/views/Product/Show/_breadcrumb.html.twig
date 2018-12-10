@@ -1,0 +1,31 @@
+{% if product.taxons|length > 0 %}
+    <div class="filtr-header mt-3 pb-3">
+        <div class="row align-items-xl-end">
+            <div class="col">
+                <div class="breadcrumb-holder d-inline-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+                            </li>
+                            {% set passedLevel = [] %}
+                            {% set firstTree = true %}
+                            {% for taxon in product.taxons %}
+                                {% if loop.index != 1 and taxon.level == 0 %}
+                                    {% set firstTree = false %}
+                                {% endif %}
+                                {% if firstTree and taxon.level not in passedLevel %}
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
+                                    </li>
+                                    {% set passedLevel = passedLevel|merge([taxon.level]) %}
+                                {% endif %}
+                            {% endfor %}
+                            <li class="breadcrumb-item">{{ product.name }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

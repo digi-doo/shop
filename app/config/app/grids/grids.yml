@@ -1,0 +1,24 @@
+imports:
+    # Admin
+    - { resource: 'admin/manufacturer.yml' }
+    - { resource: 'admin/supplier.yml' }
+    - { resource: 'admin/product.yml' }
+    - { resource: 'admin/tag.yml' }
+    - { resource: 'admin/page.yml' }
+    # Shop
+    - { resource: 'shop/manufacturer.yml' }
+    - { resource: 'shop/manufacturer-products.yml' }
+    - { resource: 'shop/tag.yml' }
+
+# Custom grid action types
+sylius_grid:
+    templates:
+        action:
+            variants_links: "@SyliusUi/Grid/Action/variantsLinks.html.twig"
+            show_no_label: "@SyliusUi/Grid/Action/showNoLabel.html.twig"
+            show_order_no_label: "@SyliusUi/Grid/Action/showOrderNoLabel.html.twig"
+        bulk_action:
+            update_product_discount: "@SyliusUi/Grid/BulkAction/updateProductDiscount.html.twig"
+            update_visibility: "@SyliusUi/Grid/BulkAction/updateVisibility.html.twig"
+        filter:
+            products_filter: "@SyliusShop/Ui/Grid/Filter/products_filter.html.twig"

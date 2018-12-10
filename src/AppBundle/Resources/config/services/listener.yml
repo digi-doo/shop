@@ -1,0 +1,71 @@
+services:
+    # After product update
+    app.listener.admin.product_update:
+        class: AppBundle\Event\Listener\ProductUpdateListener
+        arguments: ['@sylius.manager.product_variant']
+        tags:
+            - { name: kernel.event_listener, event: sylius.product.post_update, method: updateVariants }
+
+    # Before admin create
+    app.listener.before_admin_create:
+        class: AppBundle\Event\Listener\AdminCreateListener
+        arguments: ["@sylius.email_sender", "@sylius.context.channel"]
+        tags:
+            - { name: kernel.event_listener, event: sylius.admin_user.pre_create, method: beforeAdminCreate }
+
+    # Fix to prevent remove images when product can't be deleted
+    sylius.listener.images_remove:
+        class: AppBundle\Event\Listener\ImagesRemoveListener
+        arguments: ['@sylius.image_uploader', '@liip_imagine.cache.manager', '@liip_imagine.filter.manager']
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+
+    # Images uploader listener
+    app.listener.images_upload:
+        class: AppBundle\Event\Listener\AppImagesUploadListener
+        arguments:
+            - "@sylius.image_uploader"
+        tags:
+            - { name: kernel.event_listener, event: app.manufacturer.pre_create, method: uploadImage }
+            - { name: kernel.event_listener, event: app.manufacturer.pre_update, method: uploadImage }
+
+    # After order complete - send admin emails
+    app.listener.order_complete:
+        class: AppBundle\Event\Listener\OrderCompleteListener
+        arguments: 
+            - "@app.rabbit.producer.email_sender"
+            - "@app.rabbit.producer.heureka_overeno"
+            - "%heureka_overeno_key%"
+            - "@sylius.context.channel"
+        tags:
+            - { name: kernel.event_listener, event: sylius.order.post_complete, method: sendAdminEmails }
+            - { name: kernel.event_listener, event: sylius.order.post_complete, method: sendHeurekaOvereno }
+
+    # After order process
+    app.listener.order_process:
+        class: AppBundle\Event\Listener\OrderUpdateListener
+        arguments: ["@sylius.email_sender", "@request_stack"]
+        tags:
+            - { name: kernel.event_listener, event: sylius.order.post_process, method: sendProcessEmail }
+    
+    # After order ship Sylius override
+    sylius.listener.shipment_ship: 
+        class: AppBundle\Event\Listener\ShipmentListener
+        arguments: ["@sylius.email_sender", "@request_stack"]
+        tags:
+            - { name: kernel.event_listener, event: sylius.shipment.post_issue_transport, method: sendShipmentIssuedEmail }
+            - { name: kernel.event_listener, event: sylius.shipment.post_ship, method: sendShipmentShippedEmail }
+
+    # After order storno
+    app.listener.order_storno:
+        class: AppBundle\Event\Listener\OrderUpdateListener
+        arguments: ["@sylius.email_sender", "@request_stack"]
+        tags:
+            - { name: kernel.event_listener, event: sylius.order.post_storno, method: sendStornoEmail }
+
+    # After order payment complete
+    app.listener.order_paid:
+        class: AppBundle\Event\Listener\OrderUpdateListener
+        arguments: ["@sylius.email_sender", "@request_stack"]
+        tags:
+            - { name: kernel.event_listener, event: sylius.payment.post_complete, method: sendPaidEmail }

@@ -1,0 +1,63 @@
+services:
+    # Order inventory operator (setOnHold, setOnHand, negativeStock...)
+    sylius.inventory.order_inventory_operator:
+        class: AppBundle\Helpers\Order\OrderInventoryOperator
+
+    # Override default redirect after generic (not offline) order payment
+    sylius.payum_action.resolve_next_route:
+        class: AppBundle\Helpers\Order\ResolveNextRouteAction
+        tags:
+            - { name: payum.action, all: true, alias: sylius.resolve_next_route }
+
+    # Payment taxes applicator
+    sylius.taxation.order_payment_taxes_applicator: 
+        class: AppBundle\Helpers\Order\OrderPaymentTaxesApplicator
+        arguments: ["@sylius.tax_calculator", "@sylius.custom_factory.adjustment", "@sylius.tax_rate_resolver"]
+
+    # Use payment taxes applicator in order_items_based taxation strategy
+    sylius.taxation.order_items_based_strategy:
+        class: Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy
+        tags:
+          - { name: sylius.taxation.calculation_strategy, type: order_items_based, label: "Order items based" }
+        arguments: 
+          - order_items_based
+          - ["@sylius.taxation.order_items_taxes_applicator", "@sylius.taxation.order_shipment_taxes_applicator", "@sylius.taxation.order_payment_taxes_applicator"]
+    
+    # Use payment taxes applicator in order_item_units_based taxation strategy
+    sylius.taxation.order_item_units_based_strategy:
+        class: Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy
+        tags:
+          - { name: sylius.taxation.calculation_strategy, type: order_item_units_based, label: "Order item units based" }
+        arguments: 
+          - order_item_units_based
+          - ["@sylius.taxation.order_items_taxes_applicator", "@sylius.taxation.order_shipment_taxes_applicator", "@sylius.taxation.order_payment_taxes_applicator"]
+    
+    # We dont want to be able to change failed payment method yet!
+    app.order_processing.order_payment_processor.after_fail:
+        class: AppBundle\Helpers\Order\OrderFailedPaymentProcessor
+        arguments: ["@sylius.email_sender", "@event_dispatcher", "@request_stack"]
+
+    # Orverride default payment state machine callback after complete/refund
+    sylius.state_resolver.order_payment:
+        class: AppBundle\Helpers\Order\OrderPaymentStateResolver
+        arguments: ["@sm.factory", "@event_dispatcher", "@request_stack"]
+
+    # Orverride default order shipping state machine to use new issued shipping
+    sylius.state_resolver.order_shipping:
+        class: AppBundle\Helpers\Order\OrderShippingStateResolver
+        arguments: ["@sm.factory"]
+
+    # We don't want to auto select first available shipment method in cart
+    sylius.shipping_method_resolver.default:
+        class: AppBundle\Helpers\Order\DefaultShippingMethodResolver
+        arguments: ["@sylius.repository.shipping_method"]
+
+    # We don't want to auto select first available payment method in cart
+    sylius.payment_method_resolver.default:
+        class: AppBundle\Helpers\Order\DefaultPaymentMethodResolver
+        arguments: ["@sylius.repository.payment_method"]
+
+    # Final payment processor after checkout
+    sylius.order_processing.order_payment_processor.after_checkout:
+        class: Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor
+        arguments: ["@sylius.order_payment_provider", 'new']

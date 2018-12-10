@@ -1,0 +1,19 @@
+AppBundle\Entity\GoogleTaxonomy:
+    type: entity
+    table: sylius_google_taxonomy
+    repositoryClass: AppBundle\Repository\GoogleTaxonomyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: integer
+        name:
+            type: string
+            length: 255
+        dateImported:
+            type: datetime
+            column: date_imported

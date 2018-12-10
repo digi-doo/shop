@@ -1,0 +1,4 @@
+{{ render(url('app_shop_partial_manufacturer_show_by_slug', {
+    'slug': app.request.attributes.get('slug'),
+    'template': '@SyliusShop/Manufacturer/header-products.html.twig'
+})) }}

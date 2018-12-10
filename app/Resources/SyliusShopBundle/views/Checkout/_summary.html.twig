@@ -1,0 +1,44 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set giftCode = sylius.channel.freeGiftVariantCode %}
+
+<div class="ui segment">
+    <table class="ui very basic table" id="sylius-checkout-subtotal">
+        <thead class="font-weight-bold">
+        <tr>
+            <th class="sylius-table-column-item">{{ 'sylius.ui.item'|trans }}</th>
+            <th class="sylius-table-column-qty text-right">{{ 'sylius.ui.quantity'|trans }}</th>
+            <th class="sylius-table-column-subtotal text-right">{{ 'sylius.ui.price_vat'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in order.items %}
+            <tr>
+                <td>{{ item.getVariant.product.name }}</td>
+                <td class="text-right center aligned">
+                    {{ item.quantity }}
+                </td>
+                {% if giftCode == item.variant.code %}
+                    <td id="sylius-item-{{ item.variant.product.slug }}-subtotal" class="text-right">{{ money.convertAndFormat(0) }}</td>
+                {% else %}
+                    <td id="sylius-item-{{ item.variant.product.slug }}-subtotal" class="text-right">{{ money.calculateTotalPriceWithVat(item.variant, item.quantity) }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        {% if order.orderPromotionTotal %}
+            <tr>
+                <td>{{ 'sylius.ui.discount'|trans }}:</td>
+                <td class="text-right center aligned">1</td>
+                <td id="sylius-cart-promotion-total" class="text-right right aligned">{{ money.convertAndFormatPromotion(order.orderPromotionTotal) }}</td>
+            </tr>
+        {% endif %}
+        <tr class="totals font-weight-bold">
+            <td>{{ 'sylius.ui.order_total'|trans }}:</td>
+            <td></td>
+            <td id="sylius-cart-grand-total" class="text-right right aligned">{{ money.convertAndFormat((order.total - order.shippingTotal - order.paymentTotal)) }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+

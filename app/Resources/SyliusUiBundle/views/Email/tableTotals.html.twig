@@ -1,0 +1,41 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set totalItemsNoTax = 0 %}
+{% for item in order.items %}
+    {% set totalItemsNoTax = (totalItemsNoTax + item.variant.channelPricingForChannel(sylius.channel).price * item.quantity) %}
+{% endfor %}
+
+{# <tr>
+    <th colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+        {{ 'sylius.ui.subtotal'|trans }}
+    </th>
+    <th style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+        {{ money.convertAndFormat(totalItemsNoTax) }}
+    </th>
+    <th style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+        {{ money.format(order.total - order.adjustmentsTotal + order.shippingTotal, order.currencyCode) }}
+    </th>
+</tr> #}
+
+{% include '@SyliusUi/Email/_shipping.html.twig' with {'order': order} %}
+{% include '@SyliusUi/Email/_payment.html.twig' with {'order': order} %}
+
+{% if order.orderPromotionTotal %}
+    <tr class="text-success">
+        <td colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ 'sylius.ui.discount'|trans }}</td>
+        <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormat(order.orderPromotionTotal) }}</td>
+        <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormatPromotion(order.orderPromotionTotal) }}</td>
+    </tr>
+{% endif %}
+
+<tr>
+    <th colspan="4" style="font-size: 1.2em;text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+        {{ 'sylius.ui.order_total'|trans }}
+    </th>
+    <th style="font-size: 1.2em;text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+         {{ money.convertAndFormat(order.total - order.taxTotal) }}
+    </th>
+    <th style="font-size: 1.2em;text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+         {{ money.format(order.total, order.currencyCode) }}
+    </th>
+</tr>

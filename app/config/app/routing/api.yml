@@ -1,0 +1,5 @@
+##################
+# APP API ROUTES #
+##################
+app_api_order:
+    resource: "api/order.yml"

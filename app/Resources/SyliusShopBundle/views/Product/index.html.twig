@@ -1,0 +1,37 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}{{ render(url('sylius_shop_partial_taxon_show_by_slug', {'slug': app.request.attributes.get('slug'),'template': '@SyliusShop/Taxon/_metaTitle.html.twig'})) }} | {{ parent() }}{% endblock %}
+
+{% block metatags %}{{ render(url('sylius_shop_partial_taxon_show_by_slug', {'slug': app.request.attributes.get('slug'),'template': '@SyliusShop/Taxon/_metaHeader.html.twig'})) }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://loading.io/css/loading-btn.css'} %}
+    {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://loading.io/css/loading.css'} %}
+{% endblock %}
+
+{% block content %}
+    {% include '@SyliusShop/Product/Index/_header.html.twig' %}
+    <div class="row">
+        <aside class="col-xl-3">
+            {% include '@SyliusShop/Product/Index/_sidebar.html.twig' %}
+        </aside>
+        <div class="col-xl-9">
+        	{{ render(url('sylius_shop_partial_taxon_show_by_slug', {
+			    'slug': app.request.attributes.get('slug'),
+			    'template': '@SyliusShop/Taxon/_description.html.twig'
+			})) }}
+
+            {% include '@SyliusShop/Product/Index/_main.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/taxon-min.js'} %}
+{% endblock %}

@@ -1,0 +1,19 @@
+<span class="ui small header black">
+    {% set product = data.product %}
+    {% if data.name is null %}
+        {% set name = product.name %}
+    {% else %} 
+        {% set name = data.name %}
+    {% endif %}
+    <a href="{{ path('sylius_admin_product_variant_update', {'id': data.id, 'productId': data.product.id}) }}" title="{{ name }}">{{ name }}</a>
+</span>
+{% if data.optionValues|length > 0 %}
+    <br>
+    <div class="ui horizontal divided list">
+        {% for optionValue in data.optionValues %}
+            <div class="item">
+                {{ optionValue.name }}: {{ optionValue.value }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

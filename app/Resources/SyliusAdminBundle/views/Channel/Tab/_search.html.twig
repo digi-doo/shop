@@ -1,0 +1,9 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui tab" data-tab="search">
+    <h3 class="ui dividing header">{{ 'sylius.ui.channel_search'|trans }}</h3>    
+    <div class="column">
+        {{ message.info('app.message.fulltext_future'|trans) }}
+    </div>
+    {{ sonata_block_render_event('sylius.admin.channel.' ~ action ~ '.tab_settings', {'form': form}) }}
+</div>

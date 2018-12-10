@@ -1,0 +1,59 @@
+# sylius_grid:
+#     grids:
+#         sylius_admin_inventory:
+#             driver:
+#                 name: doctrine/orm
+#                 options:
+#                     class: "%sylius.model.product_variant.class%"
+#                     repository:
+#                         method: createInventoryListQueryBuilder
+#                         arguments: ["%locale%"]
+#             sorting:
+#                 onHand: asc
+#             fields:
+#                 onHand:
+#                     type: string
+#                     sortable: ~
+#                     enabled: false
+#                 name:
+#                     type: twig
+#                     sortable: translation.name
+#                     path: .
+#                     label: sylius.ui.name
+#                     options:
+#                         template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+#                 code:
+#                     type: string
+#                     sortable: ~
+#                     label: sylius.ui.code
+#                 inventory:
+#                     type: twig
+#                     sortable: onHand
+#                     path: .
+#                     label: sylius.ui.inventory
+#                     options:
+#                         template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+#             filters:
+#                 search:
+#                     type: string
+#                     label: sylius.ui.search
+#                     options:
+#                         fields: [code, translation.name]
+#             actions:
+#                 item:
+#                     update_product:
+#                         type: update
+#                         label: app.inventory.edit_product
+#                         options:
+#                             link:
+#                                 route: sylius_admin_product_update
+#                                 parameters:
+#                                     id: resource.product.id
+#                     update:
+#                         type: update
+#                         label: app.inventory.edit_variant
+#                         options:
+#                             link:
+#                                 parameters:
+#                                     id: resource.id
+#                                     productId: resource.product.id

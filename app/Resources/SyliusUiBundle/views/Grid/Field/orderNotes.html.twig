@@ -1,0 +1,15 @@
+<div class="ui compact menu">
+    <a href="{{ path('sylius_admin_order_show', {'id': data.id}) }}" class="item popup-init" data-content="{% if data.notes %}{{ 'sylius.ui.has_order_notes'|trans }}{% else %}{{ 'sylius.ui.no_order_notes'|trans }}{% endif %}">
+        <i class="icon mail outline no-margin"></i>
+        {% if data.notes %} <div class="floating ui red label">1</div> {% endif %}
+    </a>
+    <a href="{{ path('app_admin_order_internal_notes', {'id': data.id}) }}" class="item popup-init" data-content="
+        {% if data.internalNotes|length > 0 %}
+            {% transchoice data.internalNotes|length with {'%count%': data.internalNotes|length} %}sylius.ui.has_order_internal_notes{% endtranschoice %}
+        {% else %}
+            {{ 'sylius.ui.no_order_internal_notes'|trans }}
+        {% endif %}">
+        <i class="icon mail no-margin"></i>
+        {% if data.internalNotes|length > 0 %} <div class="floating ui red label">{{ data.internalNotes|length }}</div> {% endif %}
+    </a>
+</div>

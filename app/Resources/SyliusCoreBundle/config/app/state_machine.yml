@@ -1,0 +1,9 @@
+imports:
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_payment.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_payment.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_product_review.yml" }
+    # Core state machines overrides
+    - { resource: "state_machine/sylius_order.yml" }
+    - { resource: "state_machine/sylius_order_shipping.yml" }
+    - { resource: "state_machine/sylius_shipment.yml" }

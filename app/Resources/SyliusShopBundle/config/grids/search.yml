@@ -1,0 +1,42 @@
+# Custom grids
+sylius_grid:
+    grids:
+        sylius_shop_product_search:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createShopSearchListQueryBuilder
+                        arguments:
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
+            limits: [9]
+            fields:
+                stock:
+                    type: string
+                    sortable: variant.onHand
+                    enabled: false
+                createdAt:
+                    type: datetime
+                    sortable: ~
+                name:
+                    type: string 
+                    sortable: translation.name
+                price:
+                    type: int
+                    sortable: channelPricing.price
+            filters:
+                # search:
+                #     type: string
+                #     label: false
+                #     options:
+                #         fields: [code, translation.name]
+                #     form_options:
+                #         type: contains
+                search:
+                    type: fulltext_search
+                    label: false
+                    # options:
+                    #     fields: [code, translation.name, translation.shortDescription, translation.description]

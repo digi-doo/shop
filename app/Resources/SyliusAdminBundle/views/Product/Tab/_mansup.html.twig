@@ -1,0 +1,7 @@
+<div class="ui tab" data-tab="mansup">
+    <h3 class="ui dividing header">{{ 'sylius.ui.mansup'|trans }}</h3>
+    {{ form_row(form.manufacturer) }}
+    {% if product.simple %}
+        {{ form_row(form.variant.supplier) }}
+    {% endif %}
+</div>

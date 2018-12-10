@@ -1,0 +1,18 @@
+<div class="product-detail__info-rating my-4">
+    <div class="d-block d-sm-inline-block clearfix">
+        <fieldset class="rating no__interaction">
+            {% set rating = product.averageRating|round(0) %}
+
+            <input disabled type="radio" name="rating" value="5" {% if rating == 5 %}checked{% endif %} /><label></label>
+            <input disabled type="radio" name="rating" value="4" {% if rating == 4 %}checked{% endif %} /><label></label>
+            <input disabled type="radio" name="rating" value="3" {% if rating == 3 %}checked{% endif %} /><label></label>
+            <input disabled type="radio" name="rating" value="2" {% if rating == 2 %}checked{% endif %} /><label></label>
+            <input disabled type="radio" name="rating" value="1" {% if rating == 1 %}checked{% endif %} /><label></label>
+        </fieldset>
+    </div>
+    <div class="d-block d-sm-inline-block mt-3 mt-sm-0">
+        <strong>{{ product.averageRating|round(0) }}</strong> ( <span>{{ product.acceptedReviews|length }} {{ 'sylius.ui.reviews'|trans }}</span> )
+        | 
+        <a href="{{ path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}) }}">{{ 'sylius.ui.add_your_review'|trans }}</a>
+    </div>
+</div>

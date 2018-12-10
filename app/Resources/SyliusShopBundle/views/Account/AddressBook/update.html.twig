@@ -1,0 +1,35 @@
+{% extends '@SyliusShop/Account/AddressBook/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Ui/Form/theme.html.twig' %}
+
+{% block subcontent %}
+    <div class="ui segment tmpForms">
+        <header class="tmpHeader">
+            <h1>{{ 'sylius.ui.address_book'|trans }} <small>{{ 'sylius.ui.edit_my_address'|trans }}</small></h1>
+            <hr>
+        </header>
+        {#<h1 class="ui dividing header">
+            {{ 'sylius.ui.address_book'|trans }}
+            <div class="sub header">{{ 'sylius.ui.edit_my_address'|trans }}</div>
+        </h1>#}
+
+        {{ sonata_block_render_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
+
+        {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+
+        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+
+        <button type="submit" class="ui large icon labeled blue button btn">
+            <i class="icon save"></i> {{ 'sylius.ui.save_changes'|trans }}
+        </button>
+        &nbsp;&nbsp;
+        <a href="{{ path('sylius_shop_account_address_book_index') }}" class="ui large icon labeled button">
+            <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
+        </a>
+
+        {{ sonata_block_render_event('sylius.shop.account.address_book.update.form', {'address': address}) }}
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

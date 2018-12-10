@@ -1,0 +1,188 @@
+services:
+    procamping.fixture.section:
+        class: AppBundle\Fixture\SectionFixture
+        arguments:
+            - "@procamping.fixture.factory.section"
+        tags:
+            - { name: sylius_fixtures.fixture }
+    procamping.fixture.factory.section:
+        class: AppBundle\Fixture\Factory\SectionFixtureFactory
+        arguments:
+            - "@bitbag_sylius_cms_plugin.factory.section"
+            - "@bitbag_sylius_cms_plugin.factory.section_translation"
+            - "@bitbag_sylius_cms_plugin.repository.section"
+
+    procamping.fixture.block:
+        class: AppBundle\Fixture\BlockFixture
+        arguments:
+            - "@procamping.fixture.factory.block"
+        tags:
+            - { name: sylius_fixtures.fixture }
+    procamping.fixture.factory.block:
+        class: AppBundle\Fixture\Factory\BlockFixtureFactory
+        arguments:
+            - "@bitbag_sylius_cms_plugin.factory.block"
+            - "@bitbag_sylius_cms_plugin.factory.block_translation"
+            - "@bitbag_sylius_cms_plugin.repository.block"
+            - "@bitbag_sylius_cms_plugin.repository.section"
+            - "@sylius.repository.product"
+            - "@sylius.context.channel"
+            - "@sylius.context.locale"
+            - "@app.repository.tag"
+            
+    bitbag_sylius_cms_plugin.fixture.page:
+        class: BitBag\SyliusCmsPlugin\Fixture\PageFixture
+        arguments:
+            - "@bitbag_sylius_cms_plugin.fixture.factory.page"
+        tags:
+            - { name: sylius_fixtures.fixture }
+    bitbag_sylius_cms_plugin.fixture.factory.page:
+        class: BitBag\SyliusCmsPlugin\Fixture\Factory\PageFixtureFactory
+        arguments:
+            - "@bitbag_sylius_cms_plugin.factory.page"
+            - "@bitbag_sylius_cms_plugin.factory.page_translation"
+            - "@bitbag_sylius_cms_plugin.repository.page"
+            - "@bitbag_sylius_cms_plugin.repository.section"
+            - "@sylius.repository.product"
+            - "@sylius.context.channel"
+            - "@sylius.context.locale"
+
+# Procamping fixtures config
+sylius_fixtures:
+    suites:
+        procamping:
+            listeners:
+                logger: ~
+            fixtures:
+                section:
+                    options:
+                        custom:
+                            home_collection:
+                                type: collection
+                                translations:
+                                    cs_CZ:
+                                        name: "Procamping tým doporučuje"
+                                        description: "Kolekce produktů na hlavní stránce pod hlavním menu."
+                            home_favourites:
+                                type: products
+                                translations:
+                                    cs_CZ:
+                                        name: "Oblíbené u našich cestovatelů"
+                                        description: "Klasický výpis produktů na hlavní stránce"
+                            home_discounts:
+                                type: products_carousel
+                                translations:
+                                    cs_CZ:
+                                        name: "Čas slev"
+                                        description: "Produktový carousel na úvodní stránce"
+                block:
+                    options:
+                        custom:
+                            home_collection_left:
+                                type: collection
+                                tab_tybe: tag
+                                tag: 2
+                                sections:
+                                    - "home_collection"
+                                translations:
+                                    cs_CZ:
+                                        name: Babí léto
+                                        content: Akce babího léta na úvodní stránce vlevo
+                            home_collection_right:
+                                type: collection
+                                tab_tybe: tag
+                                tag: 3
+                                sections:
+                                    - "home_collection"
+                                translations:
+                                    cs_CZ:
+                                        name: Slevové tornádo
+                                        content: Akce babího léta na úvodní stránce vpravo
+                            home_favourites:
+                                type: products
+                                products: 3
+                                sections:
+                                    - "home_favourites"
+                                translations:
+                                    cs_CZ:
+                                        name: Blok oblíbených produktů
+                                        content: Blok oblíbených produktů na hlavní stránce
+                            home_discounts:
+                                type: products
+                                products: 15
+                                sections:
+                                    - "home_discounts"
+                                translations:
+                                    cs_CZ:
+                                        name: Blok slevněných produktů na hlavní stránce
+                                        content: Blok slevněných produktů na hlavní stránce v carouselu
+                page:
+                    options:
+                        custom:
+                            o-nas:
+                                translations:
+                                    cs_CZ:
+                                        name: "O nás"
+                                        slug: "o-nas"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                            doprava:
+                                translations:
+                                    cs_CZ:
+                                        name: "Doprava"
+                                        slug: "doprava"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                            kontakt:
+                                translations:
+                                    cs_CZ:
+                                        name: "Kontakt"
+                                        slug: "kontakt"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                            obchodni-podminky:
+                                translations:
+                                    cs_CZ:
+                                        name: "Obchodní podmínky"
+                                        slug: "obchodni-podminky"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                            povinne-informace:
+                                translations:
+                                    cs_CZ:
+                                        name: "Povinné informace"
+                                        slug: "povinne-informace"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                            reklamace:
+                                translations:
+                                    cs_CZ:
+                                        name: "Reklamace"
+                                        slug: "reklamace"
+                                        content: |
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Propter nos enim illam, non propter eam nosmet ipsos diligimus. At ego quem huic anteponam non audeo dicere; </p>
+
+                                            <p>Estne, quaeso, inquam, sitienti in bibendo voluptas? Duo Reges: constructio interrete. Quam si explicavisset, non tam haesitaret. Non enim ipsa genuit hominem, sed accepit a natura inchoatum. Conclusum est enim contra Cyrenaicos satis acute, nihil ad Epicurum. Quis istud, quaeso, nesciebat? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; </p>
+
+                                            <p>Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur sequi; Ex quo intellegitur officium medium quiddam esse, quod neque in bonis ponatur neque in contrariis. Quid ergo hoc loco intellegit honestum? Ergo, si semel tristior effectus est, hilara vita amissa est? </p>
+                        

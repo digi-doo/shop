@@ -1,0 +1,7 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+<div class="ui tab" data-tab="tagsTab">
+    <h3 class="ui dividing header">{{ 'app.ui.tags'|trans }}</h3>
+    {{ form_row(form.tags) }}
+</div>

@@ -1,0 +1,94 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui active tab" data-tab="details">
+    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
+    {{ form_errors(form) }}
+
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'sylius.ui.basic_informations'|trans }}</h4>
+                {{ form_row(form.enabled) }}
+
+                {# {{ form_row(form.code) }} #}
+
+                <div class="{% if form.code.vars.required %}required {% endif %}field{% if form.code.vars.errors|length > 0 %} error{% endif %} ui loadable form">
+                    {{ form_label(form.code) }}
+                    {% if form.code.vars.value == null %}
+                        <div class="ui action input">
+                            {{ form_widget(form.code, {'attr': {'data-generator-input': ''}}) }}
+                            <span class="ui icon button" id="product_code_generator">
+                                <i class="random icon"></i>
+                            </span>
+                        </div>
+                    {% else %}
+                        {{ form_widget(form.code) }}
+                    {% endif %}
+
+                    {{ form_errors(form.code) }}
+                </div>
+
+                {% if product.simple %}
+                    {{ form_row(form.variant.version) }}
+                    {{ form_row(form.variant.onHold) }}
+                    {{ form_row(form.variant.ean) }}
+                {% else %}
+                    {{ form_row(form.options) }}
+                    <div class="ui element">
+                        {{ form_row(form.variantSelectionMethod) }}
+                    </div>
+                {% endif %}
+
+                {# Nothing to see here. #}
+                <div class="ui hidden element">
+                    {% if product.simple %}
+                        {{ form_row(form.variant.translations) }}
+                        {{ form_row(form.variant.enabled) }}
+                    {% endif %}
+                    {{ form_row(form.variantSelectionMethod) }}
+                </div>
+            </div>
+        </div>
+        {% if product.simple %}
+            <div class="column">
+                <div class="ui segment">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h4>
+                    {% if form.variant.externalCode.vars.value is not empty %}
+                        {{ message.info('sylius.ui.cannot_update_external_inventory'|trans) }}
+                    {% endif %}
+                    {% if form.variant.externalCode.vars.value is not empty %}
+                        {{ form_row(form.variant.tracked, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'} }) }}
+                        {{ form_row(form.variant.negativeStock, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'}}) }}
+                        {{ form_row(form.variant.onHand, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'}}) }}
+
+                        {% if product.variants and product.variants.first.onHold > 0 %}
+                            <div class="ui orange tiny message">
+                                {% transchoice product.variants.first.onHold with {'%count%': product.variants.first.onHold} %}sylius.ui.variants_reserved{% endtranschoice %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {{ form_row(form.variant.tracked) }}
+                        {{ form_row(form.variant.negativeStock) }}
+                        {{ form_row(form.variant.onHand) }}
+
+                        {% if product.variants and product.variants.first.onHold > 0 %}
+                            <div class="ui orange tiny message">
+                                {% transchoice product.variants.first.onHold with {'%count%': product.variants.first.onHold} %}sylius.ui.variants_reserved{% endtranschoice %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {# Nothing to see here. #}
+        <div class="ui hidden element">
+            <input type="checkbox" id="sylius_product_channels_0" name="sylius_product[channels][]" value="default" checked="checked" tabindex="0" class="hidden">
+        </div>
+    </div>
+    <div class="ui hidden divider"></div>
+    {{ translationFormWithSlug(form.translations, '@SyliusAdmin/Product/_slugField.html.twig', product) }}
+
+    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_details', {'form': form}) }}
+</div>

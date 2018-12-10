@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        sylius_shop_tag:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createShopTagQueryBuilder
+                        arguments:
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            tag: "expr:notFoundOnNull(service('app.repository.tag').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
+            limits: [9]
+            fields:
+                createdAt:
+                    type: datetime
+                    sortable: ~
+                name:
+                    type: string 
+                    sortable: translation.name
+                price:
+                    type: int
+                    sortable: channelPricing.price

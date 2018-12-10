@@ -1,0 +1,11 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui tab" data-tab="gift">
+    <h3 class="ui dividing header">{{ 'sylius.ui.channel_free_gifts'|trans }}</h3>    
+    <div class="column">
+        {{ message.warning('app.message.channel_order_gift'|trans) }}
+        {{ form_row(form.freeGiftFrom) }}
+        {{ form_row(form.freeGiftVariantCode) }}
+    </div>
+    {{ sonata_block_render_event('sylius.admin.channel.' ~ action ~ '.tab_settings', {'form': form}) }}
+</div>

@@ -1,0 +1,160 @@
+{
+    "name": "czende/sshop",
+    "description": "Main Autodevelo shop project based on Sylius eCommerce.",
+    "keywords": ["symfony", "symfony2", "sylius", "distribution", "ecommerce", "cart", "shopping"],
+    "type": "project",
+    "license": "apache-2.0",
+    "homepage": "https://digidoo.cz",
+    "authors": [
+        {
+            "name": "Jan Czernin",
+            "homepage": "http://janczernin.cz"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/Sylius"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/KMSFroalaEditorBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/ColorPickerBundle"  
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/CmsPlugin"  
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/SyliusImportExportPlugin"  
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/DeveloShopPlugin"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/BalikonosShippingExportPlugin"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/ShippingExportPlugin"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/EcomailPlugin"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/czende/sylius-wishlist-bundle"  
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:digidoo/autodevelo-api.git"
+        },
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:digidoo/utils.git"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "aptoma/twig-markdown": "^3.0",
+        "autodevelo/api-client": "dev-master",
+        "autodevelo/utils": "dev-master",
+        "bitbag/cms-plugin": "dev-master",
+        "bitbag/shipping-export-plugin": "dev-master",
+        "czende/balikonos-shipping-export-plugin": "dev-master",
+        "czende/develo-shop-plugin": "dev-master",
+        "czende/ecomail-plugin": "dev-master",
+        "czende/gopay-plugin": "^1.0",
+        "ecomailcz/ecomail": "dev-master",
+        "excelwebzone/recaptcha-bundle": "^1.5",
+        "friendsofsylius/sylius-import-export-plugin": "dev-master",
+        "heureka/overeno-zakazniky": "^3.0",
+        "hwi/oauth-bundle": "^0.5.3",
+        "kms/froala-editor-bundle": "dev-master",
+        "kunicmarko/color-picker-bundle": "dev-master",
+        "michelf/php-markdown": "^1.7",
+        "phobetor/rabbitmq-supervisor-bundle": "^3.1.0",
+        "php-amqplib/rabbitmq-bundle": "^1.14",
+        "portphp/excel": "^1.0",
+        "sentry/sentry-symfony": "^0.8.6",
+        "stefandoorn/google-tag-manager-enhanced-ecommerce-plugin": "0.4.0",
+        "stefandoorn/google-tag-manager-plugin": "0.2.0",
+        "stefandoorn/sitemap-plugin": "^1.0",
+        "sylius/sylius": "dev-master",
+        "webburza/sylius-wishlist-bundle": "dev-master"
+    },
+    "require-dev": {
+        "behat/behat": "^3.2",
+        "behat/mink": "^1.7",
+        "behat/mink-browserkit-driver": "^1.3",
+        "behat/mink-extension": "^2.2",
+        "behat/mink-selenium2-driver": "^1.3",
+        "bossa/phpspec2-expect": "^1.0",
+        "coduo/php-matcher": "^2.1",
+        "dama/doctrine-test-bundle": "^1.0",
+        "friends-of-behat/context-service-extension": "^0.3",
+        "friends-of-behat/cross-container-extension": "^0.2",
+        "friends-of-behat/performance-extension": "^1.0",
+        "friends-of-behat/service-container-extension": "^0.3",
+        "friends-of-behat/suite-settings-extension": "^1.0",
+        "friends-of-behat/symfony-extension": "^0.2.1",
+        "friends-of-behat/variadic-extension": "^0.1",
+        "lakion/api-test-case": "^1.0",
+        "lakion/mink-debug-extension": "^1.2.3",
+        "phpspec/phpspec": "^3.2",
+        "phpunit/phpunit": "^5.6",
+        "se/selenium-server-standalone": "^2.52",
+        "stripe/stripe-php": "^4.1",
+        "sensio/generator-bundle": "^3.1",
+        "phpstan/phpstan": "^0.9.2",
+        "symplify/easy-coding-standard": "^2.5"
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "AppBundle\\": "src/AppBundle/"
+        },
+        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
+    },
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

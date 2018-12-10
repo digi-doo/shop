@@ -1,0 +1,45 @@
+sylius_grid:
+    grids:
+        app_admin_tag:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: AppBundle\Entity\Tag
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: translation.namd
+                slug:
+                    type: string
+                    label: sylius.ui.slug
+                    sortable: translation.slug
+                color:
+                    type: twig
+                    label: sylius.ui.color
+                    options:
+                        template: "@App/Tag/colorField.html.twig"
+                textColor:
+                    type: twig
+                    label: sylius.ui.text_color
+                    options:
+                        template: "@App/Tag/colorField.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                mainTag:
+                    type: twig
+                    label: sylius.ui.main_tag
+                    options:
+                        template: "@SyliusUi/Grid/Field/bool.html.twig"
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

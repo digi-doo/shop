@@ -1,0 +1,6 @@
+services:
+    # Custom attribute Float type
+    sylius.attribute_type.float:
+        class: AppBundle\Helpers\Attribute\FloatAttributeType
+        tags:
+            - { name: sylius.attribute.type, attribute_type: float, label: Float, form_type: AppBundle\Form\Type\FloatAttributeType }

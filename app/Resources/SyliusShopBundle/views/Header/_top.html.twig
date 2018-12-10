@@ -1,0 +1,58 @@
+<div class="header__top">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-4 col-md-5 col-sm-5 col-12 header__top-left pb-1 pb-sm-0">
+                <span>{{ 'procamping.ui.contact_our_tel'|trans({'%tel%': sylius.channel.supportNumber}) }}</span>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-7 col-sm-7 col-12 ml-lg-auto text-right header__top-right">
+                {# <div class="header__login-mob text-right">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="login_btn"></a>
+                        </div>
+                    </div>
+                </div> #}
+                <div class="header__login-pc text-right d-inline-block text-xl-left">
+                    <div class="row align-items-center text-right">
+                        <div class="d-none d-lg-block">   
+                            {% if is_granted('ROLE_USER') %}      
+                                <a href="{{ path('sylius_shop_account_dashboard') }}" class="link--green">{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</a>
+                            {% else %}
+                                <a href="#" data-toggle="modal" data-target="#logInModal" class="link--green">{{ 'procamping.ui.login'|trans }}</a> {{ 'procamping.ui.or'|trans }} <a href="{{ path('sylius_shop_register') }}" class="link--green">{{ 'procamping.ui.register'|trans }}.</a>
+                            {% endif %}
+                        </div>
+                        <div class="header__login-pc__btn">
+                            {% if is_granted('ROLE_USER') %}      
+                                <a href="{{ path('sylius_shop_account_dashboard') }}" class="login_btn d-inline-block d-lg-none mr-2"></a>
+                                {# <a href="#" class="btn-featured d-sm-inline-block">{{ 'procamping.ui.wishlist'|trans }}</a> #}
+                                <a class="btn-featured d-sm-inline-block" href="{{
+                                    wishlist_provider.wishlists | length > 1
+                                    ? path('webburza_account_wishlist_index')
+                                    : path('webburza_frontend_wishlist_first')
+                                }}">
+                                    {% if wishlist_provider.itemCount > 0 %}
+                                        <span class="badge badge-pill badge-success cart__badge">{{ wishlist_provider.itemCount }}</span>
+                                    {% endif %}
+                                    {{ 'procamping.ui.wishlist'|trans }}
+                                </a>
+                            {% else %}
+                                <a href="{{ path('sylius_shop_login') }}" class="login_btn d-inline-block d-lg-none mr-2"></a>
+                                <a href="#" class="btn-featured d-sm-inline-block" data-toggle="modal" data-target="#logInModal">{{ 'procamping.ui.wishlist'|trans }}</a>
+                            {% endif %}
+
+                            {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
+                            {# <a href="{{ path('sylius_shop_cart_summary') }}" class="btn-cart d-none d-sm-inline-block">{{ 'procamping.ui.cart'|trans }}</a> #}
+
+                            {# Mobile menu opener #}
+                            <div class="header__menu__toggler d-sm-inline-block d-xl-none">
+                                <div></div>
+                                <div></div>
+                                <div></div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

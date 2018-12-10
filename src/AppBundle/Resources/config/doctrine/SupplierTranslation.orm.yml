@@ -1,0 +1,19 @@
+AppBundle\Entity\SupplierTranslation:
+    type: entity
+    table: sylius_supplier_translation
+    repositoryClass: AppBundle\Repository\SupplierTranslationRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        delivery:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true

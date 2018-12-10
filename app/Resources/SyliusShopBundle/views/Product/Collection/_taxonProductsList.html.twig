@@ -1,0 +1,65 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% if products|length > 0 %}
+    {# Left item #}
+    <div class="recommend__item-left">
+        {% for product in products %}
+            {% if loop.index == 1 %}
+                {# Images #}
+                {% if product.imagesByType('main') is not empty %}
+                    {% set path = product.imagesByType('main').first.path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+                {% elseif product.images.first %}
+                    {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+                {% else %}
+                    {% set path = 'https://placehold.it/520x500' %}
+                {% endif %}
+
+                {# Main item #}
+                <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" style="background: url({{path}}) center / cover no-repeat;">
+                    {% set discount = false %}
+                    {% if (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).discount %}
+                        {% set discount = true %}
+                        <div class="product__sale product__sale--big">{{ money.calculatePercentageDiscount(product|sylius_resolve_variant) }}</div>
+                    {% endif %}
+
+                    {% if sylius.channel.freeShippingFrom is defined 
+                        and sylius.channel.freeShippingFrom != null
+                        and (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).price >= sylius.channel.freeShippingFrom %}
+                        <div class="product__sale product__sale--big product__freeshipping__tag{% if discount %} product__freeshipping__tag--with-discount--big{% endif %}">{{ 'app.ui.free_shipping'|trans }}</div>
+                    {% endif %}
+                </a>
+            {% endif %}                 
+        {% endfor %}
+    </div>
+    
+    {% if products|length > 1 %}
+        <div class="recommend__item-right">
+            {% for product in products %}
+                {% if loop.index > 1 %}
+                    {# Images #}
+                    {% if product.imagesByType('main') is not empty %}
+                        {% set path = product.imagesByType('main').first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+                    {% elseif product.images.first %}
+                        {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+                    {% else %}
+                        {% set path = 'https://placehold.it/260x170' %}
+                    {% endif %}
+                    
+                    {# Main item #}
+                    <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" style="background: url({{path}}) center / cover no-repeat;">
+                        {% set discount = false %}
+                        {% if (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).discount %}
+                            {% set discount = true %}
+                            <div class="product__sale product__sale--small">{{ money.calculatePercentageDiscount(product|sylius_resolve_variant) }}</div>
+                        {% endif %}
+                        {% if sylius.channel.freeShippingFrom is defined 
+                            and sylius.channel.freeShippingFrom != null
+                            and (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).price >= sylius.channel.freeShippingFrom %}
+                            <div class="product__sale product__sale--small product__freeshipping__tag{% if discount %} product__freeshipping__tag--with-discount--small{% endif %}">{{ 'app.ui.free_shipping'|trans }}</div>
+                        {% endif %}
+                    </a>
+                {% endif %} 
+            {% endfor %}
+        </div>
+    {% endif %}    
+{% endif %}

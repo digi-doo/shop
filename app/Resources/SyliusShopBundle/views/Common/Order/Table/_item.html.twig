@@ -1,0 +1,42 @@
+{# {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<tr>
+	<td class="order__items align-middle">
+		{% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
+    </td>
+    <td class="text-right align-middle">
+        <span class="sylius-unit-price">{{ money.format(item.unitPrice, order.currencyCode) }}</span>
+    </td>
+    <td class="text-right align-middle center aligned">{{ item.quantity }}</td>
+    <td class="text-right align-middle right aligned">{{ money.format(item.subtotal, order.currencyCode) }}</td>
+</tr> #}
+
+
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set product = item.product %}
+{% set product_variant = item.variant %}
+{% set giftCode = sylius.channel.freeGiftVariantCode %}
+
+<tr>
+    <td class="order__items align-middle">
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
+    </td>
+    <td class="text-right align-middle center aligned">
+        {{ item.quantity }}
+    </td>
+    <td class="text-right align-middle">
+        {% if giftCode == product_variant.code %}
+            <span class="sylius-unit-price">{{ money.convertAndFormat(0) }}</span>
+        {% else %}
+            <span class="sylius-unit-price">{{ money.calculatePriceWithVat(product_variant) }}</span>
+        {% endif %}
+    </td>
+    <td class="text-right align-middle right aligned">
+        {% if giftCode == product_variant.code %}
+            {{ money.convertAndFormat(0) }}
+        {% else %}
+            {{ money.calculateTotalPriceWithVat(product_variant, item.quantity) }}
+        {% endif %}
+    </td>
+</tr>

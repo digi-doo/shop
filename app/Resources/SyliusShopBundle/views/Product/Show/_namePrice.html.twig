@@ -1,0 +1,16 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="product-detail__info-name pb-2">
+    <div>
+        <h1>{{product.name}}</h1>
+        <p>{{ 'sylius.ui.price_no_vat'|trans }} <strong id="product-price">{{ money.calculateRoundedPriceWithoutVat(product|sylius_resolve_variant) }}</strong></p>
+    </div>
+    {% if (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).discount %}
+        <div class="product__price--sale">
+            <strike>{{ money.calculateRoundedDefaultPriceWithVat(product|sylius_resolve_variant) }}</strike>
+            <div><strong id="product-price-tax">{{ money.calculateRoundedPriceWithVat(product|sylius_resolve_variant) }}</strong></div>
+        </div>
+    {% else %}
+        <div><strong id="product-price-tax">{{ money.calculateRoundedPriceWithVat(product|sylius_resolve_variant) }}</strong></div>
+    {% endif %}
+</div>

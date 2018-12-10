@@ -1,0 +1,15 @@
+app_admin_supplier:
+    resource: |
+        alias: app.supplier
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        redirect: index
+        grid: app_admin_supplier
+        vars:
+            all:
+                subheader: app.ui.manage_suppliers
+                templates:
+                  form: AppBundle:Supplier:_form.html.twig
+            index:
+                icon: 'shipping image outline'
+    type: sylius.resource

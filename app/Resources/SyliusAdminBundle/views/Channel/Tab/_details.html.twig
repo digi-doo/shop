@@ -1,0 +1,33 @@
+<div class="ui active tab" data-tab="details">
+    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
+    <div class="ui column stackable grid">
+        <div class="column">
+            {{ form_errors(form) }}
+            <div class="one field">
+                {{ form_row(form.enabled) }}
+            </div>
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+            <div class="one field">
+                {{ form_row(form.description) }}
+            </div>
+            <div class="two fields">
+                {{ form_row(form.color) }}
+                {{ form_row(form.themeName) }}
+            </div>
+            <div class="one field">
+                <div class="field">
+                    {{ form_label(form.hostname) }}
+                    <div class="ui labeled input">
+                        <div class="ui label">https://</div>
+                        {{ form_widget(form.hostname) }}
+                    </div>
+                    {{ form_errors(form.hostname) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ sonata_block_render_event('sylius.admin.channel.' ~ action ~ '.tab_details', {'form': form}) }}
+</div>

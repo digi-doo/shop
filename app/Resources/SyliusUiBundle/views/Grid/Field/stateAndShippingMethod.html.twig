@@ -1,0 +1,12 @@
+{% set value = 'sylius.ui.' ~ data.shippingState %}
+{% set shipments = data.shipments %}
+
+{% if options.vars.labels is defined %}
+    {% include [(options.vars.labels ~ '/' ~ data.shippingState ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': value} %}
+{% else %}
+    {% include '@SyliusUi/Label/_default.html.twig' with {'value': value} %}
+{% endif %}
+<br><br>
+{% for shipment in shipments %}
+    {% include '@SyliusUi/Label/_default.html.twig' with {'value': shipment.method.name} %}
+{% endfor %}

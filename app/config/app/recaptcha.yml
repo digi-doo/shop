@@ -1,0 +1,5 @@
+ewz_recaptcha:
+    public_key:  6LeOR1gUAAAAAIWXiO5cDYeEa7cKhZ_TazE66EIz
+    private_key: 6LeOR1gUAAAAAHiWsRIjGkH3DJ9fHoCkyStNlE0N
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    # locale_key:  %kernel.default_locale%

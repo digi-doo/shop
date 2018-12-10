@@ -1,0 +1,134 @@
+{%- macro format(amount, currency_code) -%}
+    {{ amount|sylius_format_money(currency_code, sylius.localeCode) }}
+{%- endmacro -%}
+
+{%- macro formatRounded(amount, currency_code) -%}
+    {{ amount|sylius_format_money_rounded(currency_code, sylius.localeCode) }}
+{%- endmacro -%}
+
+{%- macro convertAndFormat(amount) -%}
+    {% from _self import format %}
+
+    {{- format(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+{%- endmacro -%}
+
+{%- macro convertAndFormatRounded(amount) -%}
+    {% from _self import formatRounded %}
+
+    {{- formatRounded(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+{%- endmacro -%}
+
+{%- macro convertAndFormatPromotion(amount) -%}
+    {% from _self import format %}
+    
+    {# Fucked up promotion TAX #}
+    {{- format((amount * 1.21)|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+{%- endmacro -%}
+
+{%- macro calculatePrice(variant) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculatePriceWithoutVat(variant) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculateRoundedPriceWithoutVat(variant) -%}
+    {% from _self import convertAndFormatRounded %}
+
+    {{- convertAndFormatRounded(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculatePriceWithVat(variant) -%}
+    {% from _self import convertAndFormat %}
+    
+    {{- convertAndFormat(variant|sylius_calculate_price_with_vat({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculateRoundedPriceWithVat(variant) -%}
+    {% from _self import convertAndFormatRounded %}
+    
+    {{- convertAndFormatRounded(variant|sylius_calculate_price_with_vat({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculateTotalPriceWithVat(variant, quantity) -%}
+    {% from _self import convertAndFormat %}
+        
+    {{- convertAndFormat(variant|sylius_calculate_price_with_vat({'channel': sylius.channel}) * quantity) }}
+{%- endmacro -%}
+
+{%- macro calculateTotalPriceWithoutVat(variant, quantity) -%}
+    {% from _self import convertAndFormat %}
+        
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel}) * quantity) }}
+{%- endmacro -%}
+
+{%- macro calculateDefaultPrice(variant) -%}
+    {% from _self import convertAndFormat %}
+    
+    {% if variant.channelPricingForChannel(sylius.channel).hasDiscount %}
+        {{- convertAndFormat(variant.channelPricingForChannel(sylius.channel).defaultPrice) }}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro calculateRoundedDefaultPrice(variant) -%}
+    {% from _self import convertAndFormatRounded %}
+    
+    {% if variant.channelPricingForChannel(sylius.channel).hasDiscount %}
+        {{- convertAndFormatRounded(variant.channelPricingForChannel(sylius.channel).defaultPrice) }}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro calculateDefaultPriceWithVat(variant) -%}
+    {% from _self import convertAndFormat %}
+
+    {% if variant.taxCategory and variant.taxCategory.rates|length > 0 %}
+        {% set defaultPriceWithoutVat = variant.channelPricingForChannel(sylius.channel).defaultPrice %}
+        {% set vat = variant.taxCategory.rates.first.amount %}
+
+        {% if variant.channelPricingForChannel(sylius.channel).hasDiscount %}
+            {{- convertAndFormat((defaultPriceWithoutVat + defaultPriceWithoutVat * vat)) }}
+        {% else %}
+            {{- convertAndFormat(defaultPriceWithoutVat + defaultPriceWithoutVat * vat) }}
+        {% endif %}
+    {% else %}
+        <small class="text-danger" style="font-size: 12px;font-weight: 300;">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   
+            {{ 'sylius.message.no_taxCat_or_taxRate'|trans }}
+        </small>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro calculateRoundedDefaultPriceWithVat(variant) -%}
+    {% from _self import convertAndFormatRounded %}
+
+    {% if variant.taxCategory and variant.taxCategory.rates|length > 0 %}
+        {% set defaultPriceWithoutVat = variant.channelPricingForChannel(sylius.channel).defaultPrice %}
+        {% set vat = variant.taxCategory.rates.first.amount %}
+
+        {% if variant.channelPricingForChannel(sylius.channel).hasDiscount %}
+            {{- convertAndFormatRounded((defaultPriceWithoutVat + defaultPriceWithoutVat * vat)) }}
+        {% else %}
+            {{- convertAndFormatRounded(defaultPriceWithoutVat + defaultPriceWithoutVat * vat) }}
+        {% endif %}
+    {% else %}
+        <small class="text-danger" style="font-size: 12px;font-weight: 300;">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>   
+            {{ 'sylius.message.no_taxCat_or_taxRate'|trans }}
+        </small>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro calculatePercentageDiscount(variant) -%}
+	{% from _self import convertAndFormat %}
+	
+	{% if variant.channelPricingForChannel(sylius.channel).hasDiscount %}
+		{{ '-' ~ (variant.channelPricingForChannel(sylius.channel).discount * 100) ~ '%' }}
+	{% else %}
+        {{ 0 ~ '%' }}
+    {% endif %}
+{%- endmacro -%}

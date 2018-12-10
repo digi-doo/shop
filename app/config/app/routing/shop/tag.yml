@@ -1,0 +1,10 @@
+app_shop_tag_index:
+    path: /stitek/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Tag/index.html.twig"
+            grid: sylius_shop_tag
+    requirements:
+        slug: .+

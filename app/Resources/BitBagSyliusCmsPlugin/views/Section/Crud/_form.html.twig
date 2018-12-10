@@ -1,0 +1,19 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        <div class="field">
+            <label for="{{ form.type.vars.id }}">{{ 'sylius.ui.type'|trans }}</label>
+            <select class="ui dropdown" id="{{ form.type.vars.id }}" name="{{ form.type.vars.full_name }}">
+                <option value="collection"{% if form.type.vars.value is not empty and form.type.vars.value == 'collection' %}selected{% endif %}>{{ 'app.section.collection'|trans }}</option>
+                <option value="products"{% if form.type.vars.value is not empty and form.type.vars.value == 'products' %}selected{% endif %}>{{ 'app.section.products'|trans }}</option>
+                <option value="products_carousel"{% if form.type.vars.value is not empty and form.type.vars.value == 'products_carousel' %}selected{% endif %}>{{ 'app.section.products_carousel'|trans }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+{{ translationForm(form.translations) }}

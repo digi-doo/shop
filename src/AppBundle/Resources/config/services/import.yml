@@ -1,0 +1,209 @@
+###################
+# Import services #
+###################
+services:
+    # Taxon importer & processor
+    sylius.importer.taxon.excel:
+        class: AppBundle\ImportExport\Importer\TaxonImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.taxon"
+            - "@sylius.processor.taxon"
+            - "@sylius.importer.result"
+            - 5
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: taxon, format: excel }
+
+    sylius.processor.taxon:
+        class: AppBundle\ImportExport\Processor\TaxonProcessor
+        arguments:
+            - "@sylius.factory.taxon"
+            - "@sylius.repository.taxon"
+            - "@property_accessor"
+            - "@sylius.importer.metadata_validator"
+            - ["Code", "Enabled", "Parent", "Level", "Position", "Name", "Slug", "Description"]
+
+    # Supplier generic importer & processor
+    sylius.importer.supplier.excel:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Importer\ResourceImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@app.manager.supplier"
+            - "@sylius.processor.supplier"
+            - "@sylius.importer.result"
+            - 5
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: supplier, format: excel }
+
+    sylius.processor.supplier:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Processor\ResourceProcessor
+        arguments:
+            - "@app.factory.supplier"
+            - "@app.repository.supplier"
+            - "@property_accessor"
+            - "@sylius.importer.metadata_validator"
+            - ["Code", "Enabled", "Name", "Delivery", "Description"]
+
+    # Tag generic importer & processor
+    sylius.importer.tag.excel:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Importer\ResourceImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@app.manager.tag"
+            - "@sylius.processor.tag"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: tag, format: excel }
+
+    sylius.processor.tag:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Processor\ResourceProcessor
+        arguments:
+            - "@app.factory.tag"
+            - "@app.repository.tag"
+            - "@property_accessor"
+            - "@sylius.importer.metadata_validator"
+            - ["Code", "Name", "Slug", "Description"]
+
+    # Manufacturer generic importer & processor
+    sylius.importer.manufacturer.excel:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Importer\ResourceImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@app.manager.manufacturer"
+            - "@sylius.processor.manufacturer"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: manufacturer, format: excel }
+    sylius.processor.manufacturer:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Processor\ResourceProcessor
+        arguments:
+            - "@app.factory.manufacturer"
+            - "@app.repository.manufacturer"
+            - "@property_accessor"
+            - "@sylius.importer.metadata_validator"
+            - ["Code", "Name", "Slug", "Description"]
+
+    # Product option importer & processor
+    sylius.importer.product_option.excel:
+        class: AppBundle\ImportExport\Importer\ProductOptionImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product_option"
+            - "@sylius.processor.product_option"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: product_option, format: excel }
+    sylius.processor.product_option:
+        class: AppBundle\ImportExport\Processor\ProductOptionProcessor
+        arguments:
+            - "@service_container"
+            # DO PICE KURVA SERU NA TO KOKOTI
+            # - "@sylius.repository.product_option"
+            # - "@sylius.factory.product_option_value"
+            # - "@sylius.repository.product_option_value"
+            # - "@property_accessor"
+            # - "@sylius.importer.metadata_validator"
+    
+    # Product importer & processor
+    sylius.importer.product.excel:
+        class: AppBundle\ImportExport\Importer\ProductImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product"
+            - "@sylius.processor.product"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: product, format: excel }
+    sylius.processor.product:
+        class: AppBundle\ImportExport\Processor\ProductProcessor
+        arguments:
+            - "@service_container"
+
+    # Image importer & processor
+    sylius.importer.image.excel:
+        class: AppBundle\ImportExport\Importer\ImageImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product"
+            - "@sylius.processor.image"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: image, format: excel }
+
+    sylius.processor.image:
+        class: AppBundle\ImportExport\Processor\ImageProcessor
+        arguments:
+            - "@service_container"
+
+    # Attributes importer & processor
+    sylius.importer.attribute.excel:
+        class: AppBundle\ImportExport\Importer\AttributeImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product_attribute"
+            - "@sylius.processor.attribute"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: attribute, format: excel }
+    sylius.processor.attribute:
+        class: AppBundle\ImportExport\Processor\AttributeProcessor
+        arguments:
+            - "@service_container"
+
+    # PRODUCT Attributes importer & processor
+    sylius.importer.product_attribute.excel:
+        class: AppBundle\ImportExport\Importer\ProductAttributeImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product_attribute"
+            - "@sylius.processor.product_attribute"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: product_attribute, format: excel }
+    sylius.processor.product_attribute:
+        class: AppBundle\ImportExport\Processor\ProductAttributeProcessor
+        arguments:
+            - "@service_container"
+
+    # PRODUCT taxons importer & processor
+    sylius.importer.product_taxon.excel:
+        class: AppBundle\ImportExport\Importer\ProductTaxonImporter
+        arguments:
+            - "@sylius.factory.excel_reader"
+            - "@sylius.manager.product_taxon"
+            - "@sylius.processor.product_taxon"
+            - "@sylius.importer.result"
+            - 1
+            - true
+            - true
+        tags:
+            - { name: sylius.importer, type: product_taxon, format: excel }
+    sylius.processor.product_taxon:
+        class: AppBundle\ImportExport\Processor\ProductTaxonProcessor
+        arguments:
+            - "@service_container"

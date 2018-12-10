@@ -1,0 +1,20 @@
+AppBundle\Entity\Supplier:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: ["code"]
+            groups: ["sylius"]
+            message: "app.supplier.code.unique"
+    properties:
+        translations:
+            - Valid:
+        code:
+            - NotBlank:
+                groups: ["sylius"]
+AppBundle\Entity\SupplierTranslation:
+    properties:
+        name:
+            - NotBlank:
+                groups: ["sylius"]
+        delivery:
+            - NotBlank:
+                groups: ["sylius"]

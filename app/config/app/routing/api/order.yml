@@ -1,0 +1,29 @@
+# app_admin_api_order_issue_by_number:
+#     path: /orders/by-number/{number}/issue
+#     methods: [PUT, PATCH]
+#     defaults:
+#         _controller: sylius.controller.order:applyStateMachineTransitionAction
+#         _sylius:
+#             event: issue
+#             section: admin_api
+#             repository:
+#                 method: findOneByNumber
+#                 arguments:
+#                     number: $number
+#             state_machine:
+#                 graph: sylius_order
+#                 transition: issue
+#             return_content: false
+
+app_admin_api_order_develo_update_by_number:
+    path: /orders/by-number/{number}/develo-update
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order:develoUpdateAction
+        _sylius:
+            section: admin_api
+            repository:
+                method: findOneByNumber
+                arguments:
+                    number: $number
+            return_content: false

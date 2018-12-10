@@ -1,0 +1,10 @@
+{% form_theme form 'SyliusUiBundle:Form:imagesTheme.html.twig' %}
+
+{# Render taxon media upload only for null categories #}
+{# {% if form.vars.data.parent is defined and form.vars.data.parent is null %}
+    <div class="ui segment">
+        <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
+        <br>
+        {{ form_row(form.images, {'label': false}) }}
+    </div>
+{% endif %} #}

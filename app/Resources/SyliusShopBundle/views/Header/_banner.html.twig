@@ -1,0 +1,12 @@
+{% if blocks %}
+	{% set banner = blocks.0 %}
+    {% if banner.image is defined and banner.image.path  is defined %}
+        {% set imagePath = banner.image.path|imagine_filter('sylius_shop_header_banner') %}
+    {% else %}
+        {% set imagePath = '//placehold.it/413x95' %}
+    {% endif %}
+
+	{% if (banner.link) %}<a href="{{banner.link}}">{% endif %}
+		<img src="{{ imagePath }}" alt="{{ banner.name }}" class="h-100 w-auto">
+	{% if (banner.link) %}</a>{% endif %}
+{% endif %}

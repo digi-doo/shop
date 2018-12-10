@@ -1,0 +1,117 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% block root %}
+    {% set id = item.extra('column_id') %}
+
+    <div class="eight wide right aligned column"{% if id %} id="{{ id }}"{% endif %}>
+        {{ block('items') }}
+    </div>
+{% endblock %}
+
+{% block items %}
+    <div class="ui buttons">
+        {% for item in item.children if not item.attribute('second_line') %}
+            {{ block('item') }}
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    <div class="ui buttons">
+        {% for item in item.children if item.attribute('second_line') %}
+            {{ block('item') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block item %}
+    {% if 'order_internal_notes' == item.name %}
+        {{ block('internal_notes') }}
+    {% elseif 'edit' == item.attribute('type') %}
+        {{ buttons.edit(item.uri, item.label) }}
+    {% elseif 'show' == item.attribute('type') %}
+        {{ buttons.show(item.uri, item.label) }}
+    {% elseif 'delete' == item.attribute('type') %}
+        {{ buttons.delete(item.uri, item.label|trans, true, item.attribute('resource_id')) }}
+    {% elseif 'transition' == item.attribute('type') %}
+        {{ block('transition') }}
+    {% elseif 'transition_links' == item.attribute('type') %}
+        {{ block('transition_links') }}
+    {% else %}
+        {{ block('link') }}
+    {% endif %}
+{% endblock %}
+
+{% block link %}
+    {% set color = item.labelAttribute('color') %}
+    {% set blank = item.attribute('blank') %}
+    {% set loadable = item.attribute('loadable') %}
+    <a href="{{ item.uri }}" class="ui {% if color %}{{ color }} {% endif %}labeled icon button{% if loadable %} loadable{% endif %}"{% if blank %} target="_blank"{% endif %}>
+        {{ block('icon') }}
+        {{ item.label|trans }}
+    </a>
+{% endblock %}
+
+{% block internal_notes %}
+    {% set color = item.labelAttribute('color') %}
+    {% set blank = item.attribute('blank') %}
+    {% set loadable = item.attribute('loadable') %}
+    {% set notes = item.extra('internal_notes') %}
+    <a href="{{ item.uri }}" class="ui {% if color %}{{ color }} {% endif %}labeled icon button{% if loadable %} loadable{% endif %}"{% if blank %} target="_blank"{% endif %}>
+        {{ block('icon') }}
+        {{ item.label|trans }}
+        {% if notes %}
+            <div class="floating ui red label order__note__count">{{ notes }}</div>
+        {% endif %}
+    </a>
+{% endblock %}
+
+{% block transition %}
+    {% set color = item.labelAttribute('color') %}
+    {% set confirmation = item.attribute('confirmation') %}
+    {% set confirmationMessage = item.attribute('confirmationMessage') %}
+
+    <form action="{{ item.uri }}" method="post" style="float: right;">
+        <input type="hidden" name="_method" value="PUT">
+
+        <button class="ui {% if color %}{{ color }} {% endif %}labeled icon button" type="submit" 
+            {% if confirmation %} data-requires-confirmation {% endif %}
+            {% if confirmationMessage %} data-confirmation-message="{{ confirmationMessage|trans }}" {% endif %}
+        >
+            {{ block('icon') }}
+            {{ item.label|trans }}
+        </button>
+    </form>
+{% endblock %}
+
+{% block transition_links %}
+    {% set color = item.labelAttribute('color') %}
+    {% set confirmation = item.attribute('confirmation') %}
+    {% set confirmationMessage = item.attribute('confirmationMessage') %}
+
+    <div class="ui labeled icon floating pointing dropdown link button{% if color %} {{ color }}{% endif %}">
+        {{ block('icon') }}
+        <span class="text">{{ item.label|trans }}</span>
+        <div class="menu">
+            {% for link in item.attribute('links') %}
+                <form action="{{ path(link.route, link.routeParameters) }}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+
+                    <button class="ui labeled icon button fluid item basic" type="submit" 
+                        {% if confirmation %} data-requires-confirmation {% endif %}
+                        {% if confirmationMessage %} data-confirmation-message="{{ confirmationMessage|trans }}" {% endif %}
+                    >
+                        {% if link.icon is defined %}<i class="icon {{ link.icon }}"></i> {% endif %}
+                        {% if link.label is defined %}{{ link.label|trans }}{% endif %}
+                    </button>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block icon %}
+    {% set icon = item.labelAttribute('icon') %}
+    {% if icon %}<i class="icon {{ icon }}"></i> {% endif %}
+{% endblock %}

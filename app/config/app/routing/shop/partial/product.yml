@@ -1,0 +1,13 @@
+sylius_shop_partial_product_index_latest_with_variant:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByChannelWithVariant
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - $count

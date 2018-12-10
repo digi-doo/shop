@@ -1,0 +1,7 @@
+sylius_grid:
+    grids:
+        bitbag_cms_admin_page:
+            fields:
+                code:
+                    type: string
+                    enabled: false

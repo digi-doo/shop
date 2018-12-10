@@ -1,0 +1,31 @@
+sylius_grid:
+    grids:
+        sylius_shop_manufacturer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.manufacturer.class%"
+                    repository:
+                        method: createShopListQueryBuilder
+            limits: [12]
+            # fields:
+            #     createdAt:
+            #         type: datetime
+            #         sortable: ~
+            #     position:
+            #         type: string 
+            #         # sortable: productTaxon.position
+            #     name:
+            #         type: string 
+            #         sortable: translation.name
+            #     price:
+            #         type: int
+            #         sortable: channelPricing.price
+            # filters:
+            #     search:
+            #         type: string
+            #         label: false
+            #         options:
+            #             fields: [translation.name]
+            #         form_options:
+            #             type: contains

@@ -1,0 +1,9 @@
+# Custom Shop routing
+sylius_shop_product_search:
+    path: /vyhledat/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Search/index.html.twig"
+            grid: sylius_shop_product_search

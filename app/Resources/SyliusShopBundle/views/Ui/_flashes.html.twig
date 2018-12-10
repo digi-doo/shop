@@ -1,0 +1,35 @@
+{% if app.session is not null and app.session.started %}
+    {% for type in ['success', 'error', 'info', 'warning'] %}
+        {% for flash in app.session.flashbag.get(type) %}
+            {% if 'error' == type %}
+                {% set result = 'danger' %}
+                {% set icon = 'exclamation' %}
+            {% endif %}
+            {% if 'success' == type %}
+                {% set icon = 'check' %}
+            {% endif %}
+            {% if 'warning' == type %}
+                {% set icon = 'exclamation' %}
+            {% endif %}
+            {% if 'danger' == type %}
+                {% set icon = 'exclamation' %}
+            {% endif %}
+            <div class="alert alert-{{ result|default('success') }} alert-dismissable fade show mt-20 alert-flash">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <div class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-{{ icon|default('info') }}-circle fa-3x mr-3"></i>
+                    <div>
+                        <h3 class="alert-heading mb-2">{% set header = 'sylius.ui.'~type %}{{ header|trans }}</h3>
+                        <p class="mb-0">
+                            {% if flash is iterable %}
+                                {{ flash.message|trans(flash.parameters, 'flashes') }}
+                            {% else %}
+                                {{ flash|trans({}, 'flashes') }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,15 @@
+{% block subject %}
+    {{ 'mailing.subject.invalid_stock_synchronization'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.invalid_stock_synchronization'|trans } %}
+        {% include '@SyliusUi/Email/body-invalidStockSynchronization.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.invalid_stock_synchronization_text'|trans({'%count%': count}),
+            'data': data
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

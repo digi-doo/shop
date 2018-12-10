@@ -1,0 +1,15 @@
+<div class="ui segment">
+    {# <div class="ui dividing header"><h3>{{ 'sylius.ui.shipment'|trans }} #{{ loop.index }}</h3></div> #}
+    <div class="ui dividing header"><h3>{{ 'sylius.ui.shipment'|trans }}</h3></div>
+    <div class="ui fluid stackable items">
+        {{ form_errors(form.method) }}
+
+        {% for choice_form in form.method %}
+            {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] * 1.21 %}
+            {% set method = form.method.vars.choices[loop.index0].data %}
+            {% include '@SyliusShop/Checkout/SelectShipping/_choice.html.twig' with {'form': choice_form, 'method': method, 'fee': fee} %}
+        {% else %}
+            {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}
+        {% endfor %}
+    </div>
+</div>

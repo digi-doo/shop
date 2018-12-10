@@ -1,0 +1,128 @@
+services:
+    # Checkout complete form type extension
+    app.form.extension.type.complete:
+        class: AppBundle\Form\Extension\CompleteTypeExtenstion
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType }
+
+    # Extended customer registration type
+    app.form.extension.type.customer_registration:
+        class: AppBundle\Form\Extension\CustomerRegistrationTypeExtenstion
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType }
+
+    # BitBag CMS Page extension
+    app.form.extension.type.page:
+        class: AppBundle\Form\Extension\PageTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: BitBag\SyliusCmsPlugin\Form\Type\Translation\PageTranslationType }
+
+    # Text block translation entity
+    app.form.extension.type.text_block_translation:
+        class: AppBundle\Form\Extension\TextBlockTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: BitBag\SyliusCmsPlugin\Form\Type\Translation\TextBlockTranslationType }
+
+    # BitBag CMS block extension
+    app.form.extension.type.block:
+        class: AppBundle\Form\Extension\BlockTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: BitBag\SyliusCmsPlugin\Form\Type\BlockType }
+
+    # Product form type extension
+    app.form.extension.type.product:
+        class: AppBundle\Form\Extension\ProductTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductType }
+        arguments: ['@sylius.product_variant_resolver.default', '@service_container']
+
+    # Channel pricing form type extension
+    app.form.extension.type.channel_pricing:
+        class: AppBundle\Form\Extension\ChannelPricingTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType }
+
+    # Address form type extension
+    app.form.extension.type.address:
+        class: AppBundle\Form\Extension\AddressTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\AddressingBundle\Form\Type\AddressType }
+
+    # Customer profile type extension
+    app.form.extension.type.customer_profile:
+        class: AppBundle\Form\Extension\CustomerProfileTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType }
+    
+    # Product option extension
+    app.form.extension.type.product_option:
+        class: AppBundle\Form\Extension\ProductOptionTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductOptionType }
+
+    # Product attribute extension
+    app.form.extension.type.product_attribute:
+        class: AppBundle\Form\Extension\ProductAttributeTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType }
+
+    # Product variant form type extension
+    app.form.extension.type.product_variant:
+        class: AppBundle\Form\Extension\ProductVariantTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType, priority: -5 }
+
+    # Product translation type extension
+    app.form.extension.type.product_translation:
+        class: AppBundle\Form\Extension\ProductTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType, priority: -5 }
+
+    # Taxon translation type extension
+    app.form.extension.type.taxon_translation:
+        class: AppBundle\Form\Extension\TaxonTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType }
+
+    # Channel form type extension
+    app.form.extension.type.channel:
+        class: AppBundle\Form\Extension\ChannelTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ChannelBundle\Form\Type\ChannelType, priority: -5 }
+
+    # Admin user form type extension
+    app.form.extension.type.admin_user:
+        class: AppBundle\Form\Extension\AdminUserTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType }
+
+    # Shipping method form type extension
+    app.form.extension.type.shipping_method:
+        class: AppBundle\Form\Extension\ShippingMethodTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType, priority: -5 }
+
+    # Taxon form type extension
+    app.form.extension.type.taxon:
+        class: AppBundle\Form\Extension\TaxonTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType, priority: -5 }
+
+    # Payment method choice form type extension
+    app.form.extension.type.payment_method_choice:
+        class: AppBundle\Form\Extension\PaymentMethodChoiceTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType }
+        arguments: ['@sylius.repository.payment_method']
+
+    # Product variant generator form type extension
+    sylius.form.extension.type.product_variant_generation:
+        class: AppBundle\Form\Extension\ProductVariantGenerationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType }
+
+    # Payment method form type extension
+    app.form.extension.type.payment_method:
+        class: AppBundle\Form\Extension\PaymentMethodTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType, priority: -5 }

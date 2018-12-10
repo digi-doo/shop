@@ -1,0 +1,58 @@
+{% form_theme form '@SyliusShop/Ui/Form/filter_theme.html.twig' %}
+
+{% set enabledFilter = false %}
+
+{% if form.manufacturers.vars.value is not empty %}
+    {% set enabledFilter = true %}
+    <div class="filtr-side__item">
+        <h3>{{ 'app.ui.manufacturer'|trans }}</h3>
+        {{ form_row(form.manufacturers) }}
+    </div>
+    {% if form.options.vars.value is not empty or form.attributes.vars.value is not empty %}<hr>{% endif %}
+{% endif %}
+
+{% if form.options.vars.value is not empty %}
+    {% set enabledFilter = true %}
+    <div class="filtr-side__item">
+        <h3>{{ 'sylius.ui.product_variants'|trans }}</h3>
+        {{ form_row(form.options) }}
+    </div>
+    {% if form.attributes.vars.value is not empty %}<hr>{% endif %}
+{% endif %}
+
+{% if form.attributes.vars.value is not empty %}
+    {% set enabledFilter = true %}
+    <div class="filtr-side__item">
+        <h3>{{ 'sylius.ui.attributes'|trans }}</h3>
+        {{ form_row(form.attributes) }}
+    </div>
+{% endif %}
+
+{% if enabledFilter %}
+    <button type="submit" 
+        class="btn btn-primary btn-lg btn-block mt-25 ld-ext-left hovering" 
+        onclick="this.classList.add('running');">{{ 'sylius.ui.filter_it'|trans }}
+        <div class="ld ld-ring ld-spin"></div>
+    </button>
+    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" 
+        class="btn btn-secondary btn-sm btn-block ld-ext-left hovering"
+        onclick="this.classList.add('running');">{{ 'sylius.ui.clear'|trans }}
+        <div class="ld ld-ring ld-spin"></div>
+    </a>
+    <hr>
+{% endif %}
+
+{# <div class="filtr-side__item filtr-side__item-price">
+    <h3>{{ 'sylius.ui.price'|trans }}</h3>
+    <div>
+        <strong>od</strong>
+        <input name="price_from" type="number"> Kč
+    </div>
+    <div class="mt-3">
+        <strong>do</strong>
+        <input name="price_to" type="number"> Kč
+    </div>
+</div>
+<hr> #}
+
+{# {{ form_row(form.price) }} #}

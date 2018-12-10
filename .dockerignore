@@ -1,0 +1,23 @@
+# Disabled folders and files for build
+# GIT etc
+.git
+.gitmodules
+.idea/*
+*.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Config params
+/app/config/parameters.yml
+
+# Vendors and components
+/vendor
+/bin
+/node_modules
+
+# Temp files
+var
+
+# Web assets
+/web/assets
+/web/bundles

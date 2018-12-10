@@ -1,0 +1,137 @@
+
+.cart__module {
+
+    .display-inline {
+        display: display;
+    }
+
+    .padding-top-small {
+        padding-top: 15px;
+    }
+
+    .margin-top-big {
+        margin-top: 45px;
+    }
+
+    .margin-top {
+        margin-top: 30px;
+    }
+
+    .margin-top-small {
+        margin-top: 15px;
+    }
+
+    .margin-top-smaller {
+        margin-top: 5px;
+    }
+
+    .margin-bottom {
+        margin-bottom: 30px;
+    }
+
+    .margin-bottom-small {
+        margin-bottom: 15px;
+    }
+
+    .margin-bottom-smaller {
+        margin-bottom: 5px;
+    }
+
+    .padding-left {
+        padding-left: 30px;
+    }
+
+    .padding-left-big {
+        padding-left: 45px;
+    }
+
+    .pull-right {
+        float: right;
+    }
+
+    .cart__items {
+
+        .content {
+            display: inline-block;
+        }
+
+        .ui.header > .image + .content, .ui.header > img + .content {
+            padding-left: .75rem;
+            vertical-align: middle;
+        }
+
+        .ui.header > .image:not(.icon), .ui.header > img {
+            display: inline-block;
+            margin-top: .14285714em;
+            width: 2.5em;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .sylius-product-name {
+            font-size: 1.0em;
+            font-weight: bold;
+        }
+
+        .sylius-product-variant-code {
+            font-size: 0.9em;
+        }
+
+        .remove-button {
+            color: red;
+            background: none;
+        }
+
+    }
+
+    .cart__totals {
+
+        .header {
+            font-size: 2em;
+        }
+
+        .totals {
+            font-size: 1.4em;
+        }
+
+        .btn {
+            font-size: 1.4em;
+        }
+
+
+        @media only screen and (max-width: 991px) {
+            .padding-left-big { 
+                padding-left: 0;
+            }
+
+            .totals-margin-top {
+                margin-top: 30px;
+            }
+        }
+
+    }
+    
+}
+
+// Bootstrap error renderer bug
+form[name="sylius_cart"] span.alert {
+    display: block;
+}
+
+#sylius_cart_promotionCoupon {
+    width: 100%;
+}
+
+button:focus,
+a:focus {
+    outline: 0;
+}
+
+@keyframes btnOpacity {
+    from {opacity: 1;}
+    to {opacity: 0.6;}
+}
+@-webkit-keyframes btnOpacity {
+    from {opacity: 1;}
+    to {opacity: 0.6;}
+}

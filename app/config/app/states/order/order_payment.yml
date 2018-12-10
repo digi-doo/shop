@@ -1,0 +1,12 @@
+winzou_state_machine:
+    sylius_payment:
+        callbacks:
+            after:
+                sylius_process_order:
+                    on: ["fail", "cancel"]
+                    do: ["@app.order_processing.order_payment_processor.after_fail", "process"]
+                    args: ["object.getOrder()"]
+                sylius_resolve_state:
+                    on: ["complete", "refund"]
+                    do: ["@sylius.state_resolver.order_payment", "resolve"]
+                    args: ["object.getOrder()"]

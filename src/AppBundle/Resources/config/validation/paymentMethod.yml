@@ -1,0 +1,8 @@
+AppBundle\Entity\PaymentMethod:
+    properties:
+        taxCategory:
+            - NotBlank:
+                groups: ["sylius"]
+        price:
+            - NotBlank:
+                groups: ["sylius"]

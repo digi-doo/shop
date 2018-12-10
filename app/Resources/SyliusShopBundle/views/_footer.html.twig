@@ -1,0 +1,62 @@
+<footer class="footer">
+    {{ sonata_block_render_event('sylius.shop.layout.before_footer') }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-12">
+                <div class="customer-care">
+                    <h2>{{ 'sylius.ui.customer_care'|trans  }}</h2>
+                    <ul>
+                        <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'o-nas'}) }}">O nás</a></li>
+                        <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'doprava'}) }}">Doprava</a></li>
+                        <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'kontakt'}) }}">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mt-5 mt-sm-0">
+                <h2>Jak nakupovat</h2>
+                <ul>
+                    <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'obchodni-podminky'}) }}">Obchodní podmínky</a></li>
+                    <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'podminky-ochrany-osobnich-udaju'}) }}">Podmínky ochrany osobních údajů</a></li>
+                    <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'povinne-informace'}) }}">Povinné informace</a></li>
+                    <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'reklamace'}) }}">Reklamace</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mt-5 mt-lg-0">
+                <h2>O nás</h2>
+                <p>Milujeme karavaning a kemping. Najdete u nás vše, co potřebujete pro komfortní a bezpečné kempování a karavaning. S <a href="https://procamping.cz">Procamping.cz</a> si každé cestování a dovolenou užijete naplno.</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mt-5">
+                <div class="contact-us">
+                    <h2>Napište nám</h2>
+                    <p>Nenašli jste co jste hledali nebo máte nápad jak vylepšit naše služby? Napište nám, v Procampingu se neustále snažíme vylepšovat vše co děláme. Vaše názory jsou pro nás důležité. </p>
+                </div>
+                <div class="social-btns d-none d-lg-block">
+                    <span><strong>Sledujte nás:</strong></span>
+                    <a class="social-btn social-btn--fb" href="https://www.facebook.com/procampingcz/" target="_blank"></a>
+                    <a class="social-btn social-btn--tw" href="https://twitter.com/procampingcz" target="_blank"></a>
+                    <a class="social-btn social-btn--inst" href="https://www.instagram.com/procamping/" target="_blank"></a>
+                    <a class="social-btn social-btn--yt" href="https://www.youtube.com/channel/UC0klLxRQKE5u8atgd2IX-2g" target="_blank"></a>
+                </div>
+            </div>
+            <div class="col-lg-8 col-12 mt-lg-5">
+                <div class="row">
+                    <div class="col">
+                        {# Render footer contact form #}
+                        {# {{ render(path('app_shop_partial_contact_request')) }} #}
+                        {{ render(controller('app.controller.footer_contact:requestAction')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-lg-none social-btns">
+                <span><strong>Sledujte nás:</strong></span>
+                <a class="social-btn social-btn--fb" href="https://www.facebook.com/procampingcz/" target="_blank"></a>
+                <a class="social-btn social-btn--tw" href="https://twitter.com/procampingcz" target="_blank"></a>
+                <a class="social-btn social-btn--inst" href="https://www.instagram.com/procamping/" target="_blank"></a>
+                <a class="social-btn social-btn--yt" href="https://www.youtube.com/channel/UC0klLxRQKE5u8atgd2IX-2g" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+    {{ sonata_block_render_event('sylius.shop.layout.after_footer') }}
+</footer>
+
+{# <a href="{{ path('sylius_shop_contact_request') }}" class="item">{{ 'sylius.ui.contact_us'|trans  }}</a> #}

@@ -1,0 +1,41 @@
+{% for note in order.internalNotes|reverse %}
+    {% if note.createdBy.firstName and note.createdBy.lastName %}
+        {% set creator = note.createdBy.firstName ~ ' ' ~  note.createdBy.lastName %}
+    {% else %}
+        {% set creator = note.createdBy.username  %}
+    {% endif %}
+
+    <div class="ui attached message">
+        <div class="header">{{ creator }}</div>
+        <p>{{ 'sylius.ui.created_order_note'|trans({'%date%': note.createdAt|date("d.m.Y"), '%time%': note.createdAt|date("H:i:s")}) }}</p>
+    </div>
+    <div class="ui form attached fluid segment">
+        <div class="one field">
+            <div class="field">
+                <label>{{ 'sylius.ui.message'|trans }}:</label>
+                <p>{{ note.note }}</p>
+            </div>
+        </div>
+        {% if not note.isApproved %}
+            {{ render(path('app_admin_order_internal_note_approve', {'orderId': order.id, 'id': note.id})) }}
+        {% endif %}
+    </div>
+    {% if note.isApproved %}
+        {% if note.approvedBy.firstName and note.approvedBy.lastName %}
+            {% set confirmator = note.approvedBy.firstName ~ ' ' ~  note.approvedBy.lastName %}
+        {% else %}
+            {% set confirmator = note.approvedBy.username  %}
+        {% endif %}
+
+        <div class="ui bottom attached green message">
+            <i class="icon check"></i>
+            {{ 'sylius.ui.approved_order_note'|trans({'%name%': confirmator, '%date%': note.approvedAt|date("d.m.Y"), '%time%':  note.approvedAt|date("H:i:s")}) }}
+        </div>
+    {% else %}
+        <div class="ui bottom attached red message">
+            <i class="icon warning"></i>
+            {{ 'sylius.ui.unapproved_order_note'|trans }}
+        </div>
+    {% endif %}
+{% endfor %}
+

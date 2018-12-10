@@ -1,0 +1,17 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% block title %}{{ 'sylius.ui.release'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+	<div class="ui stackable grid">
+	    <div class="twelve wide column">
+	        {{ headers.default('sylius.ui.release'|trans, 'lab') }}
+	    </div>
+	</div>
+	<p></p>
+	<div class="twelve wide column">
+        {% include 'AppBundle:Release:releases.md.twig' %}
+	</div>
+{% endblock %}

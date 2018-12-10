@@ -1,0 +1,18 @@
+<div class="mt-75">
+    <div class="banner" style="background: url({{ asset('assets/shop/img/banner-big.jpg') }}) top center / cover no-repeat;">
+        <div class="row justify-content-center align-items-center banner__content--big">
+            <div class="col-xl-10 col-11">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-12">
+                        {{ render(path('bitbag_sylius_cms_plugin_shop_block_render', {'code' : 'home_newsletter', 'template' : '@BitBagSyliusCmsPlugin/Block/Text/_content.html.twig'})) }}
+                    </div>
+                    <div class="col-lg-6 col-12 ml-lg-auto mt-3 mt-lg-0">
+                        <h3>{{ 'procamping.homepage.newsletter_register'|trans }}</h3>
+                        {% include '@EcomailPlugin/_subscribe.html.twig' %}
+                        <div class="text-right">Podívejte se, <a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', {'slug' : 'podminky-ochrany-osobnich-udaju'}) }}">jak s Vaším e-mailem můžeme zacházet.</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

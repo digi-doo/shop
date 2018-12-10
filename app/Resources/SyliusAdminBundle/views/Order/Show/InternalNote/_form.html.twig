@@ -1,0 +1,8 @@
+<div class="ui segment">
+    {{ form_start(form, {'action': path('app_admin_order_internal_note_create', configuration.vars.route.parameters), 'attr': {'class': 'ui form'}}) }}
+        {{ form_row(form.note) }}
+        <br>
+        <button type="submit" class="ui icon labeled teal button"><i class="add icon"></i> {{ 'sylius.ui.add'|trans }}</button>
+        {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

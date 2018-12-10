@@ -1,0 +1,12 @@
+{% if product.minorTags|length > 0 %}
+    <hr>
+    <div class="product-detail__info-minorTags">
+        <div>
+            <strong>{{ 'app.ui.tags'|trans }}:</strong>
+        </div>
+        {% for tag in product.minorTags %}
+            <a href="{{ path('app_shop_tag_index', {'slug': tag.slug, '_locale': tag.translation.locale }) }}" class="btn btn-gray" style="background-color: {{tag.color}}; color: {{tag.textColor}};">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+    <hr>
+{% endif %}

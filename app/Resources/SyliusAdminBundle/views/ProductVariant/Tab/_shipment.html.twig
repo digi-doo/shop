@@ -1,0 +1,11 @@
+<div class="ui tab" data-tab="shipping">
+    <h3 class="ui dividing header">{{ 'sylius.ui.shipment'|trans }}</h3>
+    {{ form_row(form.shippingRequired) }}
+    {{ form_row(form.shippingCategory) }}
+    {{ form_row(form.height) }}
+    {{ form_row(form.width) }}
+    {{ form_row(form.depth) }}
+    {{ form_row(form.weight) }}
+
+    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.shipping', {'form': form}) }}
+</div>

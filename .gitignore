@@ -1,0 +1,69 @@
+# PHP codis standards
+/.php_cs.cache
+/spec
+
+# Config params
+/app/config/parameters.yml
+# /app/config/*_dev.yml
+
+# Cache
+/var/*
+!/var/.gitkeep
+
+# Assets
+/web/assets
+/web/bundles
+/web/css
+/web/js
+/web/upload
+
+# Media
+/web/media/*
+!/web/media/.gitkeep
+
+# Bins without console
+/bin/*
+!/bin/console
+!/bin/symfony_requirements
+
+# Vendors and components
+/vendor
+/node_modules
+/bower_components
+
+# Build data
+/etc/build/*
+!/etc/build/.gitkeep
+
+# Supervisor rabbit queue data
+/etc/supervisor/*
+!/etc/supervisor/.gitkeep
+
+# Supervisor rabbit queue data
+/etc/export/*
+
+# Testing
+/features
+/tests
+/behat.yml
+/phpunit.xml
+/phpspec.yml
+
+# Editor files
+.tmp/
+!.idea/runConfigurations
+*.sublime-*
+
+# Groundwork files
+/syliusyml
+
+# Symfony server
+.web-server-pid
+
+# Feed exports
+/web/feed/*
+!/web/feed/.gitkeep
+
+# Import
+/import/*
+!/import/.gitkeep

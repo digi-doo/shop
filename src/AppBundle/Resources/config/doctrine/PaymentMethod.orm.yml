@@ -1,0 +1,21 @@
+AppBundle\Entity\PaymentMethod:
+    type: entity
+    table: sylius_payment_method
+    fields:
+        price:
+            type: integer
+            nullable: true
+        externalCode:
+            type: string
+            nullable: true
+            column: external_code
+    manyToOne:
+        taxCategory:
+            targetEntity: Sylius\Component\Taxation\Model\TaxCategoryInterface
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tax_category_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false

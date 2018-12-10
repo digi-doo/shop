@@ -1,0 +1,4 @@
+procamping:
+    footer_contact:
+        no_complete: Informace ve formuláři jsou nekompletní, nebo byl zadán e-mail ve špatném formátu.
+        invalid_formats: Některá z vložených polí obsahují chybu. Prosím zkontrolujte kontaktní formulář a odešlete jej znovu.

@@ -1,0 +1,11 @@
+{% if product.imagesByType('main') is not empty %}
+    {% set path = product.imagesByType('main').first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% elseif product.images.first %}
+    {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% else %}
+    {% set path = '//placehold.it/50x50' %}
+{% endif %}
+
+<a href="{{ path('sylius_admin_product_update', {'id': product.id}) }}" title="{{ product.name }}">
+    <img src="{{ path }}" alt="" class="ui bordered image" />
+</a>

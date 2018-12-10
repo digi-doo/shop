@@ -1,0 +1,20 @@
+{% extends 'bootstrap_4_layout.html.twig' %}
+
+{% block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="row">
+        {%- for child in form %}
+                <div class="col-6 overflow-hide">
+                    {{- form_widget(child, {
+                        parent_label_class: label_attr.class|default(''),
+                        translation_domain: choice_translation_domain,
+                        valid: valid,
+                    }) -}}
+                </div>
+            {% if loop.index0 % 2 %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded %}

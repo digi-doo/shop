@@ -1,0 +1,82 @@
+/**
+ * Content pages
+ */
+@import '../../core/variables';
+
+.tmpHeader {
+	margin: 38px 0 15px;
+
+	h1 {
+		margin-bottom: 16px;
+	}
+}
+
+.cmsContent {
+	line-height: 1.4;
+	font-size: 17px;
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 1.2em 0 0.3em;
+		line-height: 1.1;
+	}
+
+	h2 {
+		font-size: 32px;
+	}
+
+	p {
+		margin: 0 0 1em;
+	}
+
+	blockquote {
+		font-size: 1.5em;
+		background: $gray;
+		padding: 1em 1em 0.8em;
+		margin: 1em 0 2em;
+
+		p {
+			margin-bottom: 0.2em;
+		}
+	}
+
+	li {
+		margin-top: 0.25em;
+		margin-bottom: 0.25em;
+	}
+	ul, ol {
+		margin: 0.8em 0 1.5em 1.5em;
+
+		ul, ol {
+			margin-top: 0.2em;
+			margin-bottom: 0.4em;
+		}
+	}
+	ul li {
+		list-style: disc outside;
+	}
+	ol li {
+		list-style: decimal outside;
+	}
+
+	img {
+		margin: 0 0 0.5em;
+
+		&.fr-dii {
+			display: inline;
+		}
+
+		&.fr-fil {
+			float: left;
+			margin-right: 1em;
+		}
+
+		&.fr-fir {
+			float: right;
+			margin-left: 1em;
+		}
+	}
+
+	iframe {
+		max-width: 100%;
+	}
+}

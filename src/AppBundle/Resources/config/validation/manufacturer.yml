@@ -1,0 +1,30 @@
+AppBundle\Entity\Manufacturer:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: ["code"]
+            groups: ["sylius"]
+            message: "app.manufacturer.code.unique"
+    properties:
+        translations:
+            - Valid:
+        code:
+            - NotBlank:
+                groups: ["sylius"]
+        image:
+            - Valid: ~
+AppBundle\Entity\ManufacturerTranslation:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [locale, slug]
+            errorPath: slug
+            message: app.manufacturer.slug.unique
+            groups: ["sylius"]
+    properties:
+        name:
+            - NotBlank:
+                message: app.manufacturer.name.not_blank
+                groups: ["sylius"]
+        slug:
+            - NotBlank:
+                message: app.manufacturer.slug.not_blank
+                groups: ["sylius"]

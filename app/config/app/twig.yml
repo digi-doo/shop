@@ -1,0 +1,15 @@
+# Twig global variables
+twig:
+    globals:
+        sshop_release: "%sshop_release%"
+        sshop_assets_release: "%sshop_assets_release%"
+        tenant_name: "%tenant_name%"
+        mailer_team_name: "%mailer_team_name%"
+        mailer_sender_email: "%mailer_sender_email%"
+        mailer_bg_main_color: "%mailer_bg_main_color%"
+        mailer_bg_header_color: "%mailer_bg_header_color%"
+        mailer_bg_footer_color: "%mailer_bg_footer_color%"
+        mailer_text_header_color: "%mailer_text_header_color%"
+        mailer_text_footer_color: "%mailer_text_footer_color%"
+        google_map_api_key: '%google_map_api_key%'
+        google_site_verification: '%google_site_verification%'

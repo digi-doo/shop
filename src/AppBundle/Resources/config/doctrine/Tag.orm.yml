@@ -1,0 +1,36 @@
+AppBundle\Entity\Tag:
+    type: entity
+    table: sylius_tag
+    repositoryClass: AppBundle\Repository\TagRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            unique: true
+            nullable: false
+        enabled:
+            type: boolean
+            options:
+                default: true
+        color:
+            type: string
+            nullable: true
+        textColor:
+            type: string
+            nullable: true
+        mainTag:
+            type: boolean
+            column: main_tag
+            options:
+                default: false
+        stockSortingEnabled:
+            type: boolean
+            nullable: true
+            column: stock_sorting
+            options:
+                comment: 'If enabled products will be printed as two groups - in stock and out of stock.'

@@ -1,0 +1,69 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set giftCode = sylius.channel.freeGiftVariantCode %}
+
+<table cellspacing="0" cellpadding="0" width="100%" style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;color:#4a4a4a;border:1px solid #e4e4e4">
+   <thead>
+      <tr>
+         <th colspan="3" style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:100px">{{ 'sylius.ui.item'|trans }}</th>
+         {# <th style="text-align:center;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:60px;color:green;">{{ 'sylius.ui.discount'|trans }}</th> #}
+         <th style="text-align:center;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:60px">{{ 'sylius.ui.quantity'|trans }}</th>
+         <th style="text-align:right;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:100px">{{ 'sylius.ui.price_no_vat'|trans }}</th>
+         <th style="text-align:right;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:100px">{{ 'sylius.ui.price_vat'|trans }}</th>
+      </tr>
+   </thead>
+   <tbody>
+	{% for item in order.items %}
+		{% set product = item.variant.product %}
+		<tr>
+			<td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+				<a href="{{ url('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+			        {% include '@SyliusShop/Product/_mainCartImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_cart_thumbnail'} %}
+			    </a>
+			</td>
+			<td colspan="2" style="text-align:left;vertical-align:middle;border:1px solid #eee;word-wrap:break-word;color:#4a4a4a;padding:10px">
+				<a style="color:black;text-decoration:underline;" href="{{ url('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+					{{ product.name }}
+				</a>
+				<br/>
+    			<span style="font-size:9pt;color:gray;">{{ item.variant.code }}</span>
+    			{% if product.hasOptions() %}
+			        <br/>
+			        <span style="font-size:9pt;color:gray;">
+			            {% for optionValue in item.variant.optionValues %}
+			                <span style="font-size:9pt;color:gray;">
+			                    {{ optionValue.name }}: {{ optionValue.value }}
+			                </span>
+			                <br/>
+			            {% endfor %}
+			        </span>
+			    {% elseif item.variant.name is not null %}
+			        <br/>
+			        <span style="font-size:9pt;color:gray;">
+			            {{ item.variant.name }}
+			        </span>
+			    {% endif %}
+			</td>
+            {# <td style="text-align:center;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.calculatePercentageDiscount(item.variant) }}</td>     #}
+			<td style="text-align:center;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ item.quantity }}</td>
+			<td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+                {% if giftCode == item.variant.code %}
+                    {{ money.convertAndFormat(0) }}
+                {% else %}
+                    {{ money.calculateTotalPriceWithoutVat(item.variant, item.quantity) }}
+                {% endif %}
+            </td>
+			<td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">
+                {% if giftCode == item.variant.code %}
+                    {{ money.convertAndFormat(0) }}
+                {% else %}
+                    {{ money.calculateTotalPriceWithVat(item.variant, item.quantity) }}
+                {% endif %}
+            </td>
+		</tr>
+	{% endfor %}
+   </tbody>
+   <tfoot>
+		{% include '@SyliusUi/Email/tableTotals.html.twig' with {'order': order} %}
+   </tfoot>
+</table>

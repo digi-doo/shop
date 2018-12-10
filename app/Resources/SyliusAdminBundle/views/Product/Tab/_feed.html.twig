@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+<div class="ui tab" data-tab="feedsTab">
+	<h3 class="ui dividing header">{{ 'app.ui.merchant_feeds'|trans }}</h3>
+	{% if form.heurekaTaxonomy is defined %}
+        <h4 class="ui header">{{ 'app.ui.heureka_feed'|trans }}</h4>
+        {{ message.info('app.message.heureka_export_url'|trans({'%url%': url('sylius_shop_homepage') ~ 'feed/heureka.xml'})) }}
+        {{ form_row(form.heurekaTaxonomy) }}
+    {% endif %}
+
+    {% if form.googleTaxonomy is defined and form.facebookTaxonomy is defined %}
+    	<h4 class="ui dividing header">{{ 'app.ui.google_feed'|trans }}</h4>
+        {{ message.info('app.message.google_export_url'|trans({'%url%': url('sylius_shop_homepage') ~ 'feed/google.xml'})) }}
+    	{{ form_row(form.googleTaxonomy) }}
+    	<h4 class="ui dividing header">{{ 'app.ui.facebook_feed'|trans }}</h4>
+        {{ message.info('app.message.facebook_feed_same_as_google_url'|trans({'%url%': url('sylius_shop_homepage') ~ 'feed/facebook.xml'})) }}
+    {% endif %}
+
+    {% if form.googleDisabled is defined %}
+    	<h4 class="ui dividing header">{{ 'app.ui.facebook_feed'|trans }}</h4>
+        {{ message.info('app.message.facebook_feed_same_as_google'|trans({'%url%': url('sylius_shop_homepage') ~ 'feed/heureka.xml'})) }}
+    	{{ form_row(form.googleTaxonomy) }}
+    {% endif %}
+
+    {% if form.googleEnabled is defined %}
+    	<h4 class="ui dividing header">{{ 'app.ui.google_feed'|trans }}</h4>
+        {{ message.info('app.message.facebook_feed_same_as_google'|trans({'%url%': url('sylius_shop_homepage') ~ 'feed/heureka.xml'})) }}
+    	{{ form_row(form.googleTaxonomy) }}
+    {% endif %}
+
+    {% if form.heurekaTaxonomy is not defined and form.googleTaxonomy is not defined and form.facebookTaxonomy is not defined %}
+    	{{ message.info('app.message.feed_disabled_buy_it'|trans) }}
+    {% endif %}
+</div>

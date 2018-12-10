@@ -1,0 +1,24 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}{{ resource.name }} | {{ parent() }}{% endblock %}
+
+{% block metatags %}
+    <meta name="keywords" content="{% if resource.metaKeywords %}{{ resource.metaKeywords }}{% else %}{{ sylius.channel.metaKeywords }}{% endif %}" />        
+    <meta name="description" content="{% if resource.metaDescription %}{{ resource.metaDescription }}{% else %}{{ sylius.channel.metaDescription }}{% endif %}" />        
+{% endblock %}
+
+{% block content %}
+    {% include '@SyliusShop/Page/_header.html.twig' %}
+
+    {# Main froala page content #}
+    <article class="cmsContent">
+        {{ resource.content|raw }}
+        <div class="clearfix"></div>
+    </article>
+
+    {% if null != resource.products %}
+        <div class="padding">
+            {% include '@SyliusShop/Product/_horizontalList.html.twig' with {'products': resource.products} %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+AppBundle\Entity\Supplier:
+    type: entity
+    table: sylius_supplier
+    repositoryClass: AppBundle\Repository\SupplierRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        enabled:
+            type: boolean
+            options:
+                default: true
+        code:
+            type: string
+            unique: true
+            nullable: false
+    # oneToMany:
+    #     productDefaults:
+    #         targetEntity: AppBundle\Entity\ProductDefault
+    #         mappedBy: supplier
+    #         cascade:
+    #             - all
+    #         fetch: LAZY
+    #         orphanRemoval: true
+    #         indexBy: channelCode

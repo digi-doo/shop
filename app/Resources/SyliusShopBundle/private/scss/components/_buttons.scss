@@ -1,0 +1,314 @@
+.btn-featured {
+	color: black;
+	position:relative;
+	transition: all 0.3s;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		width: 30px;
+		height: 27px;
+		background: url(../img/ico-oblibene.png) no-repeat;
+		vertical-align: middle;
+		margin-right: 12px;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.search-ico {
+	width: 16px;
+	height: 16px;
+	border: 0;
+	background: url(../img/ico-search.png) center no-repeat;
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+.btn-detail {
+	color: black;
+	position:relative;
+	transition: all 0.3s;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		width: 30px;
+		height: 20px;
+		background: url(../img/ico-detail.png) no-repeat;
+		position: relative;
+		top: -1px;
+		vertical-align: middle;
+		margin-right: 12px;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.btn-display {
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	background: url(../img/ico-zobrazeni.png) center no-repeat;
+	vertical-align: middle;
+}
+
+.btn-cart {
+	color: black;
+	position:relative;
+	transition: all 0.3s;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		width: 30px;
+		height: 27px;
+		background: url(../img/ico-kosik.png) no-repeat;
+		vertical-align: middle;
+		margin-right: 12px;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+
+	&--white {
+		display: inline-block;
+		padding: 12px 20px;
+		background: $green;
+		color: white;
+		font-size: $fs-18;
+		font-weight: $fw-b;
+
+		&:before {
+			display: none;
+		}
+
+		span {
+			position: relative;
+
+			&:before {
+				content: '';
+				display: inline-block;
+				width: 26px;
+				height: 24px;
+				background: url(../img/ico-cart-w.png) no-repeat;
+				vertical-align: middle;
+				margin-right: 12px;
+			}
+		}
+
+		&:hover {
+			color: white;
+		}
+	}
+}
+
+.btn {
+	border: 0;
+	border-radius: 0;
+
+	&-primary {
+		color: white;
+		background: $green;
+
+		&:hover {
+			background: $green;
+			opacity: 0.8;
+		}
+	}
+
+	&-secondary {
+		color: white;
+		background: $yellow;
+
+		&:hover {
+			background: $yellow;
+			opacity: 0.8;
+		}
+	}
+
+	&-gray {
+		color: black;
+		background: $gray;
+
+		&:hover {
+			color: black;
+			background: $gray;
+			opacity: 0.8;
+		}
+	}
+}
+
+.social-btn {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	vertical-align: middle;
+	border-radius: 50%;
+	transition: all 0.3s;
+
+	&--fb {
+		background: url(../img/facebook.svg) no-repeat;
+	}
+
+	&--tw {
+		background: url(../img/twitter.svg) no-repeat;
+	}
+
+	&--inst {
+		background: url(../img/instagram.svg) no-repeat;
+	}
+
+	&--yt {
+		background: url(../img/youtube.svg) no-repeat;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.btn-color {
+	display: inline-block;
+	margin-right: 6px;
+	border: 1px solid white;
+
+	&--big {
+		width: 42px;
+		height: 37px;
+	}
+
+	&--small {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+	}
+
+	&--white {
+		background: white;
+		border: 1px solid #f4f4f4;
+	}
+
+	&--blue {
+		background: $blue;
+	}
+
+	&--red {
+		background: $red;
+	}
+
+	&--yellow {
+		background: $yellow-d;
+	}
+
+	&--green {
+		background: $green-d;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.plus-ico {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  &::before {
+  	content: '';
+    display: block;
+    width: 26px;
+    height: 2px;
+    position: relative;
+    top: 10px;
+    left: 2px;
+    background: black;
+  }
+
+  &::after {
+  	content: '';
+    display: block;
+    width: 26px;
+    height: 2px;
+    position: relative;
+    top: 8px;
+    left: 2px;
+    background: black;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+}
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+
+  &::before {
+  	content: "\f005";
+  	font-size: 0;
+  	font-family: "Font Awesome 5 Free";
+  	font-weight: 900;
+  }
+}
+
+.rating > input { 
+	display: none;
+} 
+
+.rating > label:before { 
+	content: "\f005";
+	display: inline-block;
+	margin: 0 3px;
+	cursor: pointer;
+	font-size: 1.25em;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 400;
+}
+
+.rating > label { 
+  color: #FFD700; 
+  float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(.no__interaction):not(:checked) > label:hover, /* hover current star */
+.rating:not(.no__interaction):not(:checked) > label:hover ~ label { 
+	color: #FFD700;
+
+	&:before {
+		font-weight: 900;
+	}
+} /* hover previous stars in list */
+
+.rating:not(.no__interaction) > input:checked + label:hover, /* hover current star when changing rating */
+.rating:not(.no__interaction) > input:checked ~ label:hover,
+.rating:not(.no__interaction) > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating:not(.no__interaction) > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+.checked--star ~ label {
+	color: #FFD700 !important;
+
+	&:before {
+		font-weight: 900 !important;
+	}
+}
+
+.form .button-featured {
+	color: #000;
+	background: transparent;
+}

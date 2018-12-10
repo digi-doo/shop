@@ -1,0 +1,4 @@
+# Cron parameters
+parameters:
+    sylius_order.order_expiration_period: 20 days
+    sylius_order.cart_expiration_period: 2 days

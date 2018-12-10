@@ -1,0 +1,71 @@
+{% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
+
+{% block title %}| {{ tenant_name }}{% endblock %}
+
+{% block metatags %}
+    {% set version = '001' %}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/shop/img/favicon/favicon-16x16.png?v=' ~ version) }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+{% endblock %}
+
+{# {% block global_messages %}
+    <div class="ui success message">
+        <div class="content">
+            <div class="header">
+                Do verze v0.0.8 byla doplněna oprava chyby, která způsobovala padání systému v případě zadání neexistujícího kódu k synchronizaci produktu.
+            </div>
+        </div>
+    </div>
+{% endblock %} #}
+
+{% block stylesheets %}
+    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css?v=' ~ sshop_assets_release } %}
+    {% if app.environment == 'prod' %}
+        {# {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/admin-prod.css'} %} #}
+    {% endif %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
+{% endblock %}
+
+{% block topbar %}
+    <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
+        <i class="sidebar icon"></i>
+    </a>
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_left') }}
+
+    {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
+    {% include '@SyliusAdmin/_search.html.twig' %}
+
+    <div class="ui left floated dividing empty item"></div>
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_middle') }}
+
+    <div class="ui right floated dividing empty item"></div>
+
+    {{ sylius_render_notifications_widget() }}
+    {% include '@SyliusAdmin/_security.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ sonata_block_render_event('sylius.admin.layout.sidebar_top') }}
+
+    <a class="item item-admin" href="{{ path('sylius_admin_dashboard') }}"><b>{{ tenant_name }}</b></a>
+    {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
+
+    {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
+{% endblock %}
+
+{% block footer %}
+    {{ 'sylius.ui.powered_by'|trans }} <a href="http://www.procamping.cz" target="_blank">{{ tenant_name }}</a>.
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js'} %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+
+    {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
+{% endblock %}

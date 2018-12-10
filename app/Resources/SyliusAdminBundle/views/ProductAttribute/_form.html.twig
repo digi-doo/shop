@@ -1,0 +1,28 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    {{ form_row(form.filterable) }}
+    {% if form.type is defined 
+        and form.type.vars.value == 'integer' 
+        or form.type.vars.value == 'percent' 
+        or form.type.vars.value == 'float' 
+    %}
+    {# {{ form_row(form.rangeable) }} #}
+    {% endif %}
+    <div class="three fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.position) }}
+        {{ form_row(form.type) }}
+    </div>
+</div>
+{% if form.configuration is defined %}
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+    {% for field in form.configuration %}
+        {{ form_row(field) }}
+    {% endfor %}
+</div>
+{% endif %}
+{{ translationForm(form.translations) }}

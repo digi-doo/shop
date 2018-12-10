@@ -1,0 +1,21 @@
+{% block subject %}
+    {{ 'mailing.subject.month_products_overview'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.month_products_overview'|trans } %}
+    	{% include '@SyliusUi/Email/body.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.month_products_overview_text'|trans({
+                '%name%': name,
+                '%month%': month,
+                '%year%': year,
+                '%simpleProducts%': simpleProducts,
+                '%confProducts%': confProducts,
+                '%confVariants%': confVariants
+            })
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

@@ -1,0 +1,128 @@
+services:
+    ############
+    # Fixtures #
+    ############
+    # Payment method
+    sylius.fixture.payment_method: 
+        class: AppBundle\Fixture\PaymentMethodFixture
+        arguments: ["@sylius.manager.payment_method", "@sylius.fixture.example_factory.payment_method"]
+        tags: 
+            - { name: sylius_fixtures.fixture }
+    sylius.fixture.example_factory.payment_method:
+        class: AppBundle\Fixture\Factory\PaymentMethodFactory
+        arguments: ["@sylius.custom_factory.payment_method", "@sylius.repository.locale", "@sylius.repository.channel", "@sylius.repository.tax_category"]
+        
+    # Shipping method
+    sylius.fixture.shipping_method:
+        class: AppBundle\Fixture\ShippingMethodFixture
+        arguments: ["@doctrine.orm.default_entity_manager", "@sylius.fixture.example_factory.shipping_method"]
+        tags: 
+            - { name: sylius_fixtures.fixture }
+    sylius.fixture.example_factory.shipping_method:
+        class: AppBundle\Fixture\Factory\ShippingMethodFactory 
+        arguments: ["@sylius.factory.shipping_method", "@sylius.repository.zone", "@sylius.repository.shipping_category", "@sylius.repository.locale", "@sylius.repository.channel", "@sylius.repository.payment_method", "@sylius.repository.tax_category"]
+
+
+# Fixtures config
+sylius_fixtures:
+    suites:
+        sshop:
+            listeners:
+                orm_purger: ~
+                logger: ~
+            fixtures:
+                locale: ~
+                currency:
+                    options:
+                        currencies: ['CZK']
+                geographical:
+                    options:
+                        countries:
+                            - "CZ"
+                        zones:
+                            CZ:
+                                name: "Česká republika"
+                                countries:
+                                    - "CZ"
+                channel:
+                    options:
+                        custom:
+                            default:
+                                name: "Výchozí e-shop"
+                                code: "default"
+                                contact_email: "cloud@autodevelo.cz"
+                                locales:
+                                    - "%locale%"
+                                currencies:
+                                    - "CZK"
+                                enabled: true
+                                hostname: "localhost"
+                tax_category:
+                    options:
+                        custom:
+                            default:
+                                code: "default"
+                                name: "Výchozí 21%"
+                tax_rate:
+                    options:
+                        custom:
+                            default:
+                                code: "default"
+                                name: "Výchozí 21%%"
+                                zone: "CZ"
+                                category: "default"
+                                amount: 0.21
+                                included_in_price: false
+                payment_method:
+                    options:
+                        custom:
+                            cash_on_delivery:
+                                code: "cash_on_delivery"
+                                name: "Hotově při převzetí"
+                                price: 12400
+                                tax_category: "default"
+                                external_code: "cash"
+                                channels:
+                                    - "default"
+                            bank_transfer:
+                                code: "bank_transfer"
+                                name: "Bankovní převod"
+                                price: 16500
+                                external_code: "transfer"
+                                tax_category: "default"
+                                channels:
+                                    - "default"
+                                enabled: true
+                shipping_method:
+                    options:
+                        custom:
+                            gls:
+                                code: "gls"
+                                name: "GLS"
+                                enabled: true
+                                tax_category: "default"
+                                channels:
+                                    - "default"
+                                payment_methods:
+                                    - "cash_on_delivery"
+                            cp:
+                                code: "cp"
+                                name: "Česká pošta"
+                                tax_category: "default"
+                                channels:
+                                    - "default"
+                                payment_methods:
+                                    - "bank_transfer"
+                admin_user:
+                    name: "admin_user"
+                    options:
+                        custom:
+                            -
+                                email: "cloud@autodevelo.cz"
+                                username: "autodevelo"
+                                password: "Autodevelo#2016"
+                                enabled: true
+                                locale_code: "%locale%"
+                                first_name: "Autodevelo"
+                                last_name: "Cloud"
+                                api: true

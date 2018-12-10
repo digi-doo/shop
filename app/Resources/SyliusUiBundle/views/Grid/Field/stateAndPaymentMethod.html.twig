@@ -1,0 +1,12 @@
+{% set value = 'sylius.ui.' ~ data.paymentState %}
+{% set payments = data.payments %}
+
+{% if options.vars.labels is defined %}
+    {% include [(options.vars.labels ~ '/' ~ data.paymentState ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': value} %}
+{% else %}
+    {% include '@SyliusUi/Label/_default.html.twig' with {'value': value} %}
+{% endif %}
+<br><br>
+{% for payment in payments %}
+    {% include '@SyliusUi/Label/_default.html.twig' with {'value': payment.method.name} %}
+{% endfor %}

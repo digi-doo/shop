@@ -1,0 +1,14 @@
+app_shop_partial_manufacturer_show_by_slug:
+    path: /man-by-slug/{slug}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.manufacturer:showAction
+        _sylius:
+            template: $template
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+    requirements:
+        slug: .+

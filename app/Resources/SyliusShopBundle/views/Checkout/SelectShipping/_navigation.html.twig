@@ -1,0 +1,11 @@
+{% set enabled = order.shipments|length %}
+
+<div class="ui two column grid row align-items-center navigation-margin-right">
+    <div class="col-md column padding-top-bottom text-right">
+        <a href="{{ path('sylius_shop_checkout_address') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
+        <button type="submit" id="next-step" class="display-inline-block button btn-padding margin-left ui large primary icon labeled{% if not enabled %} disabled{% endif %} button">
+            <i class="arrow right icon"></i>
+            {{ 'sylius.ui.next'|trans }}
+        </button>
+    </div>
+</div>

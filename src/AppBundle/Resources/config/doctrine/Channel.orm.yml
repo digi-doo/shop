@@ -1,0 +1,72 @@
+AppBundle\Entity\Channel:
+    type: entity
+    table: sylius_channel
+    fields:
+        supportEmail:
+            type: string
+            length: 255
+            nullable: true
+            column: support_email
+        address:
+            type: text
+            nullable: true
+            column: shop_address
+        opening:
+            type: text
+            nullable: true
+            column: shop_opening
+        stockEmails:
+            type: string
+            length: 255
+            nullable: true
+            column: stock_emails
+        orderEmails:
+            type: text
+            nullable: true
+            column: order_emails
+        bankAccount:
+            type: string
+            length: 255
+            nullable: true
+            column: bank_account
+        supportNumber:
+            type: string
+            length: 255
+            nullable: true
+            column: support_number
+        metaAuthor:
+            type: string
+            length: 255
+            nullable: true
+            column: meta_author
+        metaRobots:
+            type: boolean
+            column: meta_robots
+            options:
+                default: false
+        metaDescription:
+            type: text
+            nullable: true
+            column: meta_description
+        metaTitle:
+            type: string
+            length: 255
+            nullable: true
+            column: meta_title
+        metaKeywords:
+            type: string
+            length: 255
+            nullable: true
+            column: meta_keywords
+        freeShippingFrom:
+            type: integer
+            nullable: true
+            column: free_shipping_from
+        freeGiftFrom:
+            type: integer
+            nullable: true
+            column: free_gift_from
+        freeGiftVariantCode:
+            type: string
+            nullable: true
+            column: free_gift_variant_code

@@ -1,0 +1,90 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters|default({}))) %}
+
+
+<div class="ui styled fluid accordion">
+    <div class="title"><i class="dropdown icon"></i>{{ 'sylius.ui.discounts'|trans }}</div>
+    <div class="content">
+        <form action="{{ path }}" method="post" class="ui form field loadable">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="ui divided grid">
+                <div class="five wide column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.percental_discount'|trans }}</h4>
+                    <div class="field">
+                        <div class="ui right labeled input">
+                            <input type="number" min="0" max="100" id="discount_percent" name="discount_percent"><div class="ui basic label">%</div>
+                        </div>        
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.discount_limit_type'|trans }}</h4>
+                    <div class="grouped fields">                
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" id="discount_limit_type_no_change" name="discount_limit_type" value="no_change" checked="checked" tabindex="0" class="hidden">
+                                <label for="discount_limit_type_no_change">{{ 'sylius.ui.discount_limit_no_change'|trans }}</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" id="discount_limit_type_none" name="discount_limit_type" value="none" tabindex="0" class="hidden">
+                                <label for="discount_limit_type_none">{{ 'sylius.ui.discount_limit_none'|trans }}</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" id="discount_limit_type_stock" name="discount_limit_type" value="stock" tabindex="stock" class="hidden">
+                                <label for="discount_limit_type_stock">{{ 'sylius.ui.discount_limit_stock'|trans }}</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" id="discount_limit_type_datetime" name="discount_limit_type" value="datetime" tabindex="0" class="hidden">
+                                <label for="discount_limit_type_datetime">{{ 'sylius.ui.discount_limit_datetime'|trans }}</label>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.discount_limit_type_info'|trans }}</h4>
+                    <div class="discount__limit--no_change ui element">
+                        {{ message.info('sylius.ui.discount_limit_no_change_message'|trans) }}
+                    </div>
+                    <div class="discount__limit--none ui element hidden">
+                        {{ message.info('sylius.ui.discount_limit_none_message'|trans) }}
+                    </div>
+                    <div class="discount__limit--stock ui element hidden">
+                        {{ message.info('sylius.ui.discount_stock_bulk_message'|trans) }}
+                    </div>
+                    <div class="discount__limit--datetime ui element hidden">
+                        <div class="ui two column stackable grid">
+                            <div class="column">
+                                <div class="field">
+                                    <label>{{ 'sylius.ui.from'|trans }}</label>
+                                    <div id="sylius_product_variant_channelPricings_default_discountFrom">
+                                        <input type="date" id="discount_from_date" name="discount_from_date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label>{{ 'sylius.ui.to'|trans }}</label>
+                                    <div id="sylius_product_variant_channelPricings_default_discountTo">
+                                        <input type="date" id="discount_to_date" name="discount_to_date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ message.info('sylius.ui.discount_from_to__bulk_message'|trans) }}
+                    </div>
+                </div>
+            </div>    
+            
+            <button class="ui labeled icon primary button" type="submit" data-bulk-action-requires-confirmation data-confirmation-message="{{ 'sylius.ui.bulk_update_product_discount_confirmation'|trans }}">
+                <i class="icon save"></i> {{ 'sylius.ui.bulk_update_product_discount'|trans }}
+            </button>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_update_product_discount') }}" />
+        </form>
+    </div>
+</div>

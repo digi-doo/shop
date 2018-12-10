@@ -1,0 +1,44 @@
+{% from '@BitBagSyliusCmsPlugin/Block/Macro/translationForm.html.twig' import translationForm %}
+{% form_theme form '@BitBagSyliusCmsPlugin/Form/theme.html.twig' %}
+
+<div class="ui two column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'bitbag.ui.basic_settings'|trans }}</h4>
+            {{ form_errors(form) }}
+            {{ form_row(form.enabled) }}
+            {{ form_row(form.code) }}
+            {{ form_row(form.sections) }}
+        </div>
+    </div>
+    {% if form.vars.value.type == 'collection' %}
+        <div class="column">
+            <div id="block-relation" class="ui segment">
+                <h4 class="ui dividing header">{{ 'bitbag.ui.product_relations'|trans }}</h4>
+                
+                {{ form_row(form.tabType) }}
+                
+                <div id="block-taxon-select" class="ui element{% if form.tabType.vars.value == 'tag' %} hidden{% endif %}">
+                    {{ form_row(form.taxon, {'attr': {'placeholder': 'Zacni'}}) }}
+                </div>
+
+                <div id="block-tag-select" class="ui element{% if form.tabType.vars.value == 'taxon' %} hidden{% endif %}">
+                    {{ form_row(form.tag) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if form.vars.value.type == 'products' %}
+        <div class="column">
+            <div class="ui segment">
+                {{ form_row(form.products) }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<div class="ui one column stackable grid">
+    <div class="column">
+        {{ translationForm(form.translations, resource) }}
+    </div>
+</div>

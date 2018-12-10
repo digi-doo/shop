@@ -1,0 +1,16 @@
+{% block subject %}
+    {{ 'mailing.subject.low_stock_info'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.low_stock_info'|trans } %}
+    	{% include '@SyliusUi/Email/body-lowStock.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.low_stock_info_text'|trans({'%name%': name}),
+            'url': url,
+            'data': products
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

@@ -1,0 +1,7 @@
+# Main Sshop PROD config
+imports:
+    # Main config
+    - { resource: "config.yml" }
+
+    # Sentry logging
+    - { resource: "app/sentry.yml" }

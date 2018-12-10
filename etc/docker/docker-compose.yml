@@ -1,0 +1,30 @@
+version: '2.1'
+
+services:
+  sylius:
+    container_name: sshop.app.dev
+    image: gitlab.autodevelo.top:4567/docker/sshop:app
+    environment:
+      - SYLIUS_DATABASE_DRIVER=pdo_mysql
+      - SYLIUS_DATABASE_USER=root
+      - SYLIUS_DATABASE_PORT=3306
+      - SYLIUS_DATABASE_HOST=mysql
+      - SYLIUS_DATABASE_NAME=sshop
+      - SYLIUS_DATABASE_PASSWORD=password
+      - DEVELO_CLIENT_ID=4
+      - DEVELO_CLIENT_SECRET=LWKsjxK5TF9TL7PAeqaX2xqLYaYTu2Lyme4maFnqNqhGyVPKLh
+      - DEVELO_TENANT=staging
+      - DEVELO_REST_URL=http://localhost:8083/rest/api/v1
+      - SYLIUS_APP_DEV_PERMITTED=1
+    ports:
+      - 8084:80
+  mysql:
+    container_name: sshop.db.dev
+    image: gitlab.autodevelo.top:4567/docker/sshop:db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sshop_dev
+      MYSQL_USER: root
+      MYSQL_PORT: 3306
+    ports:
+      - 3608:3306

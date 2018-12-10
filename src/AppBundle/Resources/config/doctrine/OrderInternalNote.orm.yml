@@ -1,0 +1,47 @@
+AppBundle\Entity\OrderInternalNote:
+    type: entity
+    table: sylius_order_internal_note
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        note:
+            type: text
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        approvedAt:
+            type: datetime
+            nullable: true
+            column: approved_at
+    manyToOne:
+        order:
+            targetEntity: AppBundle\Entity\Order
+            inversedBy: internalNotes
+            joinColumn:
+                name: order_id
+                referencedColumnName: id
+                nullable: false
+                unique: false
+                onDelete: CASCADE 
+        createdBy:
+            targetEntity: Sylius\Component\Core\Model\AdminUser
+            joinColumn:
+                name: created_by
+                referencedColumnName: id
+                nullable: false
+                unique: false
+        approvedBy:
+            targetEntity: Sylius\Component\Core\Model\AdminUser
+            joinColumn:
+                name: approved_by
+                referencedColumnName: id
+                nullable: true
+                unique: false
+        

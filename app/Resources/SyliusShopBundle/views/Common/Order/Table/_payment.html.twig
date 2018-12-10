@@ -1,0 +1,18 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set orderPaymentPromotionAdjustment = constant('AppBundle\\Entity\\AppAdjustmentInterface::ORDER_PAYMENT_PROMOTION_ADJUSTMENT') %}
+{% set orderPaymentPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPaymentPromotionAdjustment)) %}
+{% set extraClass = '' %}
+
+{% if not orderPaymentPromotions is empty %}
+    {% set extraClass = ' text-green' %}
+    <td colspan="2" id="promotion-payment-discounts">
+        {% for label, amount in orderPaymentPromotions %}
+            <span>{{ label }}</span>
+            <strong class="{{extraClass}}">{{ money.convertAndFormatPromotion(amount) }}</strong>
+        {% endfor %}
+    </td>
+{% endif %}
+
+<td colspan="{% if not orderPaymentPromotions is empty %}1{% else %}3{% endif %}" class="right aligned" id="payment-total">{{ 'sylius.ui.payment'|trans }} ({{order.payments.first.method.name}})</td>
+<td><strong class="{{extraClass}}">{{ money.format(order.paymentTotal, order.currencyCode) }}</strong></td>

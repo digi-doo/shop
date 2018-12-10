@@ -1,0 +1,52 @@
+{%- macro list(item, matcher, options) -%}
+    {% from _self import children %}
+    {% from _self import list %}
+    
+    <ul 
+        data-menu="submenu-{{item.getExtra('code')}}" 
+        id="submenu-{{item.getExtra('code')}}" 
+        class="menu__level" 
+        tabindex="-1" 
+        role="menu" 
+        aria-label="{{ item.label }}"
+    >
+        {% for child in item.children if item.hasChildren %}
+            {{- children(child, matcher, options) }}
+        {% endfor %}
+    </ul>
+    
+    {% if item.children %}
+        {% for child in item.children %}
+            {{- list(child, matcher, options) }}
+        {% endfor %}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro children(item, matcher, options) -%}
+    {% from _self import invisibleChildren %}
+    {% if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+        {% set active = true %}
+    {% else %}
+        {% set active = false %}
+    {% endif %}
+    {% if item.hasChildren %}
+        <li class="menu__item" role="menuitem">
+            <a class="menu__link{{ active ? ' menu__link--active' }}" href="{{ item.uri }}">{{ item.label }}</a>
+            <a href="#" class="menu__link" data-submenu="submenu-{{ item.getExtra('code') }}" aria-owns="submenu-{{ item.getExtra('code') }}" title="{{ item.label }}">&bull;&bull;&bull;</a>
+        </li>
+    {% else %}
+        {{- invisibleChildren(item, matcher, options) }}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro invisibleChildren(item, matcher, options) -%}
+    {% if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+        {% set active = true %}
+    {% else %}
+        {% set active = false %}
+    {% endif %}
+    <li class="menu__item" role="menuitem">
+        <a class="menu__link{{ active ? ' menu__link--active' }}" href="{{ item.uri }}">{{ item.label }}</a>
+        <span class="menu__link menu__link--invisible"> &bull;</span>
+    </li>
+{%- endmacro -%}

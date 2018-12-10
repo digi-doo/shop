@@ -1,0 +1,3 @@
+{% if app.session.get('_security_admin') %}
+    <a href="{{ path('sylius_admin_product_update', {'id': product.id}) }}" class="btn btn-primary mt-10" target="_blank">{{ 'sylius.ui.show_product_in_admin'|trans }}</a>
+{% endif %}

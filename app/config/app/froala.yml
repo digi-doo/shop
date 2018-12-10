@@ -1,0 +1,48 @@
+kms_froala_editor:
+  # Default Froala locale
+  language: "cs"
+  
+  # Disable JQuery inclusion.
+  includeJQuery: false
+  
+  # Disable CodeMirror inclusion.
+  includeCodeMirror: false
+  
+  # Disable Font Awesome inclusion.
+  includeFontAwesome: true
+  
+  # Disable all bundle javascripts inclusion (not concerning JQuery nor CodeMirror).
+  # Usage: if you are using Grunt or other and you want to include yourself all scripts. 
+  includeJS: false
+  
+  # Disable all bundle CSS inclusion (not concerning Font Awesome nor CodeMirror).
+  # Usage: if you are using Grunt or other and you want to include yourself all stylesheets. 
+  includeCSS: false
+
+  # Default textarea height
+  height: 500
+
+  # Autosave interval
+  # saveInterval: 20
+
+  # Images sizes
+  imageDefaultWidth: 20
+  imageResizeWithPercent: true
+
+  # The image upload folder in your /web directory.
+  # Default: "/upload".
+  imageUploadFolder: "/media/content"
+
+  # Enabled Froala plugins
+  # pluginsEnabled: [ "image", "file" ]
+
+  # Disabled plugins ONLY IF YOU HAVE includeJS OPTION ENABLED
+  # pluginsDisabled: [ "charCounter", "spellcheck", "save", "video" ]
+  
+  # # Change the froala base path.
+  # # Usage:    me know, I don't think it's usefull.
+  # basePath: "/my/custom/path".
+  
+  # # Custom JS file.
+  # # Usage: add custom plugins/buttons...
+  # customJS: "/web/bundles/kmsfroalaeditor"

@@ -1,0 +1,10 @@
+<a href="{{ path('app_shop_manufacturer_products_index', {'slug': manufacturer.slug }) }}" class="position-relative">
+    <div class="product__item product__item--manufacturer">
+        <div class="product__img mb-0">
+            {% include '@SyliusShop/Manufacturer/_mainImage.html.twig' with {'manufacturer': manufacturer} %}
+        </div>
+        <div class="text-center">
+            <h3>{{ manufacturer.name }}</h3>
+        </div>
+    </div>
+</a>

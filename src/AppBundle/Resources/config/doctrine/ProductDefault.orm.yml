@@ -1,0 +1,79 @@
+AppBundle\Entity\ProductDefault:
+    type: entity
+    table: sylius_product_default
+    repositoryClass: AppBundle\Repository\ProductDefaultRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        price:
+            type: integer
+            nullable: true
+        massPriceEnabled:
+            type: boolean
+            column: enabled_mass_price
+        originalPrice:
+            type: integer
+            nullable: true
+            column: original_price
+        massOriginalPriceEnabled:
+            type: boolean
+            column: enabled_mass_original_price
+        discount:
+            type: decimal
+            precision: 10
+            scale: 2
+            nullable: true
+            column: discount_percent
+        massDiscountEnabled:
+            type: boolean
+            column: enabled_mass_discount
+        channelCode:
+            type: string
+            length: 255
+            column: channel_code
+        tracked:
+            type: boolean
+            column: tracked
+        massTrackedEnabled:
+            type: boolean
+            column: enabled_mass_tracked
+        onHand:
+            type: integer
+            nullable: true
+            column: on_hand
+        massOnHandEnabled:
+            type: boolean
+            column: enabled_mass_on_hand
+        massTaxCategoryEnabled:
+            type: boolean
+            column: enabled_mass_tax_category
+        massSupplierEnabled:
+            type: boolean
+            column: enabled_mass_supplier
+    manyToOne:
+        taxCategory:
+            targetEntity: Sylius\Component\Taxation\Model\TaxCategoryInterface
+            # inversedBy: productDefaults
+            joinColumns:
+                tax_category_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        supplier:
+            targetEntity: AppBundle\Entity\Supplier
+            # inversedBy: productDefaults
+            joinColumns:
+                supplier_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+        product:
+            targetEntity: AppBundle\Entity\Product
+            inversedBy: productDefaults
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    nullable: false
+                    onDelete: CASCADE

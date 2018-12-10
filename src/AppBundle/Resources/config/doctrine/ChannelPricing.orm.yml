@@ -1,0 +1,22 @@
+AppBundle\Entity\ChannelPricing:
+    type: entity
+    table: sylius_channel_pricing
+    fields:
+        discount:
+            type: decimal
+            precision: 10
+            scale: 2
+            nullable: true
+            column: discount_percent
+        discountLimitType:
+            type: string
+            nullable: true
+            column: discount_limit_type
+        discountFrom:
+            type: datetime
+            nullable: true
+            column: discount_from
+        discountTo:
+            type: datetime
+            nullable: true
+            column: discount_to

@@ -1,0 +1,19 @@
+app_shop_manufacturer_products_index:
+    path: /vyrobce/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Manufacturer/index-products.html.twig"
+            grid: sylius_shop_manufacturer_products
+    requirements:
+        slug: .+
+
+app_shop_manufacturer_index:
+    path: /vyrobci
+    methods: [GET]
+    defaults:
+        _controller: app.controller.manufacturer:indexAction
+        _sylius:
+            template: "@SyliusShop/Manufacturer/index.html.twig"
+            grid: sylius_shop_manufacturer

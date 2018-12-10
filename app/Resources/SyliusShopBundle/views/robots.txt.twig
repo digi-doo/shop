@@ -1,0 +1,10 @@
+User-agent: *
+{% if not sylius.channel.metaRobots %}
+Disallow: /
+{% else %}
+Disallow: {{ path('sylius_shop_checkout_start') }}
+Disallow: {{ path('sylius_shop_account_root') }}
+Disallow: {{ path('sylius_shop_product_search') }}
+{% endif %}
+
+Sitemap: {{ url('sylius_sitemap_no_index', { '_format': 'xml' }) }}

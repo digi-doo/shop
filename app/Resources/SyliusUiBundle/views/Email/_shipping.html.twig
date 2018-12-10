@@ -1,0 +1,26 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set shipping = order.shipments.first.method %}
+{% set shippingTax = shipping.taxCategory.rates.first.amount %}
+{% set shippingAmount = shipping.configuration.default.amount %}
+{% set shippingAmountTax = (shippingAmount * shippingTax) + shippingAmount %}
+<tr>
+    <td colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ shipping.name }}</td>
+    <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ money.format(shippingAmount, order.currencyCode) }}</td>
+    <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ money.format(shippingAmountTax, order.currencyCode) }}</td>
+</tr>
+{% set orderShippingPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
+{% set orderShippingPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderShippingPromotionAdjustment)) %}
+{% set promotionAmount = 0 %}
+{% set promotionAmountTax = 0 %}
+{% if not orderShippingPromotions is empty %}
+    {% for label, amount in orderShippingPromotions %}
+        <tr>
+            <td colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ label }}</td>
+            <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormat(amount) }}</td>
+            <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormat(amount * shippingTax + amount) }}</td>
+        </tr>
+        {% set promotionAmount = promotionAmount + amount %}
+        {% set promotionAmountTax = promotionAmountTax + (amount * shippingTax + amount) %}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,39 @@
+services:
+    # Shop Main Menu builder
+    app.shop.menu_builder.main:
+        class: AppBundle\Menu\ShopMainMenuBuilder
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: app.shop.main }
+        arguments: [ '@service_container' ] 
+
+    # Admin channel form menu builder
+    app.admin.menu_builder.channel_form:
+        class: AppBundle\Menu\ChannelFormMenuBuilder
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: sylius.admin.channel_form }
+        arguments : ["@knp_menu.factory", "@event_dispatcher"]
+
+    # Admin main menu listener
+    app.listener.admin.menu_builder:
+        class: AppBundle\Menu\AdminMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+
+    # Admin product menu listener
+    app.listener.admin.product_menu_builder:
+        class: AppBundle\Menu\AdminProductMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addAdminProductMenuItems }
+        arguments: ['@service_container']
+
+    # Admin product VARIANT menu listener
+    app.listener.admin.product_variant_menu_builder:
+        class: AppBundle\Menu\AdminProductVariantMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addAdminProductVariantMenuItems }
+
+    # Admin order show menu listener
+    app.listener.admin.order_menu_builder:
+        class: AppBundle\Menu\AdminOrderMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.order.show, method: addAdminOrderMenuItems }

@@ -1,0 +1,12 @@
+AppBundle\Entity\TaxCategory:
+    type: entity
+    table: sylius_tax_category
+    # oneToMany:
+    #     productDefaults:
+    #         targetEntity: AppBundle\Entity\ProductDefault
+    #         mappedBy: taxCategory
+    #         cascade:
+    #             - all
+    #         fetch: LAZY
+    #         orphanRemoval: true
+    #         indexBy: channelCode

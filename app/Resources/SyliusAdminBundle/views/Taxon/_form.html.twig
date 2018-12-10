@@ -1,0 +1,25 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui segment">
+	<h4 class="ui dividing header">{{ 'sylius.ui.basic_informations'|trans }}</h4>
+    {{ form_row(form.enabled) }}
+    {{ form_errors(form) }}
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {% if taxon.id != null %}
+            {{ form_row(form.parent) }}
+        {% else %}
+            {{ form_widget(form.parent, {'attr': {'style': 'display: none;'}}) }}
+        {% endif %}
+    </div>
+</div>
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'app.ui.display_information'|trans }}</h4>
+    {{ message.info('app.message.taxon_display_information'|trans) }}
+    {{ form_row(form.filterEnabled) }}
+    {{ form_row(form.stockSortingEnabled) }}
+</div>
+{{ translationFormWithSlug(form.translations, '@SyliusAdmin/Taxon/_slugField.html.twig', taxon) }}
+
+{% include '@SyliusAdmin/Taxon/_media.html.twig' %}

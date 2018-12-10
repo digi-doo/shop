@@ -1,0 +1,13 @@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+SHELL=/bin/bash
+
+0 0 */3 * * php /var/www/html/bin/console sylius:remove-expired-carts
+0 0 */7 * * php /var/www/html/bin/console sylius:cancel-unpaid-orders
+0 2 */1 * * php /var/www/html/bin/console app:check-stock
+0 2 */1 * * php /var/www/html/bin/console app:clear-watch-dog
+0 2 1 * * php /var/www/html/bin/console app:products:monthOverview
+
+15 3 * * * php /var/www/html/shop/bin/console app:export-merchant-feed facebook -e prod
+15 3 * * * php /var/www/html/shop/bin/console app:export-merchant-feed heureka -e prod
+15 3 * * * php /var/www/html/shop/bin/console app:export-merchant-feed zbozi -e prod
+15 3 * * * php /var/www/html/shop/bin/console app:export-merchant-feed google -e prod

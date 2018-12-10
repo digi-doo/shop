@@ -1,0 +1,15 @@
+{% set taxons = product.taxons %}
+
+{% if taxons|length > 0 %}
+    <hr>
+    <div class="product-detail__info-explore">
+        <div>
+            <strong>{{ 'procamping.ui.explore_more'|trans }}:</strong>
+        </div>
+        <div>
+            {% for taxon in taxons|reverse %}
+                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="btn btn-gray">{{ taxon.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

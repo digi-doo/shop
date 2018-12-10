@@ -1,0 +1,20 @@
+services:
+    # Add to cart button stock validator
+    sylius.validator.cart_item_availability:
+        class: AppBundle\Validator\CartItemAvailabilityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: sylius_cart_item_availability }
+        arguments: ['@sylius.availability_checker.default']
+
+    # Cart items stock validator
+    sylius.validator.in_stock:
+        class: AppBundle\Validator\InStockValidator
+        tags:
+            - { name: validator.constraint_validator, alias: sylius_in_stock }
+        arguments: ['@sylius.availability_checker.default']
+
+    # Contact form validator
+    app.validator.contact_form:
+        class: AppBundle\Validator\ContactFormValidator
+        arguments:
+            - "@validator"

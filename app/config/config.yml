@@ -1,0 +1,39 @@
+# Main Sshop config
+imports:
+    # Bundles configuration
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
+    - { resource: '@BitBagSyliusCmsPlugin/Resources/config/config.yml' }
+    # - { resource: "@ShippingExportPlugin/Resources/config/config.yml" }
+    - { resource: "@WebburzaSyliusWishlistBundle/Resources/config/config.yml" }
+
+    # Main configuration
+    - { resource: "parameters.yml" }
+    - { resource: "security.yml" }
+    - { resource: "app/fixtures/fixtures.yml" }
+
+    # App configuration
+    - { resource: "app/grids/grids.yml" }
+    - { resource: "app/states/state_machine.yml" }
+    - { resource: "app/framework.yml" }
+    - { resource: "app/doctrine.yml" }
+    - { resource: "app/mailer.yml" }
+    - { resource: "app/rest.yml" }
+    - { resource: "app/hwi_oauth.yml" }
+    - { resource: "app/resources.yml" }
+    - { resource: "app/froala.yml" }
+    - { resource: "app/feed.yml" }
+    - { resource: "app/cron.yml" }
+    - { resource: "app/gtm.yml" }
+    - { resource: "app/importexport.yml" }
+    - { resource: "app/release.yml" }
+    - { resource: "app/twig.yml" }
+    - { resource: "app/wishlist.yml" }
+    - { resource: "app/sitemap.yml" }
+    - { resource: "app/rabbitmq.yml" }
+    - { resource: "app/recaptcha.yml" }
+
+    # Develo plugin (resources & events overrides)
+    - { resource: "@DeveloShopPlugin/Resources/config/config.yml" }

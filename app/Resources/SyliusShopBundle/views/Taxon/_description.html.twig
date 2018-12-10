@@ -1,0 +1,13 @@
+<div class="taxonHeader mb-5">
+	<h1 class="taxonHeader__title">{{ taxon.name }}</h1>
+	<div class="row justify-content-center">
+		<div class="col col-lg-10 col-xl-8">
+			{% if taxon.description|trim %}
+				<div class="taxonHeader__description">
+					{{ taxon.description|raw }}
+					<i class="taxonHeader__divider mt-4"></i>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

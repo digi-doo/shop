@@ -1,0 +1,9 @@
+{% if product.mainTags|length > 0 %}
+    <div class="tag-list text-lg-right">
+        {% for tag in product.mainTags %}
+            <div>
+                <a href="{{ path('app_shop_tag_index', {'slug': tag.slug, '_locale': tag.translation.locale }) }}" class="tag-list__item" style="background-color: {{tag.color}}; color: {{tag.textColor}};">{{ tag.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,56 @@
+.filtr-side__item {
+    .form-check-input {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-check-label {
+        cursor: pointer;
+    }
+
+    .form-check {
+        padding-bottom: 5px;
+    }
+
+    .col-form-label {
+        cursor: pointer; 
+        padding: 0;
+
+        &:before {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 600; 
+            margin-right: 5px;
+        }
+
+        &:hover {
+            color: #68b763;
+            font-weight: 700;    
+        }
+
+        &[aria-expanded="false"] {
+            &:before {
+                content: "\f054";       
+            }
+        }
+
+        &[aria-expanded="true"] {
+            color: #68b763;
+            font-weight: 700;   
+
+            &:before {
+                content: "\f078";       
+            }
+        }
+    }
+}
+
+
+

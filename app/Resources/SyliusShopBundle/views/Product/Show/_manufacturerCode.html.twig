@@ -1,0 +1,10 @@
+<div class="product-detail__info-producer mt-4">
+    <div>
+        <p>
+            {% if product.manufacturer %}{{'app.ui.manufacturer'|trans}}: 
+                <a href="{{ path('app_shop_manufacturer_products_index', {'slug': product.manufacturer.slug }) }}">{{product.manufacturer.name}}</a>
+                <br>
+            {% endif %}
+            {{'sylius.ui.code'|trans}}: <strong>{{product.code}}</strong></p>
+    </div>
+</div>

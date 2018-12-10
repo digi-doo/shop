@@ -1,0 +1,8 @@
+AppBundle\Entity\ProductAttribute:
+    type: entity
+    table: sylius_product_attribute
+    fields:
+        filterable:
+            type: boolean
+        rangeable:
+            type: boolean

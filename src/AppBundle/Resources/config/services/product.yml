@@ -1,0 +1,14 @@
+services:
+    # Product variant prices provider - use tax
+    sylius.provider.product_variants_prices:
+        class: AppBundle\Helpers\Product\ProductVariantsPricesProvider
+        arguments: ['@sylius.calculator.product_variant_price']
+    
+    # Override product variant to use discount if any
+    sylius.calculator.product_variant_price:
+        class: AppBundle\Helpers\Product\ProductVariantPriceCalculator
+    
+    # Helper for last viewed products
+    app.last_viewed_products_helper:
+        class: AppBundle\Helpers\Product\LastViewedProductsHelper
+        arguments: ["@sylius.storage.session", "@sylius.repository.product"]

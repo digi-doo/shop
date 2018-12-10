@@ -1,0 +1,24 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import '@SyliusShop/Ui/Macro/messages.html.twig' as messages %}
+
+{% set header = wishlist.title %}
+
+{% block title %}{{ parent() }} | {{ header }}{% endblock %}
+
+{% block content %}
+    <header class="tmpHeader">
+        <h1>{{ header }} <small{{ wishlist.description }}</small></h1>
+        {# <hr> #}
+    </header>
+    {# {% include '@WebburzaSyliusWishlist/Frontend/Wishlist/_header.html.twig' %} #}
+    {% if wishlist.items | length %}
+        <div class="ui stackable grid">
+            <div class="column">
+                {% include '@WebburzaSyliusWishlist/Frontend/Wishlist/_items.html.twig' %}
+            </div>
+        </div>
+    {% else %}
+        {{ messages.info('webburza_wishlist.ui.wishlist_is_empty'|trans) }}
+    {% endif %}
+{% endblock %}

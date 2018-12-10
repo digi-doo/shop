@@ -1,0 +1,23 @@
+app_shop_partial_page_tree:
+    path: /page/tree
+    methods: [GET]
+    defaults:
+        _controller: bitbag_sylius_cms_plugin.controller.page:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findAll
+            permission: true
+
+app_shop_partial_page_by_section_code:
+    path: /pages/{sectionCode}
+    methods: [GET]
+    defaults:
+        _controller: bitbag_sylius_cms_plugin.controller.page:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findBySectionCode
+                arguments:
+                    - $sectionCode
+                    - "expr:service('sylius.context.locale').getLocaleCode()"

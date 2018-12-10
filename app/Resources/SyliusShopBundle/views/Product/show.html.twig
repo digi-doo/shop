@@ -1,0 +1,69 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
+
+{% block metatags %}
+    <meta name="keywords" content="{% if product.metaKeywords %}{{ product.metaKeywords }}{% else %}{{ sylius.channel.metaKeywords }}{% endif %}" />        
+    <meta name="description" content="{% if product.metaDescription %}{{ product.metaDescription }}{% else %}{{ sylius.channel.metaDescription }}{% endif %}" />        
+{% endblock %}
+
+{% block content %}
+
+    {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+    {% include '@SyliusShop/Product/Show/_adminLink.html.twig' %}
+    
+    <div class="product-detail mt-4">
+        <div class="row">
+            <div class="col-lg-6 product-detail__img text-center">
+                {{ sonata_block_render_event('sylius.shop.product.show.before_images', {'product': product}) }}
+
+                {% include '@SyliusShop/Product/Show/_images.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.product.show.after_images', {'product': product}) }}
+            </div>
+            <div class="col-lg-5 ml-lg-auto product-detail__info">
+                {% include '@SyliusShop/Product/Show/_mainTags.html.twig' %}
+                {% include '@SyliusShop/Product/Show/_namePrice.html.twig' %}
+                {% include '@SyliusShop/Product/Show/_manufacturerCode.html.twig' %}
+                {% include '@SyliusShop/Product/Show/_availability.html.twig' %}
+                {% include '@SyliusShop/Product/Show/_reviews.html.twig' %}
+                {% include '@SyliusShop/Product/Show/_shortDescription.html.twig' %}
+
+                {# Hidden helper for variants select boxes - use always for match #}
+                {# {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.variants.empty() %} #}
+                {% if product.isConfigurable() and not product.variants.empty() %}
+                    {% include '@SyliusShop/Product/Show/_variantsPricing.html.twig' with {'pricing': sylius_product_variant_prices(product, sylius.channel)} %}
+                    {% include '@SyliusShop/Product/Show/_variantsAvailability.html.twig' with {'product': product} %}
+                {% endif %}
+
+                {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
+
+                {% if product.taxons %}
+                    {% include '@SyliusShop/Product/Show/_exploreMore.html.twig' %}
+                {% endif %}
+
+                {{ sonata_block_render_event('sylius.shop.product.show.after_add_to_cart', {'product': product}) }}
+            </div>
+        </div>
+        
+        {{ sonata_block_render_event('sylius.shop.product.show.before_tabs', {'product': product}) }}
+        <div id="main-description"></div>
+        {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
+        {% include '@SyliusShop/Product/Show/_minorTags.html.twig' %}
+        {% include '@SyliusShop/Product/Show/_gtmInfo.html.twig' %}
+    </div>
+
+    {# {{ sonata_block_render_event('sylius.shop.product.show.before_associations', {'product': product}) }} #}
+
+    {{ render(controller('AppBundle\\Controller\\LastViewedProductsController::viewedAction')) }}
+{% endblock %}
+
+{# {% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript">
+    lightbox.option({
+        'albumLabel': '{{ 'sylius.lightbox.image_album_label'|trans|escape('js') }}'
+    });
+</script>
+{% endblock %} #}

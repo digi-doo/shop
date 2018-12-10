@@ -1,0 +1,9 @@
+sitemap:
+    static_routes:
+        - { route: sylius_shop_homepage }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'o-nas'} }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'doprava'} }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'kontakt'} }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'obchodni-podminky'} }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'povinne-informace'} }
+        - { route: bitbag_sylius_cms_plugin_shop_page_show, parameters: {slug: 'reklamace'} }

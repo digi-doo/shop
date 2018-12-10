@@ -1,0 +1,31 @@
+<div class="two fields">
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+</div>
+{# {{ dump(form.company) }} #}
+{% if form.company.vars.value is not empty %}
+    {{ form_row(form.company) }}
+{% endif %}
+<div class="two fields">
+    {% if form.ic.vars.value is not empty %}
+        {{ form_row(form.ic) }}
+    {% endif %}
+    {% if form.dic.vars.value is not empty %}
+        {{ form_row(form.dic) }}
+    {% endif %}
+</div>
+<div class="two fields">
+    {{ form_row(form.street) }}
+    {{ form_row(form.streetNumber) }}
+</div>
+{{ form_row(form.countryCode) }}
+{# <div class="province-container field" data-url="{{ path('sylius_admin_ajax_render_province_form') }}">
+    {% if form.provinceCode is defined %}
+        {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
+    {% endif %}
+</div> #}
+<div class="two fields">
+    {{ form_row(form.city) }}
+    {{ form_row(form.postcode) }}
+</div>
+{{ form_row(form.phoneNumber) }}

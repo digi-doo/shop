@@ -1,0 +1,89 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{{ sonata_block_render_event('sylius.shop.product.index.before_box', {'product': product}) }}
+
+<div class="product__item position-relative">
+    <div class="product__img">
+        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+            {% set discount = false %}
+            {% if (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).discount %}
+                {% set discount = true %}
+                <div class="product__sale">{{ money.calculatePercentageDiscount(product|sylius_resolve_variant) }}</div>
+            {% endif %}
+
+            {% if sylius.channel.freeShippingFrom is defined 
+                and sylius.channel.freeShippingFrom != null
+                and (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).price >= sylius.channel.freeShippingFrom %}
+                <div class="product__sale product__freeshipping__tag{% if discount %} product__freeshipping__tag--with-discount{% endif %}">{{ 'app.ui.free_shipping'|trans }}</div>
+            {% endif %}
+            
+            {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product} %}
+        </a>
+        {% if product.manufacturer and product.manufacturer.image is not empty %}
+            <a href="{{ path('app_shop_manufacturer_products_index', {'slug': product.manufacturer.slug }) }}" class="product__box__manufacturer">
+                {% include '@SyliusShop/Product/_manufacturerLogo.html.twig' with {'manufacturer': product.manufacturer} %}
+            </a>
+        {% endif %}
+    </div>
+    <div class="position-absolute product__box__content__wrapper">
+        <div class="product__content">
+            <div class="row">
+                <div class="col-sm-8 col-12 product__info">
+                    <h3><a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">{{ product.name }}</a></h3>
+                    <p>{{ 'sylius.ui.price_no_vat'|trans }} <strong>{{ money.calculateRoundedPriceWithoutVat(product|sylius_resolve_variant) }}</strong></p>
+                </div>
+                <div class="col-sm-4 col-12 text-sm-right product__price align-self-end">
+                    {% if (product|sylius_resolve_variant).channelPricingForChannel(sylius.channel).discount %}
+                        <div class="product__price--sale">
+                            <strike>{{ money.calculateRoundedDefaultPriceWithVat(product|sylius_resolve_variant) }}</strike>
+                            <div>{{ money.calculateRoundedPriceWithVat(product|sylius_resolve_variant) }}</div>
+                        </div>
+                    {% else %}
+                        <p>{{ money.calculateRoundedPriceWithVat(product|sylius_resolve_variant) }}</p>
+                    {% endif %}
+                    <p>{{ 'sylius.ui.price_vat'|trans }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="product__btn">
+            <div class="row align-items-center">
+                <div class="col-6 text-left">
+                    {# Detail button #}
+                    {# <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="btn-detail">{{ 'procamping.ui.detail'|trans }}</a> #}
+                    
+                    {# Favourites button #}
+                    {# {% if is_granted('ROLE_USER') %}
+                        <a href="#" class="btn-featured">{{ 'procamping.ui.wishlist'|trans }}</a>
+                    {% else %}
+                        <a href="#" class="btn-featured" data-toggle="modal" data-target="#logInModal">{{ 'procamping.ui.wishlist'|trans }}</a>
+                    {% endif %} #}
+                    <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="btn-featured"><span>{{ 'procamping.ui.wishlist'|trans }}</span></a>
+                </div>
+                <div class="col-6">
+                    {# Cart button #}
+                    {# {{ render(url('sylius_shop_partial_cart_add_item', {'template': '@SyliusShop/Product/Show/_addToCart.html.twig', 'productId': product.id})) }} #}
+                    {# <form name="sylius_add_to_cart" method="post" class="form" action="/ajax/cart/add?productId={{product.id}}" novalidate="novalidate" data-redirect="/kosik/">
+                        <input type="hidden"name="sylius_add_to_cart[cartItem][quantity]" required="required" min="1" value="1">
+                        <button type="submit" class="btn btn-link btn-cart btn-cart--white"><span>{{ 'procamping.ui.cart'|trans }}</span></button>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token(product.id) }}" />
+                    </form> #}
+
+                    {% if product|product_variants_stock_count > 0 %}
+                        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="btn-cart btn-cart--white btn-cart--in-stock">
+                            <i class="far fa-smile d-inline-block"></i>
+                            <span class="ml-1">{{ 'procamping.ui.button_in_stock'|trans }}</span>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="btn-cart btn-cart--white btn-cart--out-of-stock">
+                            <i class="far fa-frown d-inline-block"></i>
+                            <span class="ml-1">{{ (product|sylius_resolve_variant).supplier ? (product|sylius_resolve_variant).supplier.delivery : 'app.ui.on_request'|trans }}</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{ sonata_block_render_event('sylius.shop.product.index.after_box', {'product': product}) }}

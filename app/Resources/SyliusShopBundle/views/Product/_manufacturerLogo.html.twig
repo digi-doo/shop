@@ -1,0 +1,3 @@
+{% set path = manufacturer.image.path|imagine_filter(filter|default('sylius_shop_product_tiny_thumbnail')) %}
+
+<img src="{{ path }}" alt="{{ manufacturer.name }}" class="product__box__manufacturer__logo" />

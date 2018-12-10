@@ -1,0 +1,6 @@
+AppBundle\Entity\ProductOption:
+    type: entity
+    table: sylius_product_option
+    fields:
+        filterable:
+            type: boolean

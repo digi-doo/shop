@@ -1,0 +1,24 @@
+{% import '@SyliusShop/Ui/Macro/pagination.html.twig' as pagination %}
+{% set paginationLimits = (resources.definition.limits) %}
+
+<div class="text-center p-3 load-next-button__wrapper d-none">
+    {# <div class="btn btn-lg btn-success ld-ext-right hovering load-next-button" onclick="this.classList.add('running');">{{ paginationLimits|first }} dalších... #}
+    <div class="btn btn-lg btn-success ld-ext-right hovering load-next-button" onclick="this.classList.add('running');">{{ 'sylius.ui.show_more'|trans }}
+        <div class="ld ld-ring ld-spin"></div>
+    </div>
+</div>
+
+<div class="bottom-nav text-center text-sm-left mt-3">
+    <div class="bottom-nav__pagination d-inline-block">
+        {{ pagination.simple(resources.data) }}
+    </div>
+    {# <div class="bottom-nav__select styled-select styled-select--small float-sm-right mt-3 mt-sm-0">
+        <span><strong>{{ 'procamping.ui.products_per_page'|trans }}:</strong></span>
+        <select class="select__filter">
+            {% for limit in paginationLimits %}
+                {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query)|merge({'limit': limit})) %}
+                <option data-href="{{ path }}"{% if resources.data.maxPerPage == limit %} selected{% endif %}>{{ limit }}</option>
+            {% endfor %}
+        </select>
+    </div> #}
+</div>

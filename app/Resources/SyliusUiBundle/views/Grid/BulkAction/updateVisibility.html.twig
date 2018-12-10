@@ -1,0 +1,37 @@
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters|default({}))) %}
+
+<div class="ui styled fluid accordion">
+    <div class="title"><i class="dropdown icon"></i>{{ 'sylius.ui.bulk_product_visibility'|trans }}</div>
+    <div class="content">
+        <div class="ui eight column grid">
+            <div class="column">
+                <form action="{{ path }}" method="post" class="ui form field loadable">
+                    <input type="hidden" name="_method" value="PUT">
+                    
+                    <input type="hidden" name="visible" value="1">
+                    <input type="hidden" name="invisible" value="0">
+                    
+                    <button class="ui labeled icon primary button" type="submit" data-bulk-action-requires-confirmation data-confirmation-message="{{ 'sylius.ui.bulk_update_item_visible_confirmation'|trans }}">
+                        <i class="icon check"></i> {{ 'sylius.ui.bulk_update_product_visible'|trans }}
+                    </button>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_update_visibility') }}" />
+                </form>
+            </div>
+            <div class="column">
+                <form action="{{ path }}" method="post" class="ui form field loadable">
+                    <input type="hidden" name="_method" value="PUT">
+                    
+                    <input type="hidden" name="invisible" value="1">
+                    <input type="hidden" name="visible" value="0">
+                    
+                    <button class="ui labeled icon red button" type="submit" data-bulk-action-requires-confirmation data-confirmation-message="{{ 'sylius.ui.bulk_update_item_invisible_confirmation'|trans }}">
+                        <i class="icon remove"></i> {{ 'sylius.ui.bulk_update_product_invisible'|trans }}
+                    </button>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_update_visibility') }}" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

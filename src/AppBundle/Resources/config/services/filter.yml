@@ -1,0 +1,37 @@
+services:
+    # Admin order state filter
+    app.grid.filter.order_state:
+        class: AppBundle\Grid\Filter\OrderStateFilter
+        tags: 
+          - { name: sylius.grid_filter, type: order_state, form_type: AppBundle\Form\Type\Filter\OrderStateFilterType }
+
+    # MAIN shop taxon products filter
+    app.grid.filter.products:
+        class: AppBundle\Grid\Filter\ProductsFilter
+        arguments:
+          - "@sylius.repository.product_option_value"
+          - "@sylius.repository.product_attribute_value"
+        tags: 
+          - { name: sylius.grid_filter, type: products_filter, form_type: AppBundle\Form\Type\Filter\ProductsFilterType }
+
+    # Fulltext shop search filter
+    app.grid.filter.fulltext_search:
+        class: AppBundle\Grid\Filter\FulltextSearchFilter
+        tags: 
+          - { name: sylius.grid_filter, type: fulltext_search, form_type: AppBundle\Form\Type\Filter\FulltextSearchFilterType }
+
+    # Product options - values mapper
+    app.choice_mapper.product_options:
+        class: AppBundle\Form\Type\Filter\ChoiceMapper\ProductOptionsMapper
+        arguments:
+            - "@sylius.repository.product_option_value"
+            - "@app.context.taxon"
+
+    # Product attributes - values mapper
+    app.choice_mapper.product_attributes:
+        class: AppBundle\Form\Type\Filter\ChoiceMapper\ProductAttributesMapper
+        arguments:
+            - "@sylius.repository.product_attribute_value"
+            - "@sylius.context.locale"
+            - "@app.context.taxon"
+            - "@app.helper.string_formatter"

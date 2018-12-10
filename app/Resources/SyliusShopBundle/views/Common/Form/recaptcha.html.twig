@@ -1,0 +1,20 @@
+{% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+
+{% if form.recaptcha.vars.errors|length %}
+    <span class="invalid-feedback d-block">
+        <span class="mb-0 d-block">
+            <strong class="form-error-message">{{ form.recaptcha.vars.errors.0.message }}</strong>
+        </span>
+    </span>
+{% endif %}
+<div class="mb-20">
+    <div class="d-inline-block"{% if form.recaptcha.vars.errors|length %} style="border: 2px solid red;"{% endif %}>
+        {{ form_widget(form.recaptcha, { 'attr': {
+            'options' : {
+                'theme': 'light',
+                'type': 'image',
+                'size': 'normal'
+            },
+        } }) }}
+    </div>
+</div>

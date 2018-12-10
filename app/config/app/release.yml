@@ -1,0 +1,3 @@
+parameters:
+  sshop_release: v0.1.4
+  sshop_assets_release: v0.1.4

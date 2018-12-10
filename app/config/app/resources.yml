@@ -1,0 +1,149 @@
+sylius_resource:
+    resources:
+        app.order_internal_note:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\OrderInternalNote
+                repository: AppBundle\Repository\OrderInternalNoteRepository
+                form: AppBundle\Form\Type\OrderInternalNoteType
+        app.manufacturer:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Manufacturer
+                repository: AppBundle\Repository\ManufacturerRepository
+                form: AppBundle\Form\Type\ManufacturerType
+                factory: Sylius\Component\Resource\Factory\TranslatableFactory
+            translation:
+                classes:
+                    model: AppBundle\Entity\ManufacturerTranslation
+                    repository: AppBundle\Repository\ManufacturerTranslationRepository
+                    form: AppBundle\Form\Type\ManufacturerTranslationType
+        app.manufacturer_image:
+            classes:
+                model: AppBundle\Entity\ManufacturerImage
+                form: AppBundle\Form\Type\ManufacturerImageType
+        app.supplier:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Supplier
+                repository: AppBundle\Repository\SupplierRepository
+                form: AppBundle\Form\Type\SupplierType
+                factory: Sylius\Component\Resource\Factory\TranslatableFactory
+            translation:
+                classes:
+                    model: AppBundle\Entity\SupplierTranslation
+                    repository: AppBundle\Repository\SupplierTranslationRepository
+                    form: AppBundle\Form\Type\SupplierTranslationType
+        app.tag:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Tag
+                repository: AppBundle\Repository\TagRepository
+                form: AppBundle\Form\Type\TagType
+                factory: Sylius\Component\Resource\Factory\TranslatableFactory
+            translation:
+                classes:
+                    model: AppBundle\Entity\TagTranslation
+                    repository: AppBundle\Repository\TagTranslationRepository
+                    form: AppBundle\Form\Type\TagTranslationType
+        app.heureka:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\HeurekaTaxonomy
+                repository: AppBundle\Repository\HeurekaTaxonomyRepository
+        app.google:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\GoogleTaxonomy
+                repository: AppBundle\Repository\GoogleTaxonomyRepository
+        app.product_default:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\ProductDefault
+                repository: AppBundle\Repository\ProductDefaultRepository
+                form: AppBundle\Form\Type\ProductDefaultType
+        bitbag_sylius_cms_plugin.block:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Block
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                controller: AppBundle\Controller\ProductController
+                model: AppBundle\Entity\Product
+                repository: AppBundle\Repository\ProductRepository
+            translation:
+                classes:
+                    model: AppBundle\Entity\ProductTranslation
+        product_option:
+            classes:
+                model: AppBundle\Entity\ProductOption
+                repository: AppBundle\Repository\ProductOptionRepository
+        product_option_value:
+            classes:
+                repository: AppBundle\Repository\ProductOptionValueRepository
+        product_variant:
+            classes:
+                controller: AppBundle\Controller\ProductVariantController
+                model: AppBundle\Entity\ProductVariant
+                repository: AppBundle\Repository\ProductVariantRepository
+
+sylius_attribute:
+    resources:
+        product:
+            attribute: 
+                classes:
+                    model: AppBundle\Entity\ProductAttribute 
+                    repository: AppBundle\Repository\ProductAttributeRepository 
+            attribute_value: 
+                classes:
+                    repository: AppBundle\Repository\ProductAttributeValueRepository 
+
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: AppBundle\Entity\Taxon
+                repository: AppBundle\Repository\TaxonRepository
+            translation:
+                classes:
+                    model: AppBundle\Entity\TaxonTranslation
+sylius_channel:
+    resources:
+        channel:
+            classes:
+                model: AppBundle\Entity\Channel
+sylius_shipping:
+    resources:
+        shipping_method:
+            classes:
+                model: AppBundle\Entity\ShippingMethod
+sylius_payment:
+    resources:
+        payment_method:
+            classes:
+                model: AppBundle\Entity\PaymentMethod
+sylius_order:
+    resources:
+        order:
+            classes:
+                controller: AppBundle\Controller\OrderController
+                model: AppBundle\Entity\Order
+                repository: AppBundle\Repository\OrderRepository
+sylius_taxation:
+    resources:
+        tax_category:
+            classes:
+                model: AppBundle\Entity\TaxCategory
+sylius_addressing:
+    resources:
+        address:
+            classes:
+                model: AppBundle\Entity\Address
+sylius_core:
+    resources:
+        channel_pricing:
+            classes:
+                model: AppBundle\Entity\ChannelPricing

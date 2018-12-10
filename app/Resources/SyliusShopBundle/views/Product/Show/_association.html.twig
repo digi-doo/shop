@@ -1,0 +1,12 @@
+{# <h4 class="ui horizontal section divider header">{{ product_association.type.name }}</h4> #}
+{# <div id="sylius-product-association-{{ product_association.type.name }}">
+    {% include '@SyliusShop/Product/_horizontalList.html.twig' with {'products': product_association.associatedProducts} %}
+</div> #}
+
+<div class="row product">
+    {% for product in product_association.associatedProducts %}
+        <div class="col-lg-4 col-12">
+            {% include '@SyliusShop/Product/_box.html.twig' %}
+        </div>
+    {% endfor %}
+</div>

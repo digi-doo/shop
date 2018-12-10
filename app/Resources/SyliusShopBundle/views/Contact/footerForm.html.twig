@@ -1,0 +1,26 @@
+{{ form_start(form, {'action': path('app_shop_contact_request'), 'attr': {'id': 'footerContactForm', 'class': 'form form--footer', 'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="POST">
+    
+    <div class="row form--footer__top">
+        <div class="col-xl-6">
+            {{ form_errors(form.fullName) }}
+            {{ form_widget(form.fullName, { 'attr': {'class': 'form__input form__input--simple', 'id': 'footerName', 'placeholder': 'procamping.form.full_name'|trans} }) }}
+        </div>
+        <div class="col-xl-6">
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, { 'attr': {'class': 'form__input form__input--simple', 'id': 'footerEmail', 'placeholder': 'procamping.form.email'|trans} }) }}
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-xl-8">
+            {{ form_errors(form.message) }}
+            {{ form_widget(form.message, { 'attr': {'class': 'form__textarea', 'id': 'footerText', 'placeholder': 'procamping.form.message'|trans} }) }}
+        </div>
+        <div class="col-xl-4">
+            {{ form_widget(form._token) }}
+            {% include '@SyliusShop/Common/Form/recaptcha.html.twig' %}
+            <button type="submit">{{ 'sylius.ui.send'|trans }}</button>
+        </div>
+    </div>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

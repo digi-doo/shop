@@ -1,0 +1,34 @@
+<div class="tmpHeader">
+    <h1 class="ui header">
+        {#<i class="circular user icon"></i>#}
+        <i class="fa fa-fw fa-user"></i>
+        {{ 'sylius.ui.register_in_the_store'|trans }}
+        {#<div class="content">
+            <div class="sub header">{{ 'sylius.ui.access_your_store_account_or_create_a_new_one'|trans }}</div>
+        </div>#}
+        <small>{{ 'sylius.ui.create_a_new_customer_account'|trans }}</small>
+    </h1>
+    <hr>
+</div>
+
+<a href="{{ path('sylius_shop_login') }}" class="ui right floated basic button">{{ 'sylius.ui.have_an_account_already'|trans }} {{ 'sylius.ui.sign_in_here'|trans }}.</a>
+
+
+
+{#<div class="ui hidden divider"></div>
+
+<div class="ui two column stackable grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular user icon"></i>
+            <div class="content">
+                {{ 'sylius.ui.register_in_the_store'|trans }}
+                <div class="sub header">{{ 'sylius.ui.create_a_new_customer_account'|trans }}</div>
+            </div>
+        </h1>
+    </div>
+    <div class="middle aligned column">
+        <a href="{{ path('sylius_shop_login') }}" class="ui right floated basic button">{{ 'sylius.ui.have_an_account_already'|trans }} {{ 'sylius.ui.sign_in_here'|trans }}.</a>
+    </div>
+</div>
+#}

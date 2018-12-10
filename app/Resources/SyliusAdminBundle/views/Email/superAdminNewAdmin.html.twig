@@ -1,0 +1,18 @@
+{% block subject %}
+    {{ 'mailing.subject.superadmin_new_admin'|trans({'%username%': admin.username}) }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.superadmin_new_admin'|trans({'%username%': admin.username}) } %}
+        {% include '@SyliusUi/Email/body.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_superadmin'|trans,
+            'content': 'mailing.text.superadmin_new_admin'|trans({
+                '%username%': admin.username,
+                '%email%': admin.email,
+                '%channel%': channel
+            })
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

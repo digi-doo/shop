@@ -1,0 +1,10 @@
+AppBundle\Entity\ProductTranslation:
+    type: entity
+    table: sylius_product_translation
+    indexes:
+        fulltext_product_name_index:
+            columns: ["name"]
+            flags: fulltext
+        fulltext_product_description_index:
+            columns: ["short_description", "description"]
+            flags: fulltext

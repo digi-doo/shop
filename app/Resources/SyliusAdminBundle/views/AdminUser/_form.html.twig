@@ -1,0 +1,40 @@
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.general_info'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <div class="ui segment">
+            {# {{ form_row(form.plainPassword) }} #}
+            <div class="{% if form.plainPassword.vars.required %}required {% endif %}field{% if form.plainPassword.vars.errors|length > 0 %} error{% endif %} ui loadable form">
+                {{ form_label(form.plainPassword) }}
+                <div class="ui action input">
+                    {{ form_widget(form.plainPassword, {'attr': {'data-generator-input': ''}}) }}
+                    <span class="ui icon button" id="password_code_generator">
+                        <i class="random icon"></i>
+                    </span>
+                </div>
+
+                {{ form_errors(form.plainPassword) }}
+            </div>
+            {{ form_row(form.enabled) }}
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.additional_information'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
+            </div>
+        </div>
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.preferences'|trans }}</h4>
+            {{ form_row(form.localeCode) }}
+        </div>
+    </div>
+</div>

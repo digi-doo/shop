@@ -1,0 +1,54 @@
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+<div class="item">
+    <div class="right floated content">
+        {% if shipment.state == 'ready' %}
+            {{ label.default(('sylius.ui.'~shipment.state~'_waiting_for_issue')|trans) }}
+        {% else %}
+            {{ label.default(('sylius.ui.'~shipment.state)|trans) }}
+        {% endif %}
+    </div>
+    <i class="large truck icon"></i>
+    <div class="content">
+        <div class="header">
+            {{ shipment.method }}
+        </div>
+        <div class="description">
+            <i class="globe icon"></i>{{ shipment.method.zone }}
+        </div>
+    </div>
+    {# Issue transport #}
+    {% if sm_can(shipment, 'issue_transport', 'sylius_shipment') and shipment.order.state == 'issued' %}
+        <div class="ui segment">
+            <div class="ui labeled icon fluid pointing dropdown link button olive text-center">
+                <i class="cubes icon"></i>
+                <span class="text">{{ 'sylius.ui.issue_transport'|trans }}</span>
+                
+                <div class="menu">
+                    {{ render(path('app_admin_partial_shipment_issue_transport', {'orderId': order.id, 'id': shipment.id, 'withEmail': true, 'unapprovedNotes': order.hasUnapprovedInternalNotes})) }}
+                    {{ render(path('app_admin_partial_shipment_issue_transport', {'orderId': order.id, 'id': shipment.id, 'withEmail': false, 'unapprovedNotes': order.hasUnapprovedInternalNotes})) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {# Complete transport and order #}
+    {% if sm_can(shipment, 'ship', 'sylius_shipment') and shipment.order.shippingState == 'issued_transport' and sm_can(shipment.order, 'fulfill', 'sylius_order') %}
+        <div class="ui segment">
+            <div class="ui labeled icon fluid pointing dropdown link button teal text-center">
+                <i class="check icon"></i>
+                <span class="text">{{ 'sylius.ui.ship'|trans }}</span>
+                
+                <div class="menu">
+                    {{ render(path('app_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id, 'withEmail': true, 'unapprovedNotes': order.hasUnapprovedInternalNotes})) }}
+                    {{ render(path('app_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id, 'withEmail': false, 'unapprovedNotes': order.hasUnapprovedInternalNotes})) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if shipment.tracking is not empty %}
+        <div class="ui segment">
+            <span class="ui top attached icon label"><i class="plane icon"></i> {{ 'sylius.ui.tracking_code'|trans|upper }}</span>
+            <p>{{ shipment.tracking }}</p>
+        </div>
+    {% endif %}
+</div>

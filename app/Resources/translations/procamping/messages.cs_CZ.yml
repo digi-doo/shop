@@ -1,0 +1,37 @@
+procamping:
+    ui:
+        welcome_to_the_procamping: Vítejte v Procampingu!
+        contact_our_tel: Kontaktujte naši zákaznickou podporu %tel%
+        explore_more: Objevte více
+        login: Přihlašte se
+        or: nebo
+        register: se zaregistrujte
+        wishlist: Oblíbené
+        products_per_page: Produktů nas stránku
+        cart: Košík
+        your_cart: Váš košík
+        detail: Detail
+        last_viewed: Naposledy navštívené
+        out_of_stock: Tento produkt aktuálně nemáme skladem
+        button_out_of_stock: Není skladem
+        button_in_stock: Skladem
+        complete_price: Celková cena
+        sort_by: Seřadit podle
+        product_description: Popis
+        product_attributes: Technické parametry
+        already_registered_choose_from_address_book: Jsem již registrován a chci vybrat ze svých adres 
+        products_in_collection: '{0} %count% produktů v kolekci|{1} %count% produkt v kolekci|]1,4] %count% produkty v kolekci|[5,Inf[ %count% produktů v kolekci'
+    header:
+        search_for_product: Vyhledat produkt...
+    homepage:
+        team_recommendation: Procamping tým doporučuje
+        shop_now: Nakupujte nyní
+        newsletter_register: Registrace do Newsletteru
+    form:
+        full_name: Jméno a příjmení
+        email: Váš e-mail
+        message: Váš vzkaz
+
+sylius:
+    ui:
+        new_customers: Noví zákazníci

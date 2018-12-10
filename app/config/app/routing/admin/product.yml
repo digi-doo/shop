@@ -1,0 +1,38 @@
+app_admin_product_bulk_update_product_discount:
+    path: /products/bulk-update-discount
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product:bulkProductDiscountAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            repository:
+                method: findById
+                arguments: [$ids]
+
+app_admin_product_bulk_update_product_visibility:
+    path: /products/bulk-update-visibility
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product:bulkProductVisibilityAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            repository:
+                method: findById
+                arguments: [$ids]
+
+app_admin_product_bulk_update_product_variant_visibility:
+    path: /product-variants/bulk-update-visibility
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_variant:bulkVariantVisibilityAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            repository:
+                method: findById
+                arguments: [$ids]

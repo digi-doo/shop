@@ -1,0 +1,278 @@
+/**
+ * General temporary forms
+ */
+@import '../../core/variables';
+
+.tmpForms {
+
+	.no-border {
+		border: none !important;
+	}
+
+	.success-order {
+		font-size: 230%;
+		margin-bottom: 40px;
+	}
+
+	.success-order-text {
+		margin-top: 10px;
+		font-size: 70%;
+		margin-bottom: 50px;
+	}
+
+	.text-green {
+		color: #68b763;
+	}
+
+	.header {
+		margin: 1.5em 0 1em;
+		padding-bottom: 0.2em;
+		border-bottom: 1px solid #31562f;
+		font-size: 30px;
+	}
+
+	.header-select-shipping {
+		font-size: 2em;
+	}
+
+	.support-block {
+		border: none;
+		padding-top: 30px;
+	}
+
+	.form-group {
+		margin-bottom: 1.5em;
+	}
+
+	input[type="checkbox"] {
+		-webkit-appearance: checkbox;
+		position: relative;
+		top: -2px;
+		margin-right: 5px;
+	}
+
+	label:not(.form-check-label) {
+		margin-bottom: 0.2em;
+	}
+
+	label.required:before {
+		content: '* ';
+		color: $red;
+		float: left;
+		margin-left: -.6em;
+	}
+
+	#sylius-shipping-address {
+		.companyFields {
+			display: none;
+		}
+
+		.form-check {
+			margin-top: 1.5em;
+			padding-top: 1em;
+			border-top: 1px solid $gray-dark;
+		}
+	}
+
+	.summary-margin-top {
+		margin-top: 30px;
+	}
+
+	.shipping-summary-margin-top {
+		margin-top: 30px;
+	}
+
+	.btn-padding {
+		padding: 10px 20px;
+	}
+
+	.padding-top-bottom {
+		padding: 10px 0px;
+	}
+
+	.margin-left {
+		margin-left: 15px;
+	}
+
+	.navigation-margin-right {
+		margin-right: 3px;
+	}
+
+	.display-inline-block {
+		display: inline-block;
+	}
+
+	.display-block {
+		display: block;
+	}
+
+	.margin-top-smaller {
+		margin-top: 7px;
+	}
+
+	.shipment-description {
+		margin-top: 5px;
+		font-size: 90%;
+	}
+
+	.margin-top {
+		margin-top: 25px;
+	}
+
+	.margin-top-big {
+		margin-top: 40px;
+	}
+
+	.margin-bottom {
+		margin-bottom: 25px;
+	}
+
+	.padding-left-right {
+		padding: 0px 15px;
+	}
+
+	.shipping-price {
+		font-size: 130%;
+	}
+
+	.text-small {
+		font-size: 13px;
+	}
+
+	#sylius-shipping-address .header, #sylius-billing-address .header {
+		font-size: 16px;
+	}
+
+	#sylius-payments .header, #sylius-shipments .header {
+		border: none;
+		margin-top: 2px;
+		margin-bottom: 2px;
+	}
+
+	.margin-right {
+		margin-right: 15px;
+	}
+
+	label:not(.form-check-label) {
+	    margin-bottom: .2em;
+	    display: block;
+	    margin-bottom: 10px;
+	    font-weight: bold;
+	}
+
+	#sylius_checkout_complete_notes {
+		display: block;
+		width: 100%;
+		padding: .5rem .75rem;
+		font-size: 1rem;
+		line-height: 1.25;
+		color: #464a4c;
+		background-color: #fff;
+		background-image: none;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.15);
+		border-radius: .25rem;
+		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	}
+
+	.order__items {
+		.header {
+		    margin: 1.5em 0 1em;
+		    padding-bottom: .2em;
+		    border-bottom: none;
+		    margin: 0px;
+		}
+
+		.ui.header > .image:not(.icon), .ui.header > img {
+		    display: inline-block;
+		    margin-top: .14285714em;
+		    width: 2.5em;
+		    height: auto;
+		    vertical-align: middle;
+		}
+
+		.ui.header > .image + .content, .ui.header > img + .content {
+		    padding-left: .75rem;
+		    vertical-align: middle;
+		}
+
+		.content {
+		    display: inline-block;
+		}
+
+		.sylius-product-name {
+			font-weight: bold;
+		}
+
+		.sylius-product-variant-code {
+    		font-size: .9em;
+    	}
+
+    	.margin-left-small {
+    		margin-left: 15px;
+    	}
+
+    	.padding-top-bottom {
+    		padding-top: 10px;
+			padding-bottom: 10px;
+    	}
+	}
+
+	@media screen and (min-width: $medium) {
+		.three.fields,
+		.two.fields {
+			display: flex;
+			flex-direction: row;
+			margin: 0 -.5em 1.5em;
+
+			.form-group {
+				margin: 0 0.5em;
+			}
+		}
+
+		.two.fields .form-group {
+			width: 50%;
+		}
+		.two.fields-8-4 {
+			.form-group:first-child {
+				width: 70%;
+			}
+			.form-group:last-child {
+				width: 30%;
+			}
+		}
+
+		.three.fields .form-group {
+			width: 33.33%;
+		}
+		.three.fields-2-5-5 {
+			.form-group {
+				width: 40%;
+			}
+			.form-group:first-child {
+				width: 20%;
+			}
+		}
+
+		.summary-padding-left {
+			padding-left: 50px;
+		}
+
+		.summary-margin-top {
+			margin-top: 67px;
+		}
+
+		.shipping-summary-margin-top {
+			margin-top: 55px;
+		}
+
+		.address-margin-left {
+			margin-left: 15px;
+		}
+	}
+}

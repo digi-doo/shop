@@ -1,0 +1,37 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="ui segment">
+    <h2 class="ui dividing header margin-bottom">{{ 'sylius.ui.summary'|trans }}</h2>
+
+    {{ sonata_block_render_event('sylius.shop.cart.summary.totals', {'cart': cart}) }}
+
+    <table class="ui very basic table">
+        <tbody>
+        {% if cart.orderPromotionTotal %}
+            <tr>
+                <td class="text-success">{{ 'sylius.ui.discount'|trans }}:</td>
+                <td id="sylius-cart-promotion-total" class="text-right right aligned text-success">{{ money.convertAndFormatPromotion(cart.orderPromotionTotal) }}</td>
+            </tr>
+        {% endif %}
+        {% if cart.orderGiftPromotionTotal %}
+            <tr>
+                <td class="text-success">{{ 'sylius.ui.gift'|trans }}:</td>
+                <td class="text-right right aligned text-success">{{ money.convertAndFormat(cart.orderGiftPromotionTotal) }}</td>
+            </tr>
+        {% endif %}
+        <tr class="totals font-weight-bold">
+            <td>{{ 'sylius.ui.order_total'|trans }}:</td>
+            <td id="sylius-cart-grand-total" class="text-right right aligned">{{ money.convertAndFormat(cart.total - cart.shippingTotal - cart.paymentTotal) }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{# WTF #}
+{# <h1>{{ money.convertAndFormat(cart.paymentTotal) }} paymentTotal</h1>
+<h1>{{ money.convertAndFormat(cart.shippingTotal) }} shippingTotal</h1>
+<h1>{{ money.convertAndFormat(cart.total) }} cartTotal</h1>
+<h1>{{ money.convertAndFormat(cart.taxTotal) }} cartTaxTotal</h1>
+<h1>{{ money.convertAndFormat(cart.itemsTotal) }} itemstotal</h1>
+<h1>{{ money.convertAndFormat(cart.adjustmentsTotal) }} adjustmentsTotal</h1>
+<h1>{{ money.convertAndFormat(cart.total - cart.adjustmentsTotal) }} total - adjustmentsTotal</h1> #}

@@ -1,0 +1,4 @@
+services:
+    # Money formatter to round CZK currency
+    sylius.money_formatter:
+        class: AppBundle\Helpers\Money\MoneyFormatter

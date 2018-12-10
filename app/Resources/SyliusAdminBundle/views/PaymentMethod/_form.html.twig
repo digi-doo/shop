@@ -1,0 +1,55 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h4>
+    {{ form_errors(form) }}
+    {{ form_row(form.enabled) }}
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.position) }}
+    </div>
+    <div class="two fields">
+        {{ form_row(form.taxCategory) }}
+        {{ form_row(form.price) }}
+    </div>
+    
+    {{ form_row(form.channels) }}
+    {# <div class="hidden__on__prod">
+        <input type="checkbox" id="sylius_payment_method_channels_0" name="sylius_payment_method[channels][]" value="default" checked="checked" tabindex="0" class="hidden">
+    </div> #}
+</div>
+
+{{ sonata_block_render_event('sylius.admin.payment_method.form.after_required_fields', {'form': form}) }}
+
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.gateway_configuration'|trans }}</h4>
+    {{ form_row(form.gatewayConfig.factoryName) }}
+    {% if form.gatewayConfig.config is defined %}
+        {% for field in form.gatewayConfig.config %}
+            {% if loop.index is odd %}<div class="two fields">{% endif %}
+            {{ form_row(field) }}
+            {% if loop.index is even %}</div>{% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="ui styled fluid accordion">
+    {% for locale, translationForm in form.translations %}
+        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+            <i class="dropdown icon"></i>
+            {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
+        </div>
+        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            {{ form_row(translationForm.name) }}
+            {{ form_row(translationForm.description) }}
+            <div class="ui compact message">
+                <p>
+                    <i class="icon info circle"></i> {{ 'sylius.ui.the_instructions_below_will_be_displayed_to_the_customer'|trans }}.
+                </p>
+            </div>
+            {{ form_row(translationForm.instructions) }}
+        </div>
+    {% endfor %}
+</div>

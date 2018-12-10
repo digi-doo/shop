@@ -1,0 +1,7 @@
+<div id="gtm_info" class="d-none" 
+    data-product-name="{{ product.name }}" 
+    data-product-id="{{ product.id }}" 
+    data-product-price="{{ product|sylius_resolve_variant|sylius_calculate_price({'channel': sylius.channel}) / 100 }}"
+    data-product-category="{{ product.mainTaxon ? product.mainTaxon.name : '' }}"
+    data-product-variant-code="{{ (product|sylius_resolve_variant).code }}">
+</div>

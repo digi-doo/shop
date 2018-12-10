@@ -1,0 +1,88 @@
+sylius_grid:
+    grids:
+        sylius_admin_customer_order:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.order.class%"
+                    repository:
+                        method: createByCustomerIdAndFilterQueryBuilder
+                        arguments:
+                            customerId: $id
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+            sorting:
+                number: desc
+            fields:
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: .
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: checkoutCompletedAt
+                    sortable: checkoutCompletedAt
+                    options:
+                        format: d. m. Y H:i:s
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/State"
+                paymentState:
+                    type: twig
+                    label: sylius.ui.payment_state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/PaymentState"
+                shippingState:
+                    type: twig
+                    label: sylius.ui.shipping_state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+                total:
+                    type: twig
+                    label: sylius.ui.total
+                    path: .
+                    sortable: total
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+                currencyCode:
+                    enabled: false
+                    type: string
+                    label: sylius.ui.currency
+                    sortable: ~
+            filters:
+                state:
+                    type: order_state
+                number:
+                    type: string
+                    label: sylius.ui.number
+                date:
+                    type: date
+                    label: sylius.ui.date
+                    options:
+                        field: checkoutCompletedAt
+                total:
+                    type: money
+                    label: sylius.ui.total
+                    options:
+                        currency_field: currencyCode
+            actions:
+                item:
+                    show:
+                        type: show
+    templates:
+        filter:
+            order_state: '@SyliusUi/Grid/Filter/orderState.html.twig'

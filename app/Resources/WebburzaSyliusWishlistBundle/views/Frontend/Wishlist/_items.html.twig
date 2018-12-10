@@ -1,0 +1,55 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="ui segment">
+    <table class="ui very basic celled table">
+        <thead>
+        <tr>
+            <th>{{ 'sylius.ui.item'|trans }}</th>
+            <th>{{ 'sylius.ui.price_no_vat'|trans }}</th>
+            <th>{{ 'sylius.ui.price_vat'|trans }}</th>
+            {# <th colspan="{{ (app.user and app.user == wishlist.user) ? 2 : 1 }}">{{ 'sylius.ui.actions' | trans }}</th> #}
+            <th class="text-center">{{ 'sylius.ui.actions' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in wishlist.items %}
+            <tr>
+                <td class="single line">
+                    {% include '@WebburzaSyliusWishlist/Frontend/Wishlist/_info.html.twig' with {'variant': item.productVariant} %}
+                </td>
+                <td class="right aligned two wide">
+                    {{ money.calculatePrice(item.productVariant) }}
+                </td>
+                <td class="right aligned two wide">
+                    {{ money.calculatePriceWithvat(item.productVariant) }}
+                </td>
+
+                <td class="center aligned three wid text-center">
+                    {% if app.user and app.user == wishlist.user %}
+                        <div class="d-inline-block">
+                            <form action="{{ path('webburza_frontend_wishlist_remove_item', {'id': item.id}) }}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button class="btn btn-secondary"><i class="fas fa-trash"></i>
+                                    {# {{ 'webburza_wishlist.ui.remove_from_wishlist' | trans }} #}
+                                </button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    {% if not sylius_inventory_is_available(item.productVariant) %}
+                        <div class="d-inline-block">
+                            <button class="btn btn-secondary" disabled>
+                                <i class="fas fa-truck mr-2"></i>
+                                {{ 'sylius.ui.out_of_stock'|trans }}
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="d-inline-block">
+                            {{ render(url('webburza_frontend_wishlist_partial_cart_add_item', {'variantId': item.productVariant.id})) }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

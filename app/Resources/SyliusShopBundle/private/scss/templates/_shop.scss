@@ -1,0 +1,145 @@
+#newsletter-form {
+    position: relative;
+
+    &.loading button {
+        animation: btnOpacity 2s infinite;
+    }
+
+    .success-element,
+    .validation-element {
+        position: absolute;
+        padding: 7px;
+        bottom: -30px;
+        font-size: $fs-15;
+        width: 100%;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &.invalid {
+        .validation-element {
+            background: rgba(255, 0, 0, 0.68);
+            opacity: 1;
+        }
+
+        .success-element {
+            display: none;
+        }
+    }
+
+    &.valid {
+        .validation-element {
+            display: none;
+        }
+
+        .success-element {
+            background: rgba(16, 255, 0, 0.68);
+            opacity: 1;
+        }
+    }
+}
+
+.cart__badge {
+    position: absolute;
+    top: -6px;
+    left: 15px;
+
+    @media (max-width: 575px) {
+        top: -18px;
+    }
+
+    @media (max-width: 991px) {
+        font-size: 12px;
+    }
+}
+
+button:focus,
+a:focus {
+    outline: 0;
+}
+
+.btn-cart {
+    text-align: center;
+
+    &:not(.btn-cart--out-of-stock) .fa-frown {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+    span {
+        opacity: 1;
+        transition: opacity 0.4s ease;
+    }
+    &:disabled {
+        overflow: hidden;
+        pointer-events: none;
+        
+        .fa-frown {
+            opacity: 1;
+        }
+        span {
+            opacity: 0;
+        }
+    }
+}
+
+.btn-cart {
+    &--out-of-stock,
+    &--in-stock {
+        [class*="fa"] {
+            font-size: 24px;
+        }
+
+        span {
+            top: -3px;
+
+            &:before {
+                display: none;
+            }
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &--out-of-stock {
+        background: #FDB451;    
+    }
+}
+
+.border__top__2__333 {
+    border-top: 2px solid #333;
+}
+
+.recommend__item-left a {
+    background-size: contain !important;
+    // background-position: center bottom !important;
+}
+
+.recommend__item-right a {
+    background-size: contain !important;
+    background-position: center bottom !important;
+    position: relative;
+}
+
+.homepage__h1 {
+    padding: 0;
+    margin: 0;
+    visibility: hidden;
+    font-size: 0;
+}
+
+
+@keyframes btnOpacity {
+    from {opacity: 1;}
+    to {opacity: 0.6;}
+}
+@-webkit-keyframes btnOpacity {
+    from {opacity: 1;}
+    to {opacity: 0.6;}
+}

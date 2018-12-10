@@ -1,0 +1,172 @@
+{#################
+ Main Desktop Menu 
+##################}
+
+{% extends 'knp_menu_base.html.twig' %}
+
+{% macro attributes(attributes) %}
+{% for name, value in attributes %}
+    {%- if value is not none and value is not same as(false) -%}
+        {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% block compressed_root %}
+    {% spaceless %}
+        {{ block('root') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    {% set listAttributes = item.childrenAttributes %}
+        <div class="container d-none d-xl-block">
+            <nav class="navbar navbar-expand-md bg-faded" role="navigation">
+                <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapsing-navbar"></button>
+                <div class="collapse navbar-collapse" id="collapsing-navbar">
+                    {{ block('list') -}}
+                </div>
+            </nav>
+        </div>
+{% endblock %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% import _self as knp_menu %}
+        <ul{{ knp_menu.attributes(listAttributes) }}>
+            <li class="nav-item">
+                <a href="{{ path('sylius_shop_homepage') }}" class="nav-link nav-link--navig"><img src="{{ asset('assets/shop/img/ico-nav.png') }}" title="nav"></a>
+            </li>
+            {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {% set currentOptions = options %}
+    {% set currentItem = item %}
+    {# save current variables #}
+    {# update the depth for children #}
+    {% if options.depth is not none %}
+        {% set options = options|merge({'depth': currentOptions.depth - 1}) %}
+    {% endif %}
+    {# update the matchingDepth for children #}
+    {% if options.matchingDepth is not none and options.matchingDepth > 0 %}
+        {% set options = options|merge({'matchingDepth': currentOptions.matchingDepth - 1}) %}
+    {% endif %}
+    {% for item in currentItem.children %}
+        {{ block('item') }}
+    {% endfor %}
+    
+    {# restore current variables #}
+    {% set item = currentItem %}
+    {% set options = currentOptions %}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {# building the class of the item #}
+        {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+        {%- if matcher.isCurrent(item) or item.getExtra('product') %}
+            {%- set classes = classes|merge([options.currentClass]) %}
+        {%- elseif matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+            {%- set classes = classes|merge([options.ancestorClass]) %}
+        {%- endif %}
+        {# {%- if item.actsLikeFirst %}
+            {%- set classes = classes|merge([options.firstClass]) %}
+        {%- endif %}
+        {%- if item.actsLikeLast %}
+            {%- set classes = classes|merge([options.lastClass]) %}
+        {%- endif %} #}
+
+        {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
+        {% if item.hasChildren and options.depth is not same as(0) %}
+            {% if options.branch_class is not empty and item.displayChildren %}
+                {%- set classes = classes|merge([options.branch_class]) %}
+            {% endif %}
+        {% elseif options.leaf_class is not empty %}
+            {%- set classes = classes|merge([options.leaf_class]) %}
+        {%- endif %}
+
+        {%- set attributes = item.attributes %}
+        {%- if classes is not empty %}
+            {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+        {%- endif %}
+        {# displaying the item #}
+        {% import _self as knp_menu %}
+        <li{{ knp_menu.attributes(attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('linkElement') }}
+            {%- endif %}
+            {# render the list of children#}
+            {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+            {%- set style = item.childrenAttribute('style') %}
+
+            {%- if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+                {%- set childrenClasses = childrenClasses|merge(['nav-link--opened']) %}
+                {%- set ariaExpanded = 'true' %}
+                {%- set style = 'display: block;' %}
+            {%- endif %}
+
+            {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' '), 'style': style }) %}
+            {# {{ block('list') }} #}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import _self as knp_menu %}
+    {% if item.hasChildren and item.getExtra('level') == 2 %}
+        {% set mega = true %}
+    {% else %}
+        {% set mega = false %}
+    {% endif %}
+    <span class="menu__span__first">
+        <a href="{{ item.uri }}" class="nav-link{% if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %} nav-link--active{% endif %}" {% if mega %} data-toggle="dropdown"{% endif %} title="{{ block('label') }}">{{ block('label') }}</a>
+    </span>
+    {% if item.hasChildren %}
+        {% set openedClass = '' %}
+        {%- if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+            {% set openedClass = ' nav-link--opened' %}
+        {%- endif %}
+    {% endif %}
+    {% if mega %}
+        {{ block('megalist') }}
+    {% endif %}
+{% endblock %}
+
+{% block megalist %}
+    {% import _self as knp_menu %}
+    <div class="nav-link__underline"></div>
+    <div class="dropdown-menu megamenus">
+        {{ block('megachildren') }}
+    </div>
+{% endblock %}
+
+{% block megachildren %}
+    {% import _self as knp_menu %}
+    <div class="row menuGrid">
+        {# Level 2 #}
+        {% for child in item.children %}
+            <div class="col-sm-3 col-12 menuGrid__cell" index="{{loop.index}}">
+                <h3>
+                    <a title="{{child.label}}" href="{{child.uri}}" class="menu__link__second{% if matcher.isCurrent(child) or matcher.isAncestor(child, options.matchingDepth) or child.getExtra('product') %} nav-link--active{% endif %}">
+                        {{child.label}}
+                    </a>
+                </h3>
+                <ul class="d-none d-sm-block menu__list__third">
+                    {# Level 3 #}
+                    {% for subchild in child.children %}
+                        <li>
+                            <a title="{{subchild.label}}" href="{{subchild.uri}}" class="menu__link__third {% if matcher.isCurrent(subchild) or matcher.isAncestor(subchild, options.matchingDepth) or subchild.getExtra('product') %}nav-link--active{% endif %}">{{subchild.label}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block label %}
+    {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|raw }}{% else %}{{ item.label }}{% endif %}
+{% endblock %}

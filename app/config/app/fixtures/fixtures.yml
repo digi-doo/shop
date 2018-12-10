@@ -1,0 +1,4 @@
+# Sshop fixtures
+imports:
+    - { resource: "sshop.yml" }
+    - { resource: "procamping.yml" }

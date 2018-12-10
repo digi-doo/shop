@@ -1,0 +1,25 @@
+services:
+    app.context.taxon:
+        class: AppBundle\Context\TaxonContext
+        arguments:
+            - "@request_stack"
+            - "@sylius.repository.taxon"
+            - "@sylius.context.locale"
+
+    app.context.manufacturers:
+        class: AppBundle\Context\ManufacturersContext
+        arguments:
+            - "@app.context.taxon"
+            - "@app.repository.manufacturer"
+
+    app.context.product_options:
+        class: AppBundle\Context\ProductOptionsContext
+        arguments:
+            - "@app.context.taxon"
+            - "@sylius.repository.product_option"
+
+    app.context.product_attributes:
+        class: AppBundle\Context\ProductAttributesContext
+        arguments:
+            - "@app.context.taxon"
+            - "@sylius.repository.product_attribute"

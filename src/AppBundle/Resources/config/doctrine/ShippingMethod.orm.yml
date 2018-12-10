@@ -1,0 +1,25 @@
+AppBundle\Entity\ShippingMethod:
+    type: entity
+    table: sylius_shipping_method
+    manyToMany:
+        paymentMethods:
+            targetEntity: Sylius\Component\Payment\Model\PaymentMethodInterface
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinTable:
+                name: sylius_shipping_method_payments
+                joinColumns:
+                    -
+                        name: shipping_method_id
+                        referencedColumnName: id
+                        nullable: false
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    -
+                        name: payment_method_id
+                        referencedColumnName: id
+                        nullable: false
+                        onDelete: CASCADE
+            orderBy: null

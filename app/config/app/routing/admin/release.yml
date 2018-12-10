@@ -1,0 +1,5 @@
+app_admin_release:
+    path: /release
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AppBundle:Release:index.html.twig

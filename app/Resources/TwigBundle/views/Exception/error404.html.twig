@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
+    {% include '@SyliusAdmin/error404.html.twig' %}
+{% else %}
+	{% include '@SyliusShop/error404.html.twig' %}
+{% endif %}

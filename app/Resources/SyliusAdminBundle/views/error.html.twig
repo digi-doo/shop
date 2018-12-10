@@ -1,0 +1,16 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.error'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+	<div class="ui two column centered grid">
+		<div class="column">
+			<div class="ui red inverted segment center aligned icon header">
+				<i class="circular warning icon"></i>
+				<h1>{{ 'sylius.ui.unexpected_error_occurred'|trans }}</h1>
+	        	<h2>{{ 'sylius.ui.we_know_it'|trans }}</h2>
+	        	<h3>{{ 'sylius.ui.sorry_for_complications'|trans }}</h3>
+	        </div>
+		</div>
+	</div>
+{% endblock %}

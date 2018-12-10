@@ -1,0 +1,59 @@
+.footer {
+	background: $gray;
+	padding: {
+		top: 105px;
+		bottom: 105px;
+	}
+	margin-top: 40px;
+	font-size: $fs-24;
+
+	h2 {
+		font-weight: $fw-b;
+		margin-bottom: 20px;
+		text-transform: uppercase;
+	}
+
+	ul {
+		margin-bottom: 30px;
+		li {
+			a {
+				color: black;
+				font-weight: $fw-b;
+			}
+		}
+	}
+
+	.contact-us {
+		@media (min-width: 1200px) {
+			padding-right: 75px;
+		}
+	}
+
+	.social-btns {
+		margin-top: 66px;
+		font-size: 0;
+
+		span {
+			font-size: $fs-24;
+			vertical-align: middle;
+			margin-right: 30px;
+
+			@media (max-width: 1400px) {
+				display: block;
+			}
+		}
+
+		a {
+			margin-right: 14px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+			@media (max-width: 1400px) {
+				margin-top: 10px;
+			}
+		}
+	}
+
+}

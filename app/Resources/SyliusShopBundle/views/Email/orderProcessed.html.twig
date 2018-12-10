@@ -1,0 +1,17 @@
+{% block subject %}
+    {{ 'mailing.subject.order_information'|trans({'%id_order%': order.number}) }}
+{% endblock %}
+
+{% block body %}
+    {# {% set url = url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': order.localeCode}) %} #}
+        
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.order_information'|trans({'%id_order%': order.number}) } %}
+        {% include '@SyliusUi/Email/body-order.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_customer'|trans,
+            'content': 'mailing.text.order_processed'|trans({'%id_order%': order.number}),
+            'order': order
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

@@ -1,0 +1,76 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/grids/search.yml" }
+
+sylius_grid:
+    templates:
+        action:
+            show: "@SyliusUi/Grid/Action/show.html.twig"
+            show_shop: "@SyliusShop/Ui/Grid/Action/show.html.twig"
+            pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+        filter:
+            string: "@SyliusUi/Grid/Filter/string.html.twig"
+
+sylius_shop:
+    checkout_resolver:
+        pattern: /checkout/.+
+        route_map:
+            empty_order:
+                route: sylius_shop_cart_summary
+            cart:
+                route: sylius_shop_checkout_address
+            addressed:
+                route: sylius_shop_checkout_select_shipping
+            shipping_selected:
+                route: sylius_shop_checkout_select_payment
+            shipping_skipped:
+                route: sylius_shop_checkout_select_payment
+            payment_selected:
+                route: sylius_shop_checkout_complete
+            payment_skipped:
+                route: sylius_shop_checkout_complete
+
+# Image resolutions settings
+liip_imagine:
+    filter_sets:
+        sylius_shop_product_original: ~
+        sylius_shop_product_tiny_thumbnail:
+            filters:
+                thumbnail: { size: [64, 64], mode: outbound }
+        sylius_shop_product_cart_thumbnail:
+            filters:
+                thumbnail: { size: [95, 95], mode: outbound }
+        sylius_shop_product_small_thumbnail:
+            filters:
+                thumbnail: { size: [150, 112], mode: outbound }
+        sylius_shop_product_thumbnail:
+            filters:
+                relative_resize:
+                    heighten: 170
+        sylius_shop_product_box_main:
+            filters:
+                relative_resize:
+                    heighten: 340
+        sylius_shop_product_large_thumbnail:
+            filters:
+                relative_resize:
+                    heighten: 500
+        sylius_shop_header_banner:
+            filters:
+                thumbnail: { size: [527, 95], mode: outbound }
+        # sylius_shop_product_feed:
+        #     filters:
+        #         thumbnail: { size: [650, 628], mode: inset }
+        #         background: { size: [1200, 628], position: left, color: '#ffffff' }
+        #         watermark:
+        #             image: ../web/assets/shop/img/feed-watermark.jpg
+        #             size: 1
+        #             position: right
+
+sonata_block:
+    default_contexts: ~

@@ -1,0 +1,23 @@
+framework:
+    translator: { fallbacks: ["%locale%", "en"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form: true
+    csrf_protection: true
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
+    trusted_proxies: ~
+    session:
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        gc_maxlifetime: 7889231 # if garbage collection is triggered check if session is outdated and delete it
+        gc_probability: 0 # 0% probability to run garbage collection on each request
+        gc_divisor: 100 # gc_probability/gc_divisor, e.g. 1/100 means there is a 1% chance that the GC process starts on each request
+        cookie_lifetime: 7889231 # specifies the main lifetime of the cookie in seconds
+
+# Disable localised url
+sylius_shop:
+    locale_switcher: storage

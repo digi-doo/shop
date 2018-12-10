@@ -1,0 +1,68 @@
+{################
+ Main Mobile Menu 
+#################}
+
+{% extends 'knp_menu_base.html.twig' %}
+{% import "@SyliusShop/Common/Macro/menu.html.twig" as menu %}
+
+{% block compressed_root %}
+    {% spaceless %}
+        {{ block('root') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    <div class="menu__nav--mobile d-xl-none">
+        <div class="menu__icon--mobile">
+            <img src="{{ asset('assets/shop/img/ico-nav.png') }}">
+        </div>
+        <nav id="ml-menu" class="menu--mobile">
+            <div class="menu__wrap--mobile">    
+                {{ block('list') -}}
+            </div>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block list %}
+    {% import _self as knp_menu %}
+
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}      
+        {# Root ul level #}
+        <ul data-menu="main" class="menu__level menu__level--first" tabindex="-1" role="menu" aria-label="Vše">
+            {{ block('children') }}
+        </ul>
+        {% for child in item.children if child.hasChildren %}
+            {{ menu.list(child, matcher, options) }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    {% import _self as knp_menu %}
+    <li class="menu__item" role="menuitem">
+        {{ block('linkElement') }}
+    </li>
+{% endblock %}
+
+{% block linkElement %}
+    {% import _self as knp_menu %}
+    {% if matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.getExtra('product') %}
+        {% set active = true %}
+    {% else %}
+        {% set active = false %}
+    {% endif %}
+    <a class="menu__link{{ active ? ' menu__link--active' }}" href="{{ item.uri }}">{{ item.label }}</a>
+    
+    {% if item.hasChildren %}
+        <a href="#" class="menu__link" data-submenu="submenu-{{item.getExtra('code')}}" aria-owns="submenu-{{item.getExtra('code')}}" title="{{ item.label }}">&bull;&bull;&bull;</a>
+    {% else %}
+        <span class="menu__link menu__link--invisible"> &bull;</span>
+    {% endif %}
+{% endblock %}

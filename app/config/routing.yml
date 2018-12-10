@@ -1,0 +1,82 @@
+# Bundles routing
+sylius_admin:
+    resource: "@SyliusAdminBundle/Resources/config/routing.yml"
+    prefix: /admin
+
+sylius_api:
+    resource: "@SyliusAdminApiBundle/Resources/config/routing.yml"
+    prefix: /api
+
+app_api:
+    resource: "app/routing/api.yml"
+    prefix: /api/v{version}
+
+sylius_shop:
+    resource: "@SyliusShopBundle/Resources/config/routing.yml"
+
+sylius_shop_payum:
+    resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+kms_froala_editor:
+  resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
+  prefix:   /froalaeditor
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+bitbag_sylius_cms_plugin:
+    resource: '@BitBagSyliusCmsPlugin/Resources/config/routing.yml'
+
+# bitbag_shipping_export_plugin:
+#     resource: "@ShippingExportPlugin/Resources/config/routing.yml"
+#     prefix: /admin
+
+czende_develo_shop_plugin:
+    resource: "@DeveloShopPlugin/Resources/config/routing.yml"
+
+czende_ecomail_plugin:
+    resource: "@EcomailPlugin/Resources/config/routing.yml"
+    prefix: /
+
+# Custom routing
+app_admin:
+    resource: 'app/routing/admin.yml'
+    prefix: /admin
+
+app_shop:
+    resource: 'app/routing/shop.yml'
+    prefix: /
+
+facebook:
+    path: "/login/check-facebook"
+
+webburza_wishlist:
+  resource: "@WebburzaSyliusWishlistBundle/Resources/config/routing.yml"
+
+webburza_wishlist_front:
+  resource: "@WebburzaSyliusWishlistBundle/Resources/config/routingFront.yml"
+  prefix: /wishlist
+
+webburza_wishlist_account:
+  resource: "@WebburzaSyliusWishlistBundle/Resources/config/routingAccount.yml"
+  prefix: /account/wishlists
+
+sylius_sitemap:
+  resource: "@SitemapPlugin/Resources/config/routing.yml"
+
+app.robots:
+    path: /robots.txt
+    defaults:
+      _controller: app.controller.robots_txt:robotsTxtAction

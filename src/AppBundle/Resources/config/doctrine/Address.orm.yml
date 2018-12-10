@@ -1,0 +1,21 @@
+AppBundle\Entity\Address:
+    type: entity
+    table: sylius_address
+    fields:
+        title:
+            type: string
+            length: 64
+            nullable: true
+        ic:
+            type: string
+            length: 255
+            nullable: true
+        dic:
+            type: string
+            length: 255
+            nullable: true
+        streetNumber:
+            type: string
+            length: 64
+            nullable: false
+            column: street_number

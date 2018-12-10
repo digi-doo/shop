@@ -1,0 +1,24 @@
+AppBundle\Entity\ManufacturerTranslation:
+    type: entity
+    table: sylius_manufacturer_translation
+    repositoryClass: AppBundle\Repository\ManufacturerTranslationRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+            unique: true
+        description:
+            type: text
+            nullable: true
+    indexes:
+        fulltext_manufacturer_translation_index:
+            columns: ["name"]
+            flags: fulltext

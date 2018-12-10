@@ -1,0 +1,26 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set paymentMethod = order.payments.first.method %}
+{% set paymentMethodTax = paymentMethod.taxCategory.rates.first.amount %}
+{% set paymentMethodAmount = paymentMethod.price %}
+{% set paymentMethodAmountTax = (paymentMethodAmount * paymentMethodTax) + paymentMethodAmount %}
+<tr>
+    <td colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ paymentMethod.name }}</td>
+    <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ money.format(paymentMethodAmount, order.currencyCode) }}</td>
+    <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ money.format(paymentMethodAmountTax, order.currencyCode) }}</td>
+</tr>
+{% set orderPaymentPromotionAdjustment = constant('AppBundle\\Entity\\AppAdjustmentInterface::ORDER_PAYMENT_PROMOTION_ADJUSTMENT') %}
+{% set orderPaymentPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPaymentPromotionAdjustment)) %}
+{% set promotionAmount = 0 %}
+{% set promotionAmountTax = 0 %}
+{% if not orderPaymentPromotions is empty %}
+    {% for label, amount in orderPaymentPromotions %}
+        <tr>
+            <td colspan="4" style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ label }}</td>
+            <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormat(amount) }}</td>
+            <td style="text-align:right;vertical-align:middle;border:1px solid #eee;color:green;padding:10px">{{ money.convertAndFormat(amount * paymentMethodTax + amount) }}</td>
+        </tr>
+        {% set promotionAmount = promotionAmount + amount %}
+        {% set promotionAmountTax = promotionAmountTax + (amount * paymentMethodTax + amount) %}
+    {% endfor %}
+{% endif %}

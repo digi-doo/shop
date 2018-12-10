@@ -1,0 +1,17 @@
+{% import '@SyliusShop/Ui/Macro/messages.html.twig' as messages %}
+
+{% if resources.data|length > 0 %}
+    <div class="row" id="products">
+        {% for manufacturer in resources.data %}
+            <div class="col-lg-3 col-12 mb-3 text-center product__box__wrapper">
+                {% include '@SyliusShop/Manufacturer/_box.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if resources.data.haveToPaginate() %}
+        {% include '@SyliusShop/Product/Index/_pagination.html.twig' %}
+    {% endif %}
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}

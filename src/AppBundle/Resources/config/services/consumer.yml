@@ -1,0 +1,8 @@
+services:
+    app.rabbit.consumer.email_sender:
+        class: AppBundle\Queue\Consumer\EmailSenderConsumer
+        arguments: ["@sentry.client", "@sylius.email_sender", "@sylius.repository.order"]
+
+    app.rabbit.consumer.heureka_overeno:
+        class: AppBundle\Queue\Consumer\HeurekaOverenoConsumer
+        arguments: ["@sentry.client", "@sylius.repository.order"]

@@ -1,0 +1,123 @@
+app_shop_partial:
+    resource: "shop/partial.yml"
+    prefix: /_partial
+
+app_shop_search:
+  resource: "shop/search.yml"
+
+app_shop_cart:
+  resource: "shop/cart.yml"
+
+app_shop_manufacturer:
+  resource: "shop/manufacturer.yml"
+
+app_shop_tag:
+  resource: "shop/tag.yml"
+
+app_shop_page:
+  resource: "shop/page.yml"
+
+###################
+# Contact Request #
+###################
+# app_shop_partial_contact_request:
+#     path: /contact-form
+#     methods: [GET]
+#     defaults:
+#         _controller: app.controller.footer_contact:requestAction
+#         _sylius:
+#             template: "@SyliusShop/Contact/footerForm.html.twig"
+#             form: AppBundle\Form\Type\FooterContactType
+app_shop_contact_request:
+    path: /send-contact-form
+    methods: [POST]
+    defaults:
+        _controller: app.controller.footer_contact:requestAction
+        # _sylius:
+        #     redirect: referer
+        #     form: AppBundle\Form\Type\FooterContactType
+
+sylius_shop_product_show:
+    path: /produkt/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showSaveSessionAction
+        _sylius:
+            template: "@SyliusShop/Product/show.html.twig"
+            repository:
+                method: findOneByChannelAndSlug
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - $slug
+
+sylius_shop_product_index:
+    path: /kategorie/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Product/index.html.twig"
+            grid: sylius_shop_product
+    requirements:
+        slug: .+
+
+sylius_shop_partial_product_index_by_tag_with_variant:
+    path: /by-tag/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findByTagByChannelWithVariant
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - "expr:service('app.repository.tag').findOneBySlug($tagSlug, service('sylius.context.locale').getLocaleCode())"
+                    - !!int $count
+ 
+sylius_shop_partial_random_product_index_by_tag_with_variant:
+    path: /random-by-tag/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findRandomByTagByChannelWithVariant
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - "expr:service('app.repository.tag').findOneBySlug($tagSlug, service('sylius.context.locale').getLocaleCode())"
+                    - !!int $count
+
+sylius_shop_partial_product_index_by_taxon_with_variant:
+    path: /by-taxon/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findByTaxonByChannelWithVariant
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.repository.taxon').findOneBySlug($taxonSlug, service('sylius.context.locale').getLocaleCode())"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - !!int $count
+
+sylius_shop_partial_random_product_index_by_taxon_with_variant:
+    path: /random-by-taxon/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findRandomByTaxonByChannelWithVariant
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.repository.taxon').findOneBySlug($taxonSlug, service('sylius.context.locale').getLocaleCode())"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - !!int $count

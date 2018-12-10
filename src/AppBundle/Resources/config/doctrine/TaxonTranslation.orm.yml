@@ -1,0 +1,16 @@
+AppBundle\Entity\TaxonTranslation:
+    type: entity
+    table: sylius_taxon_translation
+    fields:
+        metaKeywords:
+            column: meta_keywords
+            type: string
+            nullable: true
+        metaDescription:
+            column: meta_description
+            type: string
+            nullable: true
+    indexes:
+        fulltext_taxon_translation_index:
+            columns: ["name", "description"]
+            flags: fulltext

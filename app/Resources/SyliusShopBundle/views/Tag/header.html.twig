@@ -1,0 +1,42 @@
+{# <header>
+	<h1>{{ 'app.ui.tag'|trans }} {{ tag.name }}</h1>
+	<p class="breadcrumbs">
+	    <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+	    <i class="fa fa-angle-right breadcrumbs__divider" aria-hidden="true"></i> 
+	    <span class="active section">{{ tag.name }}</span>
+	</p>
+	<div class="padding-bottom">
+		{{ tag.description|raw }}
+	</div>
+</header> #}
+
+{# <div class="filtr-header">
+    <div class="row mt-3 pb-3">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                       <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                       <span>{{ tag.name }}</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<h1 class="mb-3">{{ 'app.ui.tag'|trans }} {{ tag.name }}</h1> #}
+<header class="tmpHeader">
+    <h1>{{ 'app.ui.tag'|trans }} {{ tag.name }}</h1>
+    <hr>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+           <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+        </li>
+        <li class="breadcrumb-item">
+           <span>{{ tag.name }}</span>
+        </li>
+    </ol>
+    <hr>
+</header>

@@ -1,0 +1,45 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui tab" data-tab="pricing">
+    <h3 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h3>
+    {% if product.simple %}
+        <div class="column">
+            <div class="required field money__field">
+                {% if form.variant.externalCode.vars.value is not empty %}
+                    {{ message.info('sylius.ui.cannot_update_external_pricing'|trans) }}
+                {% endif %}
+
+                {% for channelPricing in form.variant.channelPricings %}
+                    {% set discountType = channelPricing.discountLimitType.vars.data %}
+                    {{ form_row(channelPricing.defaultPrice) }}
+                    {% if form.variant.externalCode.vars.value is not empty %}
+                        {{ form_row(form.variant.taxCategory, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'}}) }}
+                    {% else %}
+                        {{ form_row(form.variant.taxCategory) }}
+                    {% endif %}
+
+                    <h3 class="ui dividing header">{{ 'sylius.ui.discount'|trans }}</h3>
+                    {{ form_row(channelPricing.realDiscount) }}
+                    {{ form_row(channelPricing.discountLimitType) }}
+                    <div class="sixteen wide column field discount__limit--stock ui element{% if discountType != 'stock' %} hidden{% endif %}">
+                        {{ message.info('sylius.ui.discount_stock_message'|trans) }}
+                    </div>
+                    <div class="ui two column stackable grid discount__limit--datetime ui element{% if discountType != 'datetime' %} hidden{% endif %}">
+                        <div class="column">
+                            {{ form_row(channelPricing.discountFrom) }}
+                        </div>
+                        <div class="column">
+                            {{ form_row(channelPricing.discountTo) }}
+                        </div>
+                        <div class="sixteen wide column">
+                            {{ message.info('sylius.ui.discount_from_to_message'|trans) }}
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                {# {{ form_row(form.variant.channelPricings, {'label': false}) }} #}
+                {# {{ form_row(form.variant.channelPricings.defaultPrice, {'label': false}) }} #}
+            </div>
+        </div>
+    {% endif %}
+</div>

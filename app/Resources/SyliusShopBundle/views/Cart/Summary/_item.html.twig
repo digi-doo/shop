@@ -1,0 +1,38 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set product = item.product %}
+{% set product_variant = item.variant %}
+{% set giftCode = sylius.channel.freeGiftVariantCode %}
+
+<tr>
+    <td class="single line">
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
+    </td>
+    <td class="text-right align-middle right aligned">
+        {# {% if item.unitPrice != item.discountedUnitPrice %}
+            <span class="sylius-regular-unit-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
+        {% endif %} #}
+        {% if giftCode == product_variant.code %}
+            <span class="sylius-unit-price">{{ money.convertAndFormat(0) }}</span>
+        {% else %}
+            <span class="sylius-unit-price">{{ money.calculatePriceWithVat(product_variant) }}</span>
+        {% endif %}
+    </td>
+    <td class="text-right align-middle center aligned">
+        {% if giftCode != product_variant.code %}
+            <span class="sylius-quantity">{{ form_widget(form.quantity) }}</span>
+        {% endif %}
+    </td>
+    <td class="text-right align-middle right aligned">
+        {% if giftCode == product_variant.code %}
+            <span class="sylius-total">{{ money.convertAndFormat(0) }}</span>
+        {% else %}
+            <span class="sylius-total">{{ money.calculateTotalPriceWithVat(product_variant, item.quantity) }}</span>
+        {% endif %}
+    </td>
+    <td class="center align-middle aligned">
+        {% if giftCode != product_variant.code %}
+            <button type="button" data-redirect="{{ path('sylius_shop_cart_summary') }}" data-url="{{ path('sylius_shop_ajax_cart_item_remove', {'id': item.id}) }}" class="ui circular icon remove-button button sylius-cart-remove-button" data-csrf-token="{{ csrf_token(item.id) }}"><i class="remove icon fa fa-fw fa-times"></i></button>
+        {% endif %}
+    </td>
+</tr>

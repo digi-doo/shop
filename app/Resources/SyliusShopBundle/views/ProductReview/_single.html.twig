@@ -1,0 +1,18 @@
+<div class="card mt-3">
+    <div class="card-header">
+        <fieldset class="rating no__interaction">
+            {% set ratingSingle = review.rating|round(0) %}
+            <input disabled type="radio" name="ratingSingle" value="5" {% if ratingSingle == 5 %}class="checked--star"{% endif %} /><label>&nbsp;</label>
+            <input disabled type="radio" name="ratingSingle" value="4" {% if ratingSingle == 4 %}class="checked--star"{% endif %} /><label>&nbsp;</label>
+            <input disabled type="radio" name="ratingSingle" value="3" {% if ratingSingle == 3 %}class="checked--star"{% endif %} /><label>&nbsp;</label>
+            <input disabled type="radio" name="ratingSingle" value="2" {% if ratingSingle == 2 %}class="checked--star"{% endif %} /><label>&nbsp;</label>
+            <input disabled type="radio" name="ratingSingle" value="1" {% if ratingSingle == 1 %}class="checked--star"{% endif %} /><label>&nbsp;</label>
+        </fieldset>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title mb-2"><strong>{{ review.title }}</strong></h3>
+        <p>{{ review.author.firstName }}, {{ review.createdAt|format_date }}</p>
+        <hr>
+        <p class="card-text">{{ review.comment }}</p>
+    </div>
+</div>

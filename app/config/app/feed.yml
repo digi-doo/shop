@@ -1,0 +1,13 @@
+app:
+    feed:
+        heureka: 
+            enabled: true
+            # taxonomy_url: "https://raw.githubusercontent.com/czende/heureka/master/heureka-sekce.xml"
+            taxonomy_url: "https://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml"
+        zbozi: 
+            enabled: true
+        google: 
+            enabled: true
+            taxonomy_url: "http://www.google.com/basepages/producttype/taxonomy-with-ids.cs-CZ.txt"
+        facebook: 
+            enabled: true

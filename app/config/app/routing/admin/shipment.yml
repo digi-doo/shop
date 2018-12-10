@@ -1,0 +1,107 @@
+##################
+# Shipment issue #
+##################
+app_admin_partial_shipment_issue_transport:
+    path: /shipment/{id}/issue-transport
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: issue_transport
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: issue_transport
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Shipment/Partial/_issueTransport.html.twig"
+            form: AppBundle\Form\Type\ShipmentIssueType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id
+                        withEmail: $withEmail
+                        unapprovedNotes: $unapprovedNotes
+app_admin_order_shipment_issue_transport:
+    path: /orders/{id}/issue-transport
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: issue_transport
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: issue_transport
+            redirect: referer
+            section: admin
+            permission: true
+            form: AppBundle\Form\Type\ShipmentIssueType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id
+
+#################
+# Shipment ship #
+#################
+app_admin_partial_shipment_ship:
+    path: /shipment/{id}/ship
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: ship
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Shipment/Partial/_ship.html.twig"
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id
+                        withEmail: $withEmail
+                        unapprovedNotes: $unapprovedNotes
+app_admin_order_shipment_ship:
+    path: /orders/{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: ship
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            section: admin
+            permission: true
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id

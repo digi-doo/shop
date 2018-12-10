@@ -1,0 +1,21 @@
+{% block subject %}
+    {{ 'mailing.subject.contact_request'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.contact_request'|trans } %}
+        {% include '@SyliusUi/Email/body-raw.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.contact_request'|trans({
+                '%fullName%': data.fullName,
+                '%email%': data.email,
+                '%message%': data.message,
+                '%channel%': sylius.channel,
+                '%shop_url%': url('sylius_shop_homepage'),
+                '%request_url%': data.requestUrl
+            })
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

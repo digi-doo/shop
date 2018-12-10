@@ -1,0 +1,8 @@
+services:
+    app.custom_factory.order_internal_note:
+        class: AppBundle\Factory\OrderInternalNoteFactory
+        decorates: "app.factory.order_internal_note"
+        public: false
+        decoration_priority: 1
+        arguments:
+            - "@app.custom_factory.order_internal_note.inner"

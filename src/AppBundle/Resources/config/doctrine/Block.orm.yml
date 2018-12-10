@@ -1,0 +1,40 @@
+AppBundle\Entity\Block:
+    type: entity
+    table: bitbag_cms_block
+    fields:
+        tabType:
+            column: tab_type
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            column: updated_at
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        tag:
+            targetEntity: AppBundle\Entity\Tag
+            joinColumn:
+                name: tag_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL
+        taxon:
+            targetEntity: AppBundle\Entity\Taxon
+            joinColumn:
+                name: taxon_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL

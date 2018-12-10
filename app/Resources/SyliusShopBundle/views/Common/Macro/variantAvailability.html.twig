@@ -1,0 +1,27 @@
+{%- macro resolve(variant) -%}
+    {% if (variant.onHand - variant.onHold) <= 0 and variant.supplier and variant.negativeStock %}
+        {{ variant.supplier.delivery }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.supplier and variant.negativeStock %}
+        {{ 'app.ui.on_request'|trans }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.negativeStock %}
+        {{ 'app.ui.on_request'|trans }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.supplier and not variant.negativeStock %}
+        {{ 'app.ui.on_request'|trans }}
+    {% else %}
+        {{ 'sylius.ui.immediately'|trans }}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro resolveClass(variant) -%}
+    {% if (variant.onHand - variant.onHold) <= 0 and variant.supplier and variant.negativeStock %}
+        {{ 'text-warning' }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.supplier and variant.negativeStock %}
+        {{ 'text-danger' }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.negativeStock %}
+        {{ 'text-danger' }}
+    {% elseif (variant.onHand - variant.onHold) <= 0 and not variant.supplier and not variant.negativeStock %}
+        {{ 'text-danger' }}
+    {% else %}
+        {{ 'text-success' }}
+    {% endif %}
+{%- endmacro -%}

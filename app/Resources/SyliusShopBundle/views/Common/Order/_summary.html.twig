@@ -1,0 +1,19 @@
+
+<div class="row">
+	<div class="col-md-8">
+		{% include '@SyliusShop/Common/Order/_table.html.twig' %}
+	</div>
+
+	<div class="col-md-4 summary-padding-left">
+		{% include '@SyliusShop/Common/Order/_addresses.html.twig' %}
+
+		<div class="column margin-top-big" id="sylius-payments">
+	        {% include '@SyliusShop/Common/Order/_payments.html.twig' %}
+	    </div>
+
+	    <div class="column" id="sylius-shipments">
+	        {% include '@SyliusShop/Common/Order/_shipments.html.twig' %}
+	    </div>
+	</div>
+</div>
+

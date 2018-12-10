@@ -1,0 +1,13 @@
+{{ form_start(form, {'action': path('app_admin_order_shipment_issue_transport', configuration.vars.route.parameters), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="PUT">
+
+    <button class="ui labeled icon button fluid item basic" type="submit"{% if configuration.vars.route.parameters.unapprovedNotes %} data-requires-confirmation data-confirmation-message="{{ 'sylius.ui.there_is_unapproved_note'|trans }}"{% endif %}>
+        <i class="icon bell outline{% if not configuration.vars.route.parameters.withEmail %} slash{% endif %}"></i>
+        {% if configuration.vars.route.parameters.withEmail %}
+            {{ 'sylius.ui.send_notification'|trans }}
+        {% else %}
+            {{ 'sylius.ui.dont_send_notification'|trans }}    
+        {% endif %}
+    </button>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

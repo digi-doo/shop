@@ -1,0 +1,29 @@
+AppBundle\Entity\ProductVariant:
+    type: entity
+    table: sylius_product_variant
+    fields:
+        enabled:
+            type: boolean
+        ean:
+            type: string
+            length: 255
+            nullable: true
+            unique: false
+        externalCode:
+            type: string
+            nullable: true
+            unique: true
+            column: external_code
+        negativeStock:
+            type: boolean
+            nullable: true
+            column: negative_stock
+    manyToOne:
+        supplier:
+            targetEntity: AppBundle\Entity\Supplier
+            joinColumn:
+                name: supplier_id
+                referencedColumnName: id
+                nullable: true
+                unique: false
+                onDelete: SET NULL

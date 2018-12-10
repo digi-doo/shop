@@ -1,0 +1,8 @@
+{% set path = path('app_admin_order_internal_note_approve', configuration.vars.route.parameters) %}
+
+<form action="{{ path }}" method="POST" name="app_order_internal_comment_approve">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="app_order_internal_comment_approve[_token]" value="{{ csrf_token('app_order_internal_comment_approve') }}" />
+
+    <button type="submit" class="ui icon labeled green button"><i class="check icon"></i> {{ 'sylius.ui.approve'|trans }}</button>
+</form>

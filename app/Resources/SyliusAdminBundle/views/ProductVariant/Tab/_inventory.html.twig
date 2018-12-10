@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui tab" data-tab="inventory">
+    <h3 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h3>
+
+    {% if form.externalCode.vars.value is not empty %}
+        {{ message.info('sylius.ui.cannot_update_external_inventory'|trans) }}
+        
+        {{ form_row(form.tracked, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'} }) }}
+        {{ form_row(form.negativeStock, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'} }) }}
+        {{ form_row(form.onHand, {'attr': {'readonly': 'readonly', 'style': 'pointer-events:none;opacity:0.5;'}, 'label_attr': {'style': 'pointer-events:none;opacity:0.5;'} }) }}
+        
+        {# On hold message if any #}
+        {% if product_variant.onHold > 0 %}
+            <div class="ui orange tiny message">
+                {% transchoice product_variant.onHold with {'%count%': product_variant.onHold} %}sylius.ui.variants_reserved{% endtranschoice %}
+            </div>
+        {% endif %}
+    {% else %}
+        {{ form_row(form.tracked) }}
+        {{ form_row(form.negativeStock) }}
+        {{ form_row(form.onHand) }}
+
+        {# On hold message if any #}
+        {% if product_variant.onHold > 0 %}
+            <div class="ui orange tiny message">
+                {% transchoice product_variant.onHold with {'%count%': product_variant.onHold} %}sylius.ui.variants_reserved{% endtranschoice %}
+            </div>
+        {% endif %}
+    {% endif %}
+    {{ form_row(form.version) }}
+    {{ form_row(form.onHold) }}
+
+    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.inventory', {'form': form}) }}
+</div>

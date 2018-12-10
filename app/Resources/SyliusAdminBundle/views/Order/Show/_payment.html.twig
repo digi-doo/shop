@@ -1,0 +1,74 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+<div class="item">
+    <div class="right floated content">
+        {{ label.default(('sylius.ui.'~payment.state)|trans) }}
+    </div>
+    <i class="large payment icon"></i>
+    <div class="content">
+        <div class="header">
+            {{ payment.method }}
+        </div>
+        <div class="description">
+            {{ money.format(payment.amount, payment.order.currencyCode) }}
+        </div>
+    </div>
+    {% if sm_can(payment, 'complete', 'sylius_payment') %}
+        <div class="ui segment">
+            
+            {# Old way #}
+            {# <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
+                <input type="hidden" name="_method" value="PUT">
+                <button type="submit" class="ui icon labeled tiny blue fluid loadable button"><i class="check icon"></i> {{ 'sylius.ui.complete'|trans }}</button>
+            </form> #}
+
+            {# New way - pass extra argument with or without email #}
+            <div class="ui labeled icon fluid tiny pointing dropdown link button blue text-center">
+                <i class="check icon"></i>
+                <span class="text">{{ 'sylius.ui.complete'|trans }}</span>
+                
+                <div class="menu">
+                    <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id, 'withEmail': true}) }}" method="post" novalidate>
+                        <input type="hidden" name="_method" value="PUT">
+
+                        <button class="ui labeled icon button fluid item basic" type="submit"{% if order.hasUnapprovedInternalNotes %} data-requires-confirmation data-confirmation-message="{{ 'sylius.ui.there_is_unapproved_note'|trans }}"{% endif %}>
+                            <i class="icon bell outline"></i>
+                            {{ 'sylius.ui.send_notification'|trans }}
+                        </button>
+                    </form>
+
+                    <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id, 'withEmail': false}) }}" method="post" novalidate>
+                        <input type="hidden" name="_method" value="PUT">
+
+                        <button class="ui labeled icon button fluid item basic" type="submit"{% if order.hasUnapprovedInternalNotes %} data-requires-confirmation data-confirmation-message="{{ 'sylius.ui.there_is_unapproved_note'|trans }}"{% endif %}>
+                            <i class="icon bell slash outline"></i>
+                            {{ 'sylius.ui.dont_send_notification'|trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if payment.method.externalCode == 'transfer' and payment.state == 'new' %}
+            <div class="ui segment">
+                <form action="{{ path('app_admin_order_bank_transfer_notification', {'orderId': order.id}) }}" method="post" novalidate>
+                    <input type="hidden" name="_method" value="POST">
+                    <button type="submit" class="ui icon labeled tiny olive fluid button" data-requires-confirmation data-confirmation-message="{{ 'sylius.ui.send_transfer_notification_with_proforma'|trans }}">
+                        <i class="bell icon"></i> 
+                        {{ 'sylius.ui.send_bank_transfer_notification'|trans }}
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {# Temporary commented refund #}
+    {# {% if sm_can(payment, 'refund', 'sylius_payment') %}
+        <div class="ui segment">
+            <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
+                <input type="hidden" name="_method" value="PUT">
+                <button type="submit" class="ui icon labeled tiny yellow fluid loadable button"><i class="reply all icon"></i> {{ 'sylius.ui.refund'|trans }}</button>
+            </form>
+        </div>
+    {% endif %} #}
+</div>

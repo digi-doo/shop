@@ -1,0 +1,22 @@
+{% block subject %}
+    {{ 'mailing.subject.your_new_admin_account'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.new_admin'|trans({'%username%': admin.username}) } %}
+        {% include '@SyliusUi/Email/body-raw.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.new_admin'|trans({
+                '%username%': admin.username,
+                '%email%': admin.email,
+                '%password%': admin.plainpassword,
+                '%channel%': channel,
+                '%shop_url%': url('sylius_shop_homepage'),
+                '%admin_login_url%': url('sylius_admin_dashboard'),
+                '%admin_users_url%': url('sylius_admin_admin_user_index')
+            })
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

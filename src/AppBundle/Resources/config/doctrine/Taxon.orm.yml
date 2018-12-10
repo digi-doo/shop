@@ -1,0 +1,19 @@
+AppBundle\Entity\Taxon:
+    type: entity
+    table: sylius_taxon
+    fields:
+        enabled:
+            type: boolean
+            nullable: true
+        filterEnabled:
+            type: boolean
+            nullable: true
+            column: filter_enabled
+            options:
+                comment: 'Option for showing product filter in shop taxon detail'
+        stockSortingEnabled:
+            type: boolean
+            nullable: true
+            column: stock_sorting
+            options:
+                comment: 'If enabled products will be printed as two groups - in stock and out of stock. In each groups will be preserved default position sorting.'

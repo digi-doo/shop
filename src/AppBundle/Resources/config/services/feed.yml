@@ -1,0 +1,48 @@
+##################
+# Feeds services #
+##################
+services:
+    # Helper for exporting heureka feeds
+    app.heureka_feed_helper:
+        class: AppBundle\Helpers\Feed\HeurekaFeedHelper
+        arguments:
+            - '@sylius.shop.locale_stripping_router'
+            - '@sylius.availability_checker.default'
+            - '@sylius.calculator.product_variant_price'
+            - '@sylius.context.channel'
+            - '@sylius.context.currency'
+            - '@sylius.repository.shipping_method'
+
+    # Helper for exporting zbozi feeds
+    app.zbozi_feed_helper:
+        class: AppBundle\Helpers\Feed\ZboziFeedHelper
+        arguments:
+            - '@sylius.shop.locale_stripping_router'
+            - '@sylius.availability_checker.default'
+            - '@sylius.calculator.product_variant_price'
+            - '@sylius.context.channel'
+            - '@sylius.context.currency'
+            - '@sylius.repository.shipping_method'
+
+    # Helper for exporting google sfeeds
+    app.google_feed_helper:
+        class: AppBundle\Helpers\Feed\GoogleFeedHelper
+        arguments:
+            - '@sylius.shop.locale_stripping_router'
+            - '@sylius.availability_checker.default'
+            - '@sylius.calculator.product_variant_price'
+            - '@sylius.context.channel'
+            - '@sylius.context.currency'
+            - '@sylius.repository.shipping_method'
+
+    # Helper for exporting heureka feeds
+    app.heureka_feed:
+        class: AppBundle\Helpers\Feed\HeurekaFeed
+
+    # Helper for exporting zbozi feeds
+    app.zbozi_feed:
+        class: AppBundle\Helpers\Feed\ZboziFeed
+
+    # Helper for exporting google & facebook feeds
+    app.google_feed:
+        class: AppBundle\Helpers\Feed\GoogleFeed

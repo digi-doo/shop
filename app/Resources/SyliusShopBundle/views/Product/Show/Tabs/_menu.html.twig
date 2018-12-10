@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs nav-tabs--gray" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">{{ 'procamping.ui.product_description'|trans }}</a>
+    </li>
+    {% if product.attributes|length > 0 %}
+        <li class="nav-item">
+            <a class="nav-link" id="attributes-tab" data-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false">{{ 'procamping.ui.product_attributes'|trans }}</a>
+        </li>
+    {% endif %}
+    <li class="nav-item">
+        <a class="nav-link" id="rating-tab" data-toggle="tab" href="#rating" role="tab" aria-controls="rating" aria-selected="false">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>
+    </li>
+    {% for association in product.associations %}
+        <li class="nav-item">
+            <a class="nav-link" id="{{association.type.code}}-tab" data-toggle="tab" href="#{{association.type.code}}" role="tab" aria-controls="{{association.type.code}}" aria-selected="false">{{association.type.name}} ({{ association.associatedProducts|length }})</a>
+        </li>
+    {% endfor %}
+</ul>

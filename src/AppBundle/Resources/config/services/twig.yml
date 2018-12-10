@@ -1,0 +1,91 @@
+################################################
+# Twig related helpers & extenstions & filters #
+################################################
+services:    
+    # Collection product counter by tag into twig extension
+    app.templating.helper.product_counter_by_tag:
+        class: AppBundle\Helpers\Twig\ProductsByTagHelper
+        lazy: true
+        tags:
+            - { name: templating.helper }
+        arguments: ['@sylius.repository.product', "@=service('sylius.context.channel').getChannel()", "@=service('sylius.context.locale').getLocaleCode()"]
+    app.twig.extension.product_counter_by_tag:
+        class: AppBundle\Helpers\Twig\ProductsByTagExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ['@app.templating.helper.product_counter_by_tag']
+
+    # Collection product counter by taxon into twig extension
+    app.templating.helper.product_counter_by_taxon:
+        class: AppBundle\Helpers\Twig\ProductsByTaxonHelper
+        lazy: true
+        tags:
+            - { name: templating.helper }
+        arguments: ['@sylius.repository.product', "@=service('sylius.context.channel').getChannel()", "@=service('sylius.context.locale').getLocaleCode()"]
+    app.twig.extension.product_counter_by_taxon:
+        class: AppBundle\Helpers\Twig\ProductsByTaxonExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ['@app.templating.helper.product_counter_by_taxon']
+
+    # Collection product counter by taxon into twig extension
+    app.templating.helper.product_variant_stock_counter:
+        class: AppBundle\Helpers\Twig\ProductVariantsStockHelper
+        lazy: true
+        tags:
+            - { name: templating.helper }
+    app.twig.extension.product_variant_stock_counter:
+        class: AppBundle\Helpers\Twig\ProductVariantsStockExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ['@app.templating.helper.product_variant_stock_counter']
+
+    # Price helper override
+    sylius.templating.helper.price:
+        class: AppBundle\Helpers\Twig\PriceHelper
+        lazy: true
+        tags:
+            - { name: templating.helper }
+        arguments: ["@sylius.calculator.product_variant_price"]
+    sylius.twig.extension.price:
+        class: AppBundle\Helpers\Twig\PriceExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ["@sylius.templating.helper.price"]
+
+    # Money helper to use format amount rounded
+    sylius.twig.extension.money_rounded: 
+        class: AppBundle\Helpers\Twig\FormatMoneyRoundedExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ["@sylius.templating.helper.format_money_rounded"]
+    sylius.templating.helper.format_money_rounded: 
+        class: AppBundle\Helpers\Twig\FormatMoneyRoundedHelper
+        lazy: true
+        tags:
+            - { name: templating.helper, alias: sylius_format_money_rounded }
+        arguments: ["@sylius.money_formatter"]
+
+    # Twig markdown extension 
+    markdown.engine:
+        class: Aptoma\Twig\Extension\MarkdownEngine\MichelfMarkdownEngine
+    twig.markdown:
+        class: Aptoma\Twig\Extension\MarkdownExtension
+        arguments: ['@markdown.engine']
+        tags:
+            - { name: twig.extension }
+
+    # Shop paginator
+    app.pagerfanta_template.shop_template:
+        class: AppBundle\Helpers\Twig\ShopPagerfantaTemplate
+    pagerfanta.view.my_template:
+        class: Pagerfanta\View\DefaultView
+        public: false
+        arguments:
+            - "@app.pagerfanta_template.shop_template"
+        tags: [{ name: pagerfanta.view, alias: shop_template }]

@@ -1,0 +1,15 @@
+{% block subject %}
+    {{ 'mailing.subject.admins_order'|trans({'%id_order%': order.number}) }}
+{% endblock %}
+
+{% block body %}
+    {% autoescape %}
+        {% include '@SyliusUi/Email/header.html.twig' with {'header': 'mailing.subject.admins_order'|trans({'%id_order%': order.number}) } %}
+        {% include '@SyliusUi/Email/body-order.html.twig' with {
+            'content_header': 'mailing.header.mail_dear_admin'|trans,
+            'content': 'mailing.text.admins_order'|trans({'%id_order%': order.number, '%url%': url('sylius_admin_order_show', {'id': order.id})}),
+            'order': order
+        } %}
+        {% include '@SyliusUi/Email/footer.html.twig' with {'footer': 'mailing.footer.mail_footer'|trans } %}
+    {% endautoescape %}
+{% endblock %}

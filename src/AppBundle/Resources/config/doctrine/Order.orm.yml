@@ -1,0 +1,13 @@
+AppBundle\Entity\Order:
+    type: entity
+    table: sylius_order
+    fields:
+        exportedAt:
+            type: datetime
+            nullable: true
+            column: exported_at
+    oneToMany:
+        internalNotes:
+            targetEntity: AppBundle\Entity\OrderInternalNote
+            mappedBy: order 
+            orphanRemoval: true

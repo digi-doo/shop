@@ -1,0 +1,4 @@
+webburza_sylius_wishlist:
+    multiple: false           # multiple wishlist mode
+    default_public: false    # used for automatically created wishlists
+    account_manageable: true # users can manage their wishlists in their account

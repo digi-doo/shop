@@ -1,0 +1,22 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://loading.io/css/loading-btn.css'} %}
+    {% include '@SyliusShop/Ui/_stylesheets.html.twig' with {'path': 'https://loading.io/css/loading.css'} %}
+{% endblock %}
+
+{% block content %}
+    {% include '@SyliusShop/Manufacturer/header.html.twig' %}
+    <div class="productList">
+        {% include '@SyliusShop/Manufacturer/Index/_main.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js'} %}
+    {% include '@SyliusShop/Ui/_javascripts.html.twig' with {'path': 'assets/shop/js/taxon-min.js'} %}
+{% endblock %}

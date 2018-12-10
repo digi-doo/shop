@@ -1,0 +1,35 @@
+<tr>
+   <td align="center" valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" width="800">
+         <tbody>
+            <tr>
+               <td valign="top" style="padding:25px;background-color:#fdfdfd;">
+                  <p><strong style="font-size:12pt">{{ content_header }}</strong></p>
+                  <p><span style="font-size:12pt">{{ content }}</span></p>
+                  <br />
+                  <table cellspacing="0" cellpadding="0" width="100%" style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;color:#4a4a4a;border:1px solid #e4e4e4">
+                     <thead>
+                        <tr>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:100px">Product code<br><small>variant code</small></th>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px">External code</th>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px">Shop stock / External stock</th>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px">Shop res. / External res.</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for item in data %}
+                           <tr>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ item[0]|raw }}</a></td>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ item[1] }}</a></td>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ item[2] }}</a></td>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px">{{ item[3] }}</a></td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </td>
+</tr>

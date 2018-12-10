@@ -1,0 +1,29 @@
+imports:
+    - { resource: "services/attribute.yml" }
+    - { resource: "services/command.yml" }
+    - { resource: "services/consumer.yml" }
+    - { resource: "services/context.yml" }
+    - { resource: "services/controller.yml" }
+    - { resource: "services/factory.yml" }
+    - { resource: "services/feed.yml" }
+    - { resource: "services/filter.yml" }
+    - { resource: "services/form_extension.yml" }
+    - { resource: "services/form_type.yml" }
+    - { resource: "services/helper.yml" }
+    - { resource: "services/import.yml" }
+    - { resource: "services/listener.yml" }
+    - { resource: "services/menu.yml" }
+    - { resource: "services/money.yml" }
+    - { resource: "services/order.yml" }
+    - { resource: "services/order-processor.yml" }
+    - { resource: "services/product.yml" }
+    - { resource: "services/promotion.yml" }
+    - { resource: "services/stock.yml" }
+    - { resource: "services/twig.yml" }
+    - { resource: "services/validator.yml" }
+
+##############
+# Validation #
+##############
+parameters:
+    sylius.form.type.product_variant.validation_groups: [app_product_variant]

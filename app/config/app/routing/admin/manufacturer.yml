@@ -1,0 +1,15 @@
+app_admin_manufacturer:
+    resource: |
+        alias: app.manufacturer
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        redirect: index
+        grid: app_admin_manufacturer
+        vars:
+            all:
+                subheader: app.ui.manage_manufacturers
+                templates:
+                  form: AppBundle:Manufacturer:_form.html.twig
+            index:
+                icon: 'recycle image outline'
+    type: sylius.resource

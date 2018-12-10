@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_product_show:
+    path: /produkt/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: "@SyliusShop/Product/show.html.twig"
+            repository:
+                method: findOneByChannelAndSlug
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - $slug
+
+sylius_shop_product_show_concept:
+    path: /produkt-koncept/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: "@SyliusShop/Product/show.html.twig"
+            repository:
+                method: findOneConceptByChannelAndSlug
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - $slug
+                    # Show product concept only if there is a logged admin
+                    - "expr:service('session').get('_security_admin')"
+
+sylius_shop_product_index:
+    path: /kategorie/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@SyliusShop/Product/index.html.twig"
+            grid: sylius_shop_product
+    requirements:
+        slug: .+

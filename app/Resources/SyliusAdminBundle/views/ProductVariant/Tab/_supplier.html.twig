@@ -1,0 +1,6 @@
+<div class="ui tab" data-tab="supplier">
+    <h3 class="ui dividing header">{{ 'app.ui.supplier'|trans }}</h3>
+    {{ form_row(form.supplier) }}
+
+    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.supplier', {'form': form}) }}
+</div>

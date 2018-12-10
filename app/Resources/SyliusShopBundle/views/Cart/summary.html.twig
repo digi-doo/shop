@@ -1,0 +1,56 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Ui/Form/theme.html.twig' %}
+
+{% import '@SyliusShop/Ui/Macro/messages.html.twig' as messages %}
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+{% set header = 'sylius.ui.your_shopping_cart' %}
+
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    {% if not cart.empty %}
+        <div class="cart__module">
+            {% if sylius.channel.freeGiftFrom is defined and cart.itemsTotal < (sylius.channel.freeGiftFrom * 1.21) %}
+                {% set amount = money.convertAndFormat((sylius.channel.freeGiftFrom * 1.21) - cart.itemsTotal) %}
+                {{ messages.info('app.message.buy_more_for_gift'|trans({'%amount%': amount })) }}
+            {% endif %}
+            {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.cart.summary.after_content_header', {'cart': cart}) }}
+
+            <div class="row ui stackable grid">
+                <div class="col-lg-8 cart__items">
+                    <div class="eleven wide column">
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.before_items', {'cart': cart}) }}
+
+                        {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}
+
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.after_items', {'cart': cart}) }}
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 cart__totals">
+                    <div class="five wide column padding-left-big totals-margin-top">
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.before_totals', {'cart': cart}) }}
+
+                        {% include '@SyliusShop/Cart/Summary/_totals.html.twig' %}
+
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.after_totals', {'cart': cart}) }}
+
+                        {% include '@SyliusShop/Cart/Summary/_checkout.html.twig' %}
+                    </div>
+                </div>
+                
+            </div>
+
+            {{ sonata_block_render_event('sylius.shop.cart.summary.before_suggestions', {'cart': cart}) }}
+
+            {# {% include '@SyliusShop/Cart/Summary/_suggestions.html.twig' %} #}
+            {{ render(controller('AppBundle\\Controller\\LastViewedProductsController::viewedAction')) }}
+        </div>
+    {% else %}
+        {{ messages.info('sylius.ui.your_cart_is_empty') }}
+    {% endif %}
+{% endblock %}

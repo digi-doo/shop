@@ -1,0 +1,13 @@
+{# Promotion WITHOUT shipping & payment promotions #}
+
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
+
+{% if not orderPromotions is empty %}
+    {% for label, amount in orderPromotions %}
+        <td colspan="3" class="right aligned text-green" id="shipping-total"><strong>{{ label }}</strong></td>
+        <td class="text-green">{{ money.convertAndFormatPromotion(amount) }}</td>
+    {% endfor %}
+{% endif %}

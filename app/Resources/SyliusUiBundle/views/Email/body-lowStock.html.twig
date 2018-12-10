@@ -1,0 +1,31 @@
+<tr>
+   <td align="center" valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" width="800">
+         <tbody>
+            <tr>
+               <td valign="top" style="padding:25px;background-color:#fdfdfd;">
+                  <p><strong style="font-size:12pt">{{ content_header }}</strong></p>
+                  <p><span style="font-size:12pt">{{ content }}</span></p>
+                  <br />
+                  <table cellspacing="0" cellpadding="0" width="100%" style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;color:#4a4a4a;border:1px solid #e4e4e4">
+                     <thead>
+                        <tr>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px;width:100px">{{ 'sylius.ui.code'|trans }}</th>
+                           <th style="text-align:left;color:#4a4a4a;border:1px solid #e4e4e4;padding:10px">{{ 'sylius.ui.name'|trans }}</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for product in data %}
+                           <tr>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;color:#4a4a4a;padding:10px"><a href="http://{{ url ~ path('sylius_admin_product_update', {'id': product.id}) }}" title="{{ product.code }}">{{ product.code }}</a></td>
+                              <td style="text-align:left;vertical-align:middle;border:1px solid #eee;word-wrap:break-word;color:#4a4a4a;padding:10px"><a href="http://{{ url ~ path('sylius_admin_product_update', {'id': product.id}) }}" title="{{ product.name }}">{{ product.name }}</a></td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </td>
+</tr>

@@ -1,0 +1,6 @@
+{% for item in order.items %}
+    {% include '@SyliusShop/Common/Order/Table/_item.html.twig' %}
+{% endfor %}
+<tr class="text-right">
+    {% include '@SyliusShop/Common/Order/Table/_promotion.html.twig' with {'order': order} %}
+</tr>

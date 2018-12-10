@@ -1,0 +1,44 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as message %}
+
+<div class="ui tab massEdit" data-tab="massEdit">
+	<h3 class="ui dividing header">{{ 'app.ui.mass_product_edit'|trans }}</h3>
+	
+	{{ message.info('app.message.mass_product_default'|trans) }}
+	{{ message.warning('app.message.mass_product_edit'|trans) }}
+	
+	{% for channel in form.productDefaults %}
+		<div class="ui segment massPrice">
+			<h4 class="ui dividing header">{{ 'app.ui.base_price'|trans }}</h4>
+			{{ form_row(channel.massPriceEnabled) }}
+			{{ form_row(channel.price) }}
+		</div>
+		{# <div class="ui segment massOriginalPrice">
+			<h4 class="ui dividing header">{{ 'sylius.ui.original_price'|trans }}</h4>
+			{{ form_row(channel.massOriginalPriceEnabled) }}
+			{{ form_row(channel.originalPrice) }}
+		</div> #}
+		<div class="ui segment massOriginalPrice">
+			<h4 class="ui dividing header">{{ 'sylius.ui.percental_discount'|trans }}</h4>
+			{{ form_row(channel.massDiscountEnabled) }}
+			{{ form_row(channel.discount) }}
+		</div>
+		<div class="ui segment massTaxCategory">
+			<h4 class="ui dividing header">{{ 'sylius.ui.tax_category'|trans }}</h4>
+			{{ form_row(channel.massTaxCategoryEnabled) }}
+			{{ form_row(channel.taxCategory) }}
+		</div>
+		<div class="ui segment massSupplier">
+			<h4 class="ui dividing header">{{ 'app.ui.supplier'|trans }}</h4>
+			{{ form_row(channel.massSupplierEnabled) }}
+			{{ form_row(channel.supplier) }}
+		</div>
+		<div class="ui segment massInventory">
+			<h4 class="ui dividing header">{{ 'app.ui.stock'|trans }}</h4>
+			{{ form_row(channel.massTrackedEnabled) }}
+			{{ form_row(channel.tracked) }}
+			<hr class="ui dividing header">
+			{{ form_row(channel.massOnHandEnabled) }}
+			{{ form_row(channel.onHand) }}
+		</div>
+	{% endfor %}
+</div>

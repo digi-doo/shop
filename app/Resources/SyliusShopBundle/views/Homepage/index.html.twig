@@ -1,0 +1,17 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <h1 class="homepage__h1">{% if sylius.channel.metaTitle %}{{ sylius.channel.metaTitle }}{% else %}{{ tenant_name }}{% endif %}</h1>
+    {{ render(path('bitbag_sylius_cms_plugin_shop_block_index_by_section_code', {'sectionCode': 'home_collection', 'template': '@SyliusShop/Homepage/_collections.html.twig'})) }}
+    {% include '@SyliusShop/Homepage/_newsletter.html.twig' %}
+    {{ render(path('bitbag_sylius_cms_plugin_shop_block_index_by_section_code', {'sectionCode': 'home_favourites', 'template': '@SyliusShop/Homepage/_favourites.html.twig'})) }}
+    {{ render(path('bitbag_sylius_cms_plugin_shop_block_index_by_section_code', {'sectionCode': 'home_discounts', 'template': '@SyliusShop/Homepage/_discounts.html.twig'})) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/ecomailplugin/js/czende-ecomail-plugin.js') }}"></script>
+    <script>
+        $('#newsletter-form').joinNewsletter();
+    </script>
+{% endblock %}

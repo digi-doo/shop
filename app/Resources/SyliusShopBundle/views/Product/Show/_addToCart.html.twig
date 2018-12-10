@@ -1,0 +1,49 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set product = order_item.variant.product %}
+
+{% form_theme form '@SyliusShop/Ui/Form/theme.html.twig' %}
+<div id="sylius-product-selecting-variant">
+    {{ sonata_block_render_event('sylius.shop.product.show.before_add_to_cart', {'product': product, 'order_item': order_item}) }}
+
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'loadable form', 'novalidate': 'novalidate', 'data-redirect': path(configuration.getRedirectRoute('summary'))}}) }}
+    {{ form_errors(form) }}
+    
+    {% if not product.simple %}
+        {% if product.variantSelectionMethodChoice %}
+            {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
+        {% else %}
+            {% include '@SyliusShop/Product/Show/_options.html.twig' %}
+        {% endif %}
+    {% endif %}
+
+    <div class="styled-select styled-input--small mt-3">
+        <span>{{ form.cartItem.quantity.vars.label|trans }}</span>
+        {# <label class="form-control-label required" for="{{ form.cartItem.quantity.vars.id }}">{{ form.cartItem.quantity.vars.label|trans }}</label> #}
+        
+        <input type="number" id="{{ form.cartItem.quantity.vars.id }}" name="{{ form.cartItem.quantity.vars.full_name }}" required="required" min="1" class="form-control d-inline-block" value="{{form.cartItem.quantity.vars.value}}">        
+        {# {{ form_row(form.cartItem.quantity) }} #}
+    </div>
+
+    <div class="product-detail__info-price mt-3">
+        <p><strong>{{ 'procamping.ui.complete_price'|trans }}: </strong><span id="product-price-tax-complete">{{ money.calculateRoundedPriceWithVat(product|sylius_resolve_variant) }}</span></p>
+    </div>
+
+    {{ sonata_block_render_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item}) }}
+
+    <div class="product-detail__info-btn">
+        {% set extraClass = '' %}
+        {% if is_granted('ROLE_USER') %}      
+            {% set extraClass = ' ml-2' %}
+            {% include '@SyliusShop/Product/Show/_addToWishlist.html.twig' %}
+        {% else %}
+            <a href="#" data-toggle="modal" data-target="#logInModal" class="btn-featured">{{ 'procamping.ui.wishlist'|trans }}</a>
+        {% endif %}
+        <button type="submit" class="btn-cart btn-cart--white{{extraClass}}">
+            <i class="far fa-frown fa-2x d-inline-block"></i>
+            <span>{{ 'sylius.ui.add_to_cart'|trans }}</span>
+        </button>
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

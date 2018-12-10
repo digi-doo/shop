@@ -1,0 +1,15 @@
+################
+# CLI Commands #
+################
+services:
+    app.low_stock_checker:
+        class: AppBundle\Helpers\Stock\LowStockChecker
+        arguments: ["@sylius.repository.product", "@sylius.context.channel", "@sylius.email_sender"]
+
+    app.products_checker:
+        class: AppBundle\Helpers\Product\ProductsChecker
+        arguments: ["@sylius.repository.product", "@sylius.context.channel", "@sylius.email_sender"]
+
+    app.release_sender:
+        class: AppBundle\Helpers\ReleaseSender
+        arguments: ["@sylius.context.channel", "@sylius.email_sender", "@sylius.repository.admin_user", "@sylius.shop.locale_stripping_router"]

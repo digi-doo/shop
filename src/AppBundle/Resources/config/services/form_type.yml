@@ -1,0 +1,128 @@
+services:
+    # Order internal note approve type
+    app.order_internal_note_approve.form.type:
+        class: AppBundle\Form\Type\OrderInternalNoteApproveType
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: form.type }
+    
+    # Order internal note type
+    app.order_internal_note.form.type:
+        class: AppBundle\Form\Type\OrderInternalNoteType
+        arguments: ['AppBundle\Entity\OrderInternalNote', ['sylius']]
+        tags:
+            - { name: form.type }
+    
+    # Product channel pricing for mass change on variants
+    app.form.type.product_default:
+        class: AppBundle\Form\Type\ProductDefaultType
+        arguments: ['AppBundle\Entity\ProductDefault', ['sylius']]
+        tags:
+            - { name: form.type }
+
+    # Supplier choice type
+    app.form.type.supplier_choice_type:
+        class: AppBundle\Form\Type\SupplierChoiceType
+        arguments: ["@app.repository.supplier"]
+        tags:
+            - { name: form.type }
+
+    # Manufacturer entity
+    app.manufacturer.form.type:
+        class: AppBundle\Form\Type\ManufacturerType
+        arguments: ['AppBundle\Entity\Manufacturer', ['sylius']]
+        tags:
+            - { name: form.type }
+    
+    # Manufacturer translation entity
+    app.manufacturer_translation.form.type:
+        class: AppBundle\Form\Type\ManufacturerTranslationType
+        arguments: ['AppBundle\Entity\ManufacturerTranslation', ['sylius']]
+        tags:
+            - { name: form.type }
+
+    # Manufacturer image form
+    app.form.type.manufacturer_image:
+        class: AppBundle\Form\Type\ManufacturerImageType
+        tags:
+            - { name: form.type }
+        arguments: ['%app.model.manufacturer_image.class%']
+
+    # Tag entity
+    app.tag.form.type:
+        class: AppBundle\Form\Type\TagType
+        arguments: ['AppBundle\Entity\Tag', ['sylius']]
+        tags:
+            - { name: form.type }
+    
+    # Tag translation entity
+    app.tag_translation.form.type:
+        class: AppBundle\Form\Type\TagTranslationType
+        arguments: ['AppBundle\Entity\TagTranslation', ['sylius']]
+        tags:
+            - { name: form.type }
+
+    # Manufacturer choice type
+    app.form.type.manufacturer_choice_type:
+        class: AppBundle\Form\Type\ManufacturerChoiceType
+        arguments: ["@app.repository.manufacturer"]
+        tags:
+            - { name: form.type }
+    
+    # Supplier entity
+    app.supplier.form.type:
+        class: AppBundle\Form\Type\SupplierType
+        arguments: ['AppBundle\Entity\Supplier', ['sylius']]
+        tags:
+            - { name: form.type }
+    
+    # Supplier translation entity
+    app.supplier_translation.form.type:
+        class: AppBundle\Form\Type\SupplierTranslationType
+        arguments: ['AppBundle\Entity\SupplierTranslation', ['sylius']]
+        tags:
+            - { name: form.type }
+
+    # Bitbag text block to use froala
+    app.text_block_translation.form.type:
+        class: AppBundle\Form\Type\TextBlockTranslationType
+        arguments:
+            - "%bitbag_sylius_cms_plugin.model.block_translation.class%"
+        tags:
+            - { name: form.type }
+
+    # Order shipment issue
+    sylius.form.type.shipment_issue:
+        class: AppBundle\Form\Type\ShipmentIssueType
+        arguments: ["%sylius.model.shipment.class%", "%sylius.form.type.shipment_ship.validation_groups%"]
+        tags:
+            - { name: form.type }
+
+    # Manufacturer form filter type used in products filter
+    app.form.type.manufacturers_filter:
+        class: AppBundle\Form\Type\Filter\ManufacturersFilterType
+        arguments: 
+          - "@app.context.manufacturers"
+          - "@request_stack"
+        tags:
+            - { name: form.type }
+
+    # Product options form filter type used in products filter
+    app.form.type.product_option_filter:
+        class: AppBundle\Form\Type\Filter\ProductOptionsFilterType
+        arguments: 
+          - "@request_stack"
+          - "@app.context.product_options"
+          - "@app.choice_mapper.product_options"
+        tags:
+            - { name: form.type }
+
+    # Product attributes form filter type used in products filter
+    app.form.type.product_attribute_filter:
+        class: AppBundle\Form\Type\Filter\ProductAttributesFilterType
+        arguments: 
+          - "@request_stack"
+          - "@app.context.product_attributes"
+          - "@app.choice_mapper.product_attributes"
+        tags:
+            - { name: form.type }

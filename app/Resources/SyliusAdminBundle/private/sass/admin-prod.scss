@@ -1,0 +1,105 @@
+// Hide
+.admin__sidebar {
+	.marketing,
+	.groups,
+	.channels,
+	.countries,
+	.zones,
+	.currencies,
+	.exchange_rates,
+	.locales,
+	.shipping_categories,
+	.tax_categories,
+	.tax_rates,
+	.faq {
+		display: none !important;
+	}
+}
+
+form[name="sylius_product"] {
+	a.item[data-tab="shipping"] {
+		display: none !important;
+	}
+}
+
+.massOriginalPrice {
+	display: none !important;
+}
+
+.hidden__on__prod {
+	display: none !important;
+}
+
+// Hide channel label
+#sylius_product_variant_channelPricings > .field > label {
+	display: none !important;
+}
+
+form[name="sylius_product_variant"] .ui.large.fluid.vertical.menu {
+	// a[data-tab="taxes"],
+	a[data-tab="shipping"] {
+		display: none !important;
+	}
+}
+
+#sylius_product_variant_channelPricings_default .field:last-child {
+	display: none !important;
+}
+
+#sylius_product_generate_variants_variants {
+	div[id$="channelPricings_default"] .field:last-child {
+		display: none !important;
+	}
+	div[id$="channelPricings"] label:first-child:not([for$="channelPricings_default_price"]) {
+		display: none !important;
+	}
+}
+
+// #sylius_product_code1,
+// #sylius_product_code2 {
+// 	display: none;
+// }
+
+// form[name="sylius_product_generate_variants"] div[id*="channelPricings"] label
+//     display: none !important
+
+// form[name="sylius_product_generate_variants"] div[id*="channelPricings"] label[for*="channelPricings"]
+//     display: block !important
+
+// form[name="sylius_product_generate_variants"] label[for*="taxCategory"],
+// form[name="sylius_product_generate_variants"] select[id*="taxCategory"]
+//     display: none !important
+
+.configuration-shipment label {
+	display: none !important;
+}
+
+.configuration-shipment div[id*="sylius_shipping_method_configuration"] label {
+	display: block !important;
+}
+
+// #sylius_product_productChannelPricings > .field > label
+	// display: none !important
+// #sylius_product_productChannelPricings div.field > div > .field:last-child
+// 	display: none !important
+
+/**
+ * DIRTY SASSes
+ */
+.pricing__segment {
+	.field:last-child {
+		label {
+			display: none;
+		}
+		label[for=sylius_product_variant_channelPricings_default_price] {
+			display: block;
+		}
+		label[for=sylius_product_variant_channelPricings_default_price]:after {
+    		color: #db2828 !important;
+    		display: inline-block;
+    		vertical-align: top;
+    		content: '*';
+    		margin: -.2em 0 0 .2em;
+    	}
+    }
+}

@@ -1,0 +1,34 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
+    {{ form_errors(form) }}
+    <div class="ui three column stackable grid">
+        <div class="ui column">
+            {{ form_row(form.code) }}
+        </div>
+        <div class="ui column">
+            <div class="field">
+                <label>{{ 'sylius.ui.enabled-disabled'|trans }}</label>
+                {{ form_row(form.enabled) }}
+            </div>
+        </div>
+        <div class="ui column">
+            <div class="field">
+                <label>{{ 'sylius.ui.is_main_tag'|trans }}</label>
+                {{ form_row(form.mainTag) }}
+            </div>
+        </div>
+    </div>
+    <div class="ui two column stackable grid">
+		<div class="ui column">{{ form_row(form.color) }}</div>
+		<div class="ui column">{{ form_row(form.textColor) }}</div>
+    </div>
+</div>
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'app.ui.display_information'|trans }}</h4>
+    {{ form_row(form.stockSortingEnabled) }}
+</div>
+{{ translationFormWithSlug(form.translations, 'AppBundle:Tag:_slugField.html.twig', tag) }}

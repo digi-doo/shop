@@ -1,0 +1,162 @@
+sylius:
+    recaptcha:
+        approve: Pro pokračování prosím ověřte, zda nejste robot. Děkujeme!
+    user:
+        plainPassword:
+            not_blank: Prosím zadejte heslo
+    order:
+        internal_note:
+            not_blank: Prosím vložte poznámku
+    product:
+        sku:
+            not_blank: Prosím vložte SKU produktu.
+            unique: SKU produktu musí být unikátní.
+        slug:
+            not_blank: Prosím vložte slug produktu.
+            unique: Slug produktu musí být unikátní.
+        code:
+            not_blank: Prosím vložte kód produktu.
+            regex: Kód produktu musí být složen pouze z písmen, čísel, pomlček a podtržítek bez diakritiky a bez mezer.
+            unique: Kód produktu musí být unikátní.
+        name:
+            not_blank: Prosím vložte název produktu.
+            min_length: Název produktu musí mít minimálně 1 písmeno.|Název produktu musí mít minimálně {{ limit }} písmen.
+            max_length: Název produktu nesmí být delší než 1 písmeno.|Název produktu nesmí být delší než {{ limit }} písmen.
+    product_variant:
+        combination: Varianta s touto možností již existuje.
+        code:
+            not_blank: Prosím vložte kód.
+            regex: Kód varianty produktu musí být složen pouze z písmen, čísel, pomlček a podtržítek bez diakritiky a bez mezer.
+            unique: Kód varianty produktu musí být unikátní.
+            within_product_unique: Kód varianty musí být unikátní v rámci celého produktu.
+        external_code:
+            unique: Externí kód musí být unikátní - je již použitý pro synchronizaci jiné varianty.
+        channel_pricing:
+            all_defined: 'Je nutné definovat minimálně základní cenu.'
+        price: 
+            not_blank: 'Je nutné definovat základní cenu.'
+    simple_product:
+        code:
+            unique: Kód jednoduchého produktu musí být unikátní napříč všemi produkty i variantami.
+    option:
+        code:
+            not_blank: Prosím vložte kód možnosti.
+            regex: Kód možnosti musí být složen pouze z písmen, čísel, pomlček a podtržítek bez diakritiky a bez mezer.
+            unique: Kód možnosti již existuje.
+        name:
+            not_blank: Prosím vložte název možnosti.
+            min_length: Název možnosti musí mít minimálně 1 písmeno.|Název možnosti musí mít minimálně {{ limit }} písmen.
+            max_length: Název možnosti nesmí být delší než 1 písmeno.|Název možnosti nesmí být delší než {{ limit }} písmen.
+        values:
+            min_count: Prosím vložte minimálně {{ limit }} hodnotu.|Prosím vložte minimálně {{ limit }} hodnot.
+    option_value:
+        code:
+            not_blank: Prosím vložte kód hodnoty.
+            regex: Kód hodnoty musí být složen pouze z písmen, čísel, pomlček a podtržítek bez diakritiky a bez mezer.
+            unique: Kód hodnoty již existuje.
+        value:
+            not_blank: Prosím vložte hodnotu možnosti.
+    association_type:
+        name:
+            not_blank: Prosím vložte název asociace.
+            min_length: Název asociace musí mít minimálně 1 písmeno.|Název asociace musí mít minimálně {{ limit }} písmen.
+            max_length: Název asociace nesmí být delší než 1 písmeno.|Název asociace nesmí být delší než {{ limit }} písmen.
+        code:
+            not_blank: Prosím vložte kód asociace.
+            regex: Kód asociace musí být složen pouze z písmen, čísel, pomlček a podtržítek bez diakritiky a bez mezer.
+            unique: Kód asociace již existuje.
+    taxon:
+        name:
+            not_blank: 'Prosím vložte název kategorie'
+        code:
+            not_blank: 'Prosím vložte kód kategorie'
+            unique: 'Kód kategorie musí být unikátní'
+        slug:
+            not_blank: 'Prosím vložte slug kategorie'
+            unique: 'Slug kategorie musí být unikátní'
+    cart_item:
+        not_available: '%itemName% nemá dostatečné skladové zásoby. Aktuální počet kusů na skladě: %itemOnHand%.'
+        product_not_for_sale: 'Produkt %itemName% je samostatně neprodejný.'
+        variant_not_for_sale: 'Tato varianta produktu %itemName% je samostatně neprodejná.'
+    address:
+        street_number:
+            not_blank: 'Prosím vložte číslo popisné/orientační'
+        phone_number:
+            not_blank: 'Prosím vložte telefonní čislo'
+            invalid: 'Nesprávný formát telefonního čísla. Prosím vložte telefonní číslo ve formátu +420 123 456 789 nebo +420123456789.'
+    checkout:
+        terms:
+            not_null: Pro odeslání objednávky je potřeba souhlasit s obchodními podmínkami.
+
+app:
+    supplier:
+        code:
+            not_blank: 'Prosím vložte kód dodavetele'
+            unique: 'Kód dodavatele musí být unikátní'
+        name:
+            not_blank: 'Prosím vložte název dodavetele'
+        delivery: 
+            not_blank: 'Prosím vložte dobu dodání'
+    manufacturer:
+        code:
+            not_blank: 'Prosím vložte kód výrobce'
+            unique: 'Kód výrobce musí být unikátní'
+        name:
+            not_blank: 'Prosím vložte název výrobce'
+        slug:
+            not_blank: 'Prosím vložte slug výrobce'
+            unique: 'Slug výrobce musí být unikátní'
+        images:
+            mime_types: 'Formát souboru není podporován. Prosím použijte formáty PNG, JPG nebo GIF.'
+    tag:
+        code:
+            not_blank: 'Prosím vložte kód štítku'
+            unique: 'Kód štítku musí být unikátní'
+        name:
+            not_blank: 'Prosím vložte název štítku'
+        slug:
+            not_blank: 'Prosím vložte slug štítku'
+            unique: 'Slug štítku musí být unikátní'
+
+bitbag:
+    cms:
+        block:
+            image:
+                mime_types: Povolené formáty jsou pouze PNG a JPEG.
+            code:
+                unique: Blok s tímto kódem již existuje.
+                not_blank: Kód nemůže být prázdný.
+                min_length: Kód musí mít minimálně {{ limit }} znaků.
+                max_length: Kód nesmí být delší než {{ limit }} znaků.
+            name:
+                min_length: Název musí mít minimálně {{ limit }} znaků.
+                max_length: Název nesmí být delší než {{ limit }} znaků.
+            content:
+                min_length: Obsah musí obsahovat minimálně {{ limit }} znaků.
+        page:
+            code:
+                unique: Stránka s tímto kódem již existuje.
+                not_blank: Kód nemůže být prázdný.
+                min_length: Kód musí mít minimálně {{ limit }} znaků.
+                max_length: Kód nesmí být delší než {{ limit }} znaků.
+            name:
+                not_blank: Název nemůže být prázdný.
+                min_length: Název musí mít minimálně {{ limit }} znaků.
+                max_length: Název nesmí být delší než {{ limit }} znaků.
+            slug:
+                not_blank:  Slug nemůže být prázdný.
+                min_length: Slug musí mít minimálně {{ limit }} znaků.
+                max_length: Slug nesmí být delší než {{ limit }} znaků.
+            meta_keywords:
+                min_length: Meta klíčová slova musí mít minimálně {{ limit }} znaků.
+                max_length: Meta klíčová slova nesmí být delší než {{ limit }} znaků.
+            meta_description:
+                min_length: Meta popis musí mít minimálně {{ limit }} znaků.
+                max_length: Meta popis slova nesmí být delší než {{ limit }} znaků.
+            content:
+                not_blank: Obsah nemůže být prázdný.
+                min_length: Obsah musí mít minimálně {{ limit }} znaků.
+
+# Import project related translations
+imports:
+    - { resource: "procamping/validators.cs_CZ.yml" }

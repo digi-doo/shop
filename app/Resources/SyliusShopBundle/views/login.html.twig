@@ -1,0 +1,36 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Ui/Form/theme.html.twig' %}
+
+{% block content %}
+    {% include '@SyliusShop/Login/_header.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.shop.login.after_content_header') }}
+
+    <div class="row justify-content-center tmpForms">
+        <div class="col-md-6">
+            {{ sonata_block_render_event('sylius.shop.login.before_login') }}
+            <h2 class="heading-border header">{{ 'sylius.ui.registered_customers'|trans }}</h2>
+            <p class="mt-2 mb-20">{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+            {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'form', 'novalidate': 'novalidate'}}) }}
+                {% include '@SyliusShop/Login/_form.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.login.form', {'form': form}) }}
+
+                <button type="submit" class="btn">{{ 'sylius.ui.login'|trans }}</button>
+                <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
+                &nbsp;&nbsp;
+                <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="link--green">{{ 'sylius.ui.forgot_password'|trans }}</a>
+            {{ form_end(form, {'render_rest': false}) }}
+
+            {{ sonata_block_render_event('sylius.shop.login.after_login') }}
+        </div>
+        <div class="col-md-6">
+            {{ sonata_block_render_event('sylius.shop.login.before_register') }}
+
+            {% include '@SyliusShop/Login/_register.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.login.after_register') }}
+        </div>
+    </div>
+{% endblock %}

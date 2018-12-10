@@ -1,0 +1,73 @@
+##########################################################
+# Default Sylius order processors state machine verrides #
+##########################################################
+services:
+    # Adjustments clearer
+    sylius.order_processing.order_adjustments_clearer:
+        class: AppBundle\Helpers\Order\OrderAdjustmentsClearer
+        tags: 
+          - { name: sylius.order_processor, priority: 50 }
+
+    # Final shimpent processor
+    sylius.order_processing.order_shipment_processor:
+        class: Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor
+        arguments: ["@sylius.shipping_method_resolver.default", "@sylius.factory.shipment"]
+        tags: 
+          - { name: sylius.order_processor, priority: 45 }
+
+    # Product variants vs order items recalculator
+    sylius.order_processing.order_prices_recalculator:
+        class: Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator
+        arguments: ["@sylius.calculator.product_variant_price"]
+        tags: 
+          - { name: sylius.order_processor, priority: 40 }
+
+    # Order gift processor
+    sylius.order_processing.order_gift_processor:
+        class: AppBundle\Helpers\Order\OrderGiftProcessor
+        arguments: 
+          - "@sylius.repository.product_variant"
+          - "@sylius.factory.order_item"
+          - "@sylius.order_item_quantity_modifier"
+          - "@session"
+          - "@request_stack"
+        tags: 
+          - { name: sylius.order_processor, priority: 35 }
+
+    # Payment charges processor
+    sylius.order_processing.payment_charges_processor:
+        class: AppBundle\Helpers\Order\PaymentChargesProcessor
+        arguments: ['@sylius.factory.adjustment']
+        tags: 
+          - { name: sylius.order_processor, priority: 25 }
+
+    # Shipping charges processor
+    sylius.order_processing.shipping_charges_processor:
+        class: Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor
+        arguments: ["@sylius.factory.adjustment", "@sylius.shipping_calculator"]
+        tags: 
+          - { name: sylius.order_processor, priority: 15 }        
+
+    # Promotions processor
+    sylius.order_processing.order_promotion_processor:
+        class: Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor
+        arguments: ["@sylius.promotion_processor"]
+        tags: 
+          - { name: sylius.order_processor, priority: 10 }
+
+    # Order taxes processor
+    sylius.order_processing.order_taxes_processor:
+        class: Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor
+        arguments: 
+          - "@sylius.provider.channel_based_default_zone_provider"
+          - "@sylius.zone_matcher"
+          - "@sylius.registry.tax_calculation_strategy"
+        tags: 
+          - { name: sylius.order_processor, priority: 5 }
+
+    # Checkout payment processor
+    sylius.order_processing.order_payment_processor.checkout:
+        class: Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor
+        arguments: ["@sylius.order_payment_provider", 'cart']
+        tags: 
+          - { name: sylius.order_processor, priority: 0 }

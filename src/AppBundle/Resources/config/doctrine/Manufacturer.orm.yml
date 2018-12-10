@@ -1,0 +1,33 @@
+AppBundle\Entity\Manufacturer:
+    type: entity
+    table: sylius_manufacturer
+    repositoryClass: AppBundle\Repository\ManufacturerRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            unique: true
+            nullable: false
+        enabled:
+            type: boolean
+            options:
+                default: true
+        filterable:
+            type: boolean
+        stockSortingEnabled:
+            type: boolean
+            nullable: true
+            column: stock_sorting
+            options:
+                comment: 'If enabled products will be printed as two groups - in stock and out of stock.'
+    oneToOne:
+        image:
+            targetEntity: AppBundle\Entity\ManufacturerImage
+            mappedBy: owner
+            orphanRemoval: true
+            cascade:
+                - all

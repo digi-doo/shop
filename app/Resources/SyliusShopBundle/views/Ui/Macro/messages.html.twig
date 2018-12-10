@@ -1,0 +1,41 @@
+{% macro default(message, icon, type, header) %}
+    {% if type is not empty %}
+        {% if 'error' == type %}
+            {% set result = 'danger' %}
+            {% set icon = 'exclamation' %}
+        {% endif %}
+        {% if 'success' == type %}
+            {% set icon = 'check' %}
+        {% endif %}
+        {% if 'warning' == type %}
+            {% set icon = 'exclamation' %}
+        {% endif %}
+        {% if 'danger' == type %}
+            {% set icon = 'exclamation' %}
+        {% endif %}
+    {% endif %}
+    <div class="alert alert-{{ type|default('success') }} mt-20">
+        <div class="d-flex justify-content-start align-items-center">
+            <i class="fas fa-{{ icon|default('info') }}-circle fa-3x mr-3"></i>
+            <div>
+                <h3 class="alert-heading mb-2">{{ header|default(type)|trans }}</h3>
+                <p class="mb-0">{{ message|trans }}</p>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro info(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'info', 'info', 'sylius.ui.info') }}
+{% endmacro %}
+
+{% macro success(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'check', 'success', 'sylius.ui.success') }}
+{% endmacro %}
+
+{% macro error(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'exclamation', 'danger', 'sylius.ui.error') }}
+{% endmacro %}

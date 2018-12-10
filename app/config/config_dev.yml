@@ -1,0 +1,39 @@
+# Main Sshop DEV config
+imports:
+    - { resource: "config.yml" }
+    
+    # Temporary added sentry
+    # - { resource: "app/sentry.yml" }
+
+framework:
+    router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
+    profiler: { only_exceptions: false }
+
+doctrine:
+    dbal:
+        dbname: "%database_name%_dev"
+
+ewz_recaptcha:
+    enabled: true
+    public_key:  6LeRR1gUAAAAANITl4rNWabQEyPYKHXMZEqCxZIb
+    private_key: 6LeRR1gUAAAAAPvTKIu3KfVfjOuT9L1c0h3rdepm
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+
+swiftmailer:
+    disable_delivery: true
+    # disable_delivery: false
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+google_tag_manager:
+    enabled: true
+gtm:
+    inject: true

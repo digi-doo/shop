@@ -1,0 +1,15 @@
+AppBundle\Entity\ManufacturerImage:
+  properties:
+    file:
+      - Image:
+          groups: [sylius]
+          maxHeight: 1000
+          maxWidth: 1000
+          mimeTypes:
+            - "image/png"
+            - "image/jpg"
+            - "image/jpeg"
+            - "image/gif"
+          mimeTypesMessage: app.manufacturer.images.mime_types
+          minHeight: 100
+          minWidth: 100
